@@ -27,6 +27,8 @@ body {
 
 
 /*Newly added*/
+
+
 .control-label-left{
     padding-top: 7px;
     margin-bottom: 0;
@@ -73,6 +75,24 @@ hr {
     width: 100%;
     text-align: left;
 }
+
+
+.glyphicon-green{
+
+    color: seagreen;
+}
+
+.glyphicon-red{
+
+    color: orangered;
+}
+
+.glyphicon-blue{
+
+    color: royalblue;
+}
+
+
 /*
  * Sidebar
  */
