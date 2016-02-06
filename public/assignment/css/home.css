@@ -26,37 +26,40 @@ body {
 }
 
 
-/*Newly added classes for customization*/
+/*Newly added*/
 
-/* To shift the labels to the left just beside the sidebar */
+
 .control-label-left{
     padding-top: 7px;
     margin-bottom: 0;
     text-align: left;
+
 }
 
+/*
+.glyphicon {
+    font-size: 50px;
+}
+ */
 
-/* To increase size of glyphicons by certain factor */
+/* increase size by certain factor */
 .gi-15x{font-size: 1.5em;}
 .gi-2x{font-size: 2em;}
 .gi-3x{font-size: 3em;}
 .gi-4x{font-size: 4em;}
 .gi-5x{font-size: 5em;}
 
-
-/* To add space between two glyphicons */
 .glyphicon-second {
     margin-left: 8px;
 }
 
-/* To properly align glyphicons into the table */
+
 .glyphicon-right-align-top-offset{
     float: right;
     padding-top: 30px;
 
 }
 
-/* To properly align single plus glyhicon in Form-Fields,html */
 .glyphicon-new-field-offset{
 
     padding-top: 30px;
@@ -64,7 +67,6 @@ body {
     float: right;
 }
 
-/* To have a bold line to have a separate section */
 hr {
     border: 0;
     color: #FFFFFF;
@@ -75,7 +77,6 @@ hr {
 }
 
 
-/* To have colored glyphicons */
 .glyphicon-green{
 
     color: seagreen;
@@ -90,9 +91,6 @@ hr {
 
     color: royalblue;
 }
-
-<!-- End of Customization -->
-
 
 
 /*
