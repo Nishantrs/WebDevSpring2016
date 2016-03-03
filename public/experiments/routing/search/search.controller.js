@@ -7,7 +7,7 @@
 
     angular
         .module("MovieApp")
-        .controller("SearchController", searchController)
+        .controller("SearchController", searchController);
 
     function searchController($scope, $http, $routeParams, $location, MovieService){
 
@@ -25,7 +25,7 @@
         function search(title){
 
             console.log(title);
-            $location.url("/search/"+title)
+            $location.url("/search/"+title);
             //$http.get("http://www.omdbapi.com/?s="+title)
             //      .success(render);
             MovieService.findMoviesByTitle(title, render);

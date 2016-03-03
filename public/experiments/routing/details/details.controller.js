@@ -7,14 +7,14 @@
 
     angular
         .module("MovieApp")
-        .controller("DetailsController", detailsController)
+        .controller("DetailsController", detailsController);
 
     function detailsController($scope, $routeParams, $http){
 
         var imdbID = $routeParams.imdbID; //imdbID is the parameter used in config.js
 
         $http.get("http://www.omdbapi.com/?i="+imdbID)
-            .success(renderMovie)
+            .success(renderMovie);
 
         function renderMovie(response){
             $scope.movie = response; //movie is the variable used in details.view.html
