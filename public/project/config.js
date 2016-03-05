@@ -1,5 +1,5 @@
 /**
- * Created by NishantRatnakar on 2/27/2016.
+ * Created by NishantRatnakar on 3/3/2016.
  */
 
 "use strict";
@@ -7,7 +7,7 @@
 (function(){
 
     angular
-        .module("FormBuilderApp")
+        .module("HotelReview")
         .config(configuration);
 
     function configuration($routeProvider){
@@ -21,10 +21,10 @@
                 templateUrl:"views/users/profile.view.html",
                 controller: "ProfileController"
             }) //placeholders required
-            .when("/admin", {
-                templateUrl: "views/admin/admin.view.html",
-                controller: "AdminController"
-            })
+            //.when("/admin", {
+            //    templateUrl: "views/admin/admin.view.html",
+            //    controller: "AdminController"
+            //})
             .when("/register",{
                 templateUrl:"views/users/register.view.html",
                 controller: "RegisterController"
@@ -33,14 +33,14 @@
                 templateUrl:"views/users/login.view.html",
                 controller: "LoginController"
             })
-            .when("/forms",{
-                templateUrl:"views/forms/forms.view.html",
-                controller: "FormController"
-            })
-            .when("/form-fields",{
-                templateUrl:"views/forms/form-fields.view.html",
-                controller: "FormFieldsController"
-            })
+            //.when("/forms",{
+            //    templateUrl:"views/forms/forms.view.html",
+            //    controller: "FormController"
+            //})
+            //.when("/form-fields",{
+            //    templateUrl:"views/forms/form-fields.view.html",
+            //    controller: "FormFieldsController"
+            //})
             .otherwise({
                 redirectTo: "/home"
             });
