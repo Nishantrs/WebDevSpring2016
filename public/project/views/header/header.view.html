@@ -16,22 +16,23 @@
                 <li>
                     <a href="#/home">Home</a>
                 </li>
-                <li>
+                <li ng-hide="currentUser" ng-class="{'active': $location.url().indexOf('register')!=-1}">
                     <a href="#/register"><u>Register</u></a>
                 </li>
-                <li>
+                <li ng-hide="currentUser" ng-class="{'active': $location.url().indexOf('login')!=-1}">
                     <a href="#/login"><u>Login</u></a>
                 </li>
-                <li>
-                    <a href="#/profile">Profile</a>
+                <li ng-show="currentUser" ng-class="{'active': ($location.url().indexOf('profile')!=-1) && !($location.url().indexOf('reviews')!=-1)}">
+                    <a ng-href="#/profile/{{currentUser._id}}"><span ng-bind="currentUser.username"></span></a>
                 </li>
-                <li>
-                    <a href="#/forms">Reviews</a>
+                <li ng-if="currentUser" ng-class="{'active': $location.url().indexOf('reviews')!=-1}">
+                    <a href="#/profile/{{currentUser._id}}/reviews">Reviews</a>
                 </li>
-                <li>
+                <li ng-show="currentUser && currentUser.roles.indexOf('admin') >= 0"
+                    ng-class="{'active': $location.url().indexOf('admin')!=-1}">
                     <a href="#/admin">Admin</a>
                 </li>
-                <li>
+                <li ng-show="currentUser" ng-click="logout()">
                     <a href="#/home"><u>Logout</u></a>
                 </li>
             </ul>

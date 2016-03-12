@@ -37,14 +37,14 @@
 }
 
 /* To have a bold line to have a separate section */
-hr {
-    border: 0;
-    color: #FFFFFF;
-    background-color: #000000;
-    height: 5px;
-    width: 100%;
-    text-align: left;
-}
+/*hr {*/
+    /*border: 0;*/
+    /*color: #FFFFFF;*/
+    /*background-color: #000000;*/
+    /*height: 5px;*/
+    /*width: 100%;*/
+    /*text-align: left;*/
+/*}*/
 
 
 /* To have colored glyphicons */
@@ -160,4 +160,52 @@ hr {
 
 .register-login-form-header{
 text-align: center;
+}
+
+/* Profile Page */
+
+.profile-background {
+    background-image: url('../images/profile-header.jpg');
+    background-position: center center;
+    background-size: cover;
+    height: 300px;
+    position: relative;
+    padding-top: 25px;
+    /* margin-top: -110px; */
+}
+
+.profile {
+    margin-top: 0px;
+    padding: 15px;
+    position: relative;
+    z-index: 2;
+}
+
+.img-circle {
+    border-radius: 50%;
+}
+
+.img-circle {
+    background-color: #FFFFFF;
+    margin-bottom: 10px;
+    padding: 4px;
+}
+
+.img-no-padding {
+    padding: 0px;
+}
+
+.profile-button{
+    padding-top: 10px;
+    margin-left: 15px;
+}
+
+.profile-body{
+    background-color: #f7e1bf;
+}
+
+.hr-profile{
+    height: 1px;
+    width: 50%;
+    align: center
 }
