@@ -1,0 +1,40 @@
+
+
+<nav class="navbar navbar-inverse navbar-fixed-top transparency" ng-controller="HeaderController">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#/home">Form Maker</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li ng-hide="currentUser">
+                    <a href="#/register"><u>Register</u></a>
+                </li>
+                <li ng-hide="currentUser">
+                    <a href="#/login"><u>Login</u></a>
+                </li>
+                <li ng-show="currentUser">
+                    <a href="#/profile">{{currentUser.username}}</a>
+                </li>
+                <li class="visible-xs" ng-if="currentUser" ng-class="{'active' : $location.url().indexOf('forms') != -1}">
+                    <a href="#/forms">Forms</a>
+                </li>
+                <li ng-show="currentUser && currentUser.roles.indexOf('admin') >= 0">
+                    <a href="#/admin">Admin</a>
+                </li>
+                <li ng-show="currentUser" ng-click="logout()">
+                    <a href=""><u>Logout</u></a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+
+

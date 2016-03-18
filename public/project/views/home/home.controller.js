@@ -22,26 +22,32 @@
         //    SearchService.searchByTermAndPlace(data.query, data.city,0);
         //}
 
-        //function init()
-        //{
-        //    angular.element(document).ready(function () {
-        //
-        //        $http.get("http://ipinfo.io", function(res) {
-        //
-        //            if (res !== undefined) {
-        //                model.searchData.city = res.city;
-        //            } else {
-        //                ////console.log("not supported");
-        //                //set default location
-        //                model.searchData.city = 'Boston';
-        //            }
-        //        });
-        //
-        //    });
-        //
-        //}
-        //
-        //init();
+        function init()
+        {
+//            angular.element(document).ready(function () {
+
+                $http.get("http://ipinfo.io")
+                .success(function(res) {
+
+                    model.searchData = {
+                        city : 'Boston'
+                    };
+
+                    console.log ( res);
+                    if (typeof res !== "undefined") {
+                        model.searchData.city = res.city;
+                    } else {
+                        ////console.log("not supported");
+                        //set default location
+                        model.searchData.city = 'Boston';
+                    }
+                });
+
+//            });
+
+        }
+
+        init();
 
 
 
@@ -55,7 +61,7 @@
             //    console.log(res);
             //});
 
-            if (data=== undefined) //(data.query === undefined && data.city === undefined)
+            if (typeof data === "undefined") //(data.query === undefined && data.city === undefined)
                 {
                 alert("Enter valid value to search");
                 }
