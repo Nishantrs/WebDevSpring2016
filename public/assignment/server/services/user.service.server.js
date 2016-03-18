@@ -8,13 +8,35 @@ module.exports = function(app, userModel)
 {
 
     app.post("/api/assignment/user", createUser);
-    app.get("/api/assignment/user", getAllUsers);
-    app.get("/api/assignment/user/:id", findUserById);
-    app.get("/api/assignment/user?username=username", findUserByUsername);
+    //app.get("/api/assignment/user", getAllUsers);
+    //app.get("/api/assignment/user/:id", findUserById);
+    //app.get("/api/assignment/user?username=username", findUserByUsername);
     //app.get("/api/assignment/user?username=username&password=password", findUserByCredentials);
-    app.get("/api/assignment/user/:username/:password",findUserByCredentials);
+    //app.get("/api/assignment/user/:username/:password",findUserByCredentials);
     app.put("/api/assignment/user/:id", updateUserById);
     app.delete("/api/assignment/user/:id", deleteUserById);
+
+    app.get("/api/assignment/user", decideEndpoint);
+
+    function decideEndpoint(req, res)
+    {
+        if(req.query.username && req.query.password)
+        {
+            findUserByCredentials(req, res);
+        }
+        else if (req.params.username)
+        {
+            findUserByUsername(req, res);
+        }
+        else if (req.params.id)
+        {
+            findUserById(req, res);
+        }
+        else
+        {
+            getAllUsers(req, res);
+        }
+    }
 
 
 
@@ -78,11 +100,11 @@ module.exports = function(app, userModel)
 
     function findUserByCredentials(req, res)
     {
-        //var userName = req.query.username;
-        //var userPassword = req.query.password;
+        var userName = req.query.username;
+        var userPassword = req.query.password;
 
-        var userName = req.params.username;
-        var userPassword = req.params.password;
+        //var userName = req.params.username;
+        //var userPassword = req.params.password;
 
         console.log(userName);
         console.log(userPassword);

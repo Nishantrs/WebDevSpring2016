@@ -38,7 +38,7 @@
         {
             console.log("forms.controller.js");
 
-            //vm.fTitle = null;
+            vm.fTitle = null;
 
             console.log("before request");
 
@@ -83,9 +83,9 @@
                 var newForm = {"_id": null, "title": formTitle, "userId": null};
 
                 FormService.createFormForUser(user._id, newForm)
-                    .then(renderForms);
+                    .then(init);
 
-                vm.fTitle = null;
+                //vm.fTitle = null;
                 $scope.fmessage = "Form added!!!";
 
             }
@@ -113,9 +113,10 @@
                    };
 
                    FormService.updateFormById(updatedForm._id, updatedForm)
-                       .then(renderForms);
+                       .then(init);
 
-                   $scope.fTitle = null;
+                   //vm.fTitle = null;
+                   $scope.selectedForm = null;
                    $scope.fmessage = "Form updated!!!"
                }
                 else
@@ -132,7 +133,7 @@
         function deleteForm(index)
         {
             FormService.deleteFormById(vm.userForms[index]._id)
-                .then(renderForms);
+                .then(init);
             $scope.fmessage = "Form deleted!!!"
         }
 

@@ -76,8 +76,8 @@
         function findUserByCredentials(credentials)
             {
                 console.log("In User Services");
-                //return $http.get("/api/assignment/user?username=" +credentials.username+ "&password=" +credentials.password);
-                return $http.get("/api/assignment/user/" +credentials.username+ "/" +credentials.password);
+                return $http.get("/api/assignment/user?username=" +credentials.username+ "&password=" +credentials.password);
+                //return $http.get("/api/assignment/user/" +credentials.username+ "/" +credentials.password);
             }
 
 

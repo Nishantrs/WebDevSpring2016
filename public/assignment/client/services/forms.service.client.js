@@ -48,7 +48,7 @@
                 method: 'POST',
                 url: '/api/assignment/user/' + userId + '/form',
                 data: formObj
-            });l
+            });
         }
 
         //function findAllFormsForUser(userId, callback)
