@@ -12,35 +12,71 @@
         .controller("RegisterController", RegisterController);
 
     function RegisterController($location, $scope, $rootScope, UserService){
-        $scope.$location=$location;
 
-        $scope.register = register;
+        var vm = this;
+        vm.register = register;
+
+        function init()
+        {
+            console.log("In register controller");
+        }
+
+        init();
+
         $scope.rmessage = null;
 
 
-        function register(username, password, verifypassword, email)
+        function register(user)
         {
-            var setCurrentUser = function (nUser)
-            {
-               $rootScope.currentUser = nUser;
-               $location.url("/profile")
-            };
 
-            if (username == null || password == null || verifypassword == null || email == null) // null as object is still not created in register.
+            //if (user.username == null || user.password == null || user.passwordverify == null || user.email == null) // null as object is still not created in register.
+            //{
+            //    console.log(user.username);
+            //    $scope.rmessage = "Please enter all the details";
+            //    return;
+            //}
+
+            if(!user.username)
             {
-                $scope.rmessage = "Please enter all the details";
-                console.log($scope.rmessage);
+                $scope.rmessage = "Please provide a username";
+                return;
             }
-            else if (password != verifypassword)
+
+            if (!user.password || !user.passwordverify)
+            {
+                $scope.rmessage = "Please provide a password";
+                return;
+            }
+
+            if(!user.email)
+            {
+                $scope.rmessage = "Please provide an email";
+                return;
+            }
+
+            if (user.password != user.passwordverify)
             {
                 $scope.rmessage = "Password provided does not match. Please re-enter details.";
-                console.log($scope.rmessage);
+                return;
             }
-            else
-            {
-                var user = {"username": username, "password": password, "email": email, "roles":"[student]", "firstName": "", "lastName": ""};
-                UserService.createUser(user, setCurrentUser);
-            }
+
+
+                var userObj = {"username": user.username, "password": user.password, "email": user.email, "roles":"[student]", "firstName": "", "lastName": ""};
+
+                UserService.createUser(userObj)
+                    .then(function(response)
+                    {
+                        if(response.data)
+                        {
+                            UserService.setCurrentUser(response.data);
+                            $location.url("/profile");
+                        }
+                        else
+                        {
+                            $scope.rmessage = "Please try again"
+                        }
+                    });
+
         }
     }
 

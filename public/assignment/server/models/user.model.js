@@ -22,17 +22,23 @@ module.exports = function (app) {
 
     function createUser(user)
     {
+        console.log("In Model createUser");
+
         users.push(user);
-        return users;
+        return user;
     }
 
     function getAllUsers()
     {
+        console.log("In Model getAllUsers");
+
         return users;
     }
 
     function findUserById(userId)
     {
+        console.log("In Model findUserById");
+
         var userFound = null;
         for (var i = 0; users.length; i++)
         {
@@ -47,6 +53,8 @@ module.exports = function (app) {
 
     function findUserByUsername(username)
     {
+        console.log("In Model findUserByUsername");
+
         var userFound = null;
 
         for (var i = 0; users.length; i++)
@@ -62,14 +70,15 @@ module.exports = function (app) {
 
     function findUserByCredentials(userName, userPassword)
     {
+        console.log("In Model findUserByCredential");
         var userFound = null;
 
         var username = userName;
         var password = userPassword;
 
-        for (var i = 0; users.length; i++)
+        for (var i in users) //var i = 0; users.length; i++ not working
         {
-            if (users[i].username === username && users[i].password === password)
+            if (users[i].username == username && users[i].password == password)
             {
                 userFound = users[i];
                 break;
@@ -80,19 +89,27 @@ module.exports = function (app) {
 
     function updateUserById(userId, user)
     {
-        for (var i = 0; users.length; i++)
+        console.log("In Model updateUserById");
+
+        //console.log(users[1]._id);
+
+        for (var i in users)  //var i = 0; users.length; i++
         {
-            if (users[i]._id === userId)
+            console.log("In Model In loop updateUserById");
+            if (users[i]._id == userId)
             {
+                console.log("In Model Inside if");
                 users[i] = user;
-                break;
+                console.log(users[i]);
+                return users[i];
             }
         }
-        return users;
+
     }
 
     function deleteUserById(userId)
     {
+        console.log("In Model deleteUserById");
         for (var i = 0; users.length; i++)
         {
             if (users[i]._id === userId)

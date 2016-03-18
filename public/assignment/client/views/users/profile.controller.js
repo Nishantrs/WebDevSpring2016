@@ -11,69 +11,70 @@
         .module("FormBuilderApp")
         .controller("ProfileController", ProfileController);
 
-    function ProfileController($location, $scope, $rootScope, UserService){
+    function ProfileController($location, $scope, UserService){
 
-        $scope.update = update;
+        var vm = this;
+        vm.update = update;
+        var currentUser = UserService.getCurrentUser();
+        vm.username= currentUser.username;
+        vm.password= currentUser.password;
+        vm.firstName = currentUser.firstName;
+        vm.lastName = currentUser.lastName;
+        vm.email = currentUser.email;
 
-        if(!$rootScope.currentUser)
+        function init()
         {
-            $location.url("/home");
+
+            console.log("In profile controller");
+
+            if(!currentUser)
+            {
+                $location.url("/home");
+            }
         }
-       else
+
+        init();
+
+        function update(username, Password, FirstName, LastName, Email)
         {
-            var user = $rootScope.currentUser;
+            console.log("In update function");
 
-            $scope.$location = $location;
-            $scope.username = user.username;
-            $scope.userPassword = user.password;
-            $scope.userFirstName = user.firstName;
-            $scope.userLastName = user.lastName;
-            $scope.userEmail = user.email;
-            $scope.pmessage = null;
+            $scope.message="null";
 
-        }
-
-
-
-        function update(name, Password, FirstName, LastName, Email) {
-
-
-            //var updatedUser =
-            //{
-            //    "_id": user._id,
-            //    "firstName": FirstName,
-            //    "lastName": LastName,
-            //    "username": name,
-            //    "password": Password,
-            //    "email": Email,
-            //    "roles": user.roles
-            //};
-
-
-            if (name == "" || Password == "" || FirstName == "" || LastName == "" || Email == "") {
+            if (username == "" || Password == "" || FirstName == "" || LastName == "" || Email == "")
+            {
                 $scope.pmessage = "Please enter all the details";
                 console.log($scope.pmessage);
             }
-            else {
-                var updatedUser =
+            else
+            {
+                var id = currentUser._id;
+
+                var userDetails =
                 {
-                    "_id": user._id,
-                    "firstName": FirstName,
-                    "lastName": LastName,
-                    "username": name,
-                    "password": Password,
-                    "email": Email,
-                    "roles": user.roles
+                    "_id":id,
+                    "username":username,
+                    "password":Password,
+                    "firstName":FirstName,
+                    "lastName":LastName,
+                    "email":Email,
+                    "roles":currentUser.roles
                 };
+                UserService.updateUser(id,userDetails)
+                    .then(function(response)
+                    {
+                        console.log(response.data);
 
-                var updateCurrentUser = function (uUser) {
-                    $rootScope.currentUser = uUser;
-                    $location.url("/profile");
-                    $scope.pmessage = "Profile updated!!!";
-                };
-
-                UserService.updateUser(user._id, updatedUser, updateCurrentUser);
-
+                        if(response.data)
+                        {
+                            UserService.setCurrentUser(response.data);
+                            $scope.pmessage = "Your Profile has been updated!!!";
+                        }
+                        else
+                        {
+                            $scope.pmessage = "Sorry! Please enter your details again!!!";
+                        }
+                    });
             }
         }
         }

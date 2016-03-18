@@ -6,34 +6,34 @@
     <div class="form-group">
         <label for="exampleInputUsername1" class="col-sm-2 control-label-left">Username:</label>
         <div class="col-sm-10">
-            <input ng-model="rusername" type="text" class="form-control" id="exampleInputUsername1" placeholder="Username">
+            <input ng-model="model.username" type="text" class="form-control" id="exampleInputUsername1" placeholder="Username">
         </div>
     </div>
 
     <div class="form-group">
         <label for="inputPassword3" class="col-sm-2 control-label-left">Password:</label>
         <div class="col-sm-10">
-            <input ng-model="rpassword" type="password" class="form-control" id="inputPassword3" placeholder="Password">
+            <input ng-model="model.password" type="password" class="form-control" id="inputPassword3" placeholder="Password">
         </div>
     </div>
 
     <div class="form-group">
         <label for="inputPassword4" class="col-sm-2 control-label-left">Verify Password:</label>
         <div class="col-sm-10">
-            <input ng-model="rpasswordverify" type="password" class="form-control" id="inputPassword4" placeholder="verify password">
+            <input ng-model="model.passwordverify" type="password" class="form-control" id="inputPassword4" placeholder="verify password">
         </div>
     </div>
 
     <div class="form-group">
         <label for="inputEmail3" class="col-sm-2 control-label-left">Email:</label>
         <div class="col-sm-10">
-            <input ng-model="remail" type="email" class="form-control" id="inputEmail3" placeholder="Email">
+            <input ng-model="model.email" type="email" class="form-control" id="inputEmail3" placeholder="Email">
         </div>
     </div>
 
     <div class="form-group">
         <div class="col-sm-offset-2 col-sm-10">
-            <button ng-click="register(rusername, rpassword, rpasswordverify, remail)"
+            <button ng-click="model.register(model)"
                     type="submit" class="btn btn-block btn-primary">Register</button>
         </div>
     </div>

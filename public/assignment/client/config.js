@@ -16,18 +16,18 @@
         $routeProvider
             .when("/home",{
                 templateUrl:"views/home/home.view.html",
-                controller: "HomeController",
-                resolve: {
-                    getLoggedIn: getLoggedIn
-                }
+                controller: "HomeController"
+                //resolve: {
+                //    getLoggedIn: getLoggedIn
+                //}
             })
             .when("/profile/:username?",{
                 templateUrl:"views/users/profile.view.html",
                 controller: "ProfileController",
-                controllerAs: "model",
-                resolve: {
-                    checkLoggedIn: checkLoggedIn
-                }
+                controllerAs: "model"
+                //resolve: {
+                //    checkLoggedIn: checkLoggedIn
+                //}
             }) //placeholders required
             .when("/admin", {
                 templateUrl: "views/admin/admin.view.html",
@@ -59,43 +59,43 @@
             });
     }
 
-    function getLoggedIn(UserService, $q)
-    {
-        var deferred = $q.defer();
-
-        UserService
-        .getCurrentUser()
-        .then(function(response)
-        {
-            var currentUser = response.data;
-            UserService.setCurrentUser(currentUser);
-            deferred.resolve();
-        });
-
-        return deferred.promise;
-
-
-    }
-
-    function checkLoggedIn(UserService, $q, $location){
-
-        var deferred = $q.defer();
-
-        UserService
-            .getCurrentUser()
-            .then(function(response)
-            {
-                var currentUser = response.data;
-                if(currentUser) {
-                    UserService.setCurrentUser(currentUser);
-                    deferred.resolve();
-                }else{
-                    deferred.reject();
-                    $location.path("/home");
-
-                }
-            });
-
-        return deferred.promise;
-    }
+    //function getLoggedIn(UserService, $q)
+    //{
+    //    var deferred = $q.defer();
+    //
+    //    UserService
+    //    .getCurrentUser()
+    //    .then(function(response)
+    //    {
+    //        var currentUser = response.data;
+    //        UserService.setCurrentUser(currentUser);
+    //        deferred.resolve();
+    //    });
+    //
+    //    return deferred.promise;
+    //
+    //
+    //}
+    //
+    //function checkLoggedIn(UserService, $q, $location){
+    //
+    //    var deferred = $q.defer();
+    //
+    //    UserService
+    //        .getCurrentUser()
+    //        .then(function(response)
+    //        {
+    //            var currentUser = response.data;
+    //            if(currentUser) {
+    //                UserService.setCurrentUser(currentUser);
+    //                deferred.resolve();
+    //            }else{
+    //                deferred.reject();
+    //                $location.path("/home");
+    //
+    //            }
+    //        });
+    //
+    //    return deferred.promise;
+    //}
 })();
