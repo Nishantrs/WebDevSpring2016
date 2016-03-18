@@ -3,7 +3,7 @@
 <div ng-show="fmessage" class="alert alert-danger text-center" role="alert">{{fmessage}}</div>
 
 <ul class="nav nav-tabs">
-    <li role="presentation" class="active"><a href="#/forms">Forms</a></li>
+    <li role="presentation" class="active"><a>Forms</a></li>  <!-- href="#/forms"-->
     <li role="presentation"><a href="#/form-fields">Fields</a></li>
 </ul>
 <div class="table-responsive">
@@ -15,19 +15,19 @@
         </tr>
 
         <tr>
-            <td><input ng-model="fTitle" type="text" class="form-control" id="Formname" placeholder="name"></td>
-            <td><a ng-click="addForm(fTitle)" class="btn btn-default"><span class="glyphicon glyphicon-plus glyphicon-blue gi-15x" aria-hidden="true"></span></a>
-                <a ng-click="updateForm(fTitle)" class="btn btn-default"><span class="glyphicon glyphicon-ok glyphicon-green gi-15x" aria-hidden="true"></span></a><!--  glyphicon-second removed -->
+            <td><input ng-model="model.fTitle" type="text" class="form-control" id="Formname" placeholder="name"></td>
+            <td><a ng-click="model.addForm(model.fTitle)" class="btn btn-default"><span class="glyphicon glyphicon-plus glyphicon-blue gi-15x" aria-hidden="true"></span></a>
+                <a ng-click="model.updateForm(model.fTitle)" class="btn btn-default"><span class="glyphicon glyphicon-ok glyphicon-green gi-15x" aria-hidden="true"></span></a><!--  glyphicon-second removed -->
 
 
             </td>
         </tr>
         </thead>
         <tbody>
-            <tr ng-repeat="form in userForms">
-            <td><a href="#/form-fields">{{form.title}}</a></td>
-            <td><a ng-click="deleteForm($index)" class="btn btn-default"><span class="glyphicon glyphicon-remove glyphicon-red gi-15x" aria-hidden="true"></span></a>
-                <a ng-click="selectForm($index)" class="btn btn-default"><span class="glyphicon glyphicon-pencil glyphicon-blue gi-15x" aria-hidden="true"></span></a><!--  glyphicon-second removed -->
+            <tr ng-repeat="form in model.userForms">
+            <td><a>{{form.title}}</a></td>  <!-- href="#/form-field" -->
+            <td><a ng-click="model.deleteForm($index)" class="btn btn-default"><span class="glyphicon glyphicon-remove glyphicon-red gi-15x" aria-hidden="true"></span></a>
+                <a ng-click="model.selectForm($index)" class="btn btn-default"><span class="glyphicon glyphicon-pencil glyphicon-blue gi-15x" aria-hidden="true"></span></a><!--  glyphicon-second removed -->
             </td>
             </tr>
         </tbody>

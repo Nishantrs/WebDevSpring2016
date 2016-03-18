@@ -11,34 +11,68 @@
         .module("FormBuilderApp")
         .controller("FormController",FormController);
 
-    function FormController($scope, $rootScope, $location, FormService)
+    function FormController($scope, $rootScope, $location, FormService, UserService)
     {
 
 
-        $scope.addForm = addForm;
-        $scope.updateForm = updateForm;
-        $scope.deleteForm = deleteForm;
-        $scope.selectForm = selectForm;
+        //$scope.addForm = addForm;
+        //$scope.updateForm = updateForm;
+        //$scope.deleteForm = deleteForm;
+        //$scope.selectForm = selectForm;
 
-        $scope.fTitle = null;
+        var vm =this;
+        vm.addForm = addForm;
+        vm.updateForm=updateForm;
+        vm.deleteForm=deleteForm;
+        vm.selectForm=selectForm;
+
+
+        var user = UserService.getCurrentUser();
+
         $scope.fmessage = null;
-        $scope.selectedForm = null;
-
-        var user = $rootScope.currentUser;
+        $scope.selectedForm = [];
 
 
 
-        getCurrentUserForms(user);
-
-        function getCurrentUserForms(cUser)
+        function init()
         {
-            var getForms = function(cUserForms)
-            {
-                $scope.userForms = cUserForms
-            };
+            console.log("forms.controller.js");
 
-            FormService.findAllFormsForUser(user._id,getForms)
+            //vm.fTitle = null;
+
+            console.log("before request");
+
+            FormService.findAllFormsForUser(user._id)
+                .then(renderForms);
+
+            console.log("after request");
         }
+
+        init();
+
+        function renderForms(response)
+        {
+            console.log(response.data);
+            if(response.data)
+            {
+                vm.userForms = response.data;
+
+            }
+        }
+
+
+
+        //getCurrentUserForms(user);
+        //
+        //function getCurrentUserForms(cUser)
+        //{
+        //    var getForms = function(cUserForms)
+        //    {
+        //        $scope.userForms = cUserForms
+        //    };
+        //
+        //    FormService.findAllFormsForUser(user._id,getForms)
+        //}
 
 
         function addForm(formTitle)
@@ -48,20 +82,11 @@
             {
                 var newForm = {"_id": null, "title": formTitle, "userId": null};
 
-                var newFormList = function(nform)
-                {
+                FormService.createFormForUser(user._id, newForm)
+                    .then(renderForms);
 
-                    var getForms = function(cUserForms)
-                    {
-                        $scope.userForms = cUserForms;
-                    };
-
-                    FormService.findAllFormsForUser(user._id, getForms);   //use getCurrentUserForms(user); instead
-                };
-
-                FormService.createFormForUser(user._id, newForm, newFormList);
-                $scope.fTitle = null;
-                $scope.fmessage = "Form added!!!"
+                vm.fTitle = null;
+                $scope.fmessage = "Form added!!!";
 
             }
             else
@@ -69,6 +94,7 @@
                 $scope.fmessage = "Please enter name of the form.";
             }
         }
+
 
 
 
@@ -82,20 +108,12 @@
                    var updatedForm = {
                        "_id": $scope.selectedForm._id,
                        "title": formTitle,
-                       "userId": $scope.selectedForm.userId
+                       "userId": $scope.selectedForm.userId,
+                       "fields": $scope.selectedForm.fields
                    };
 
-                   var updatedFormList = function(uform)
-                   {
-                       var getForms = function(cUserForms)
-                       {
-                           $scope.userForms = cUserForms;
-                       };
-
-                       FormService.findAllFormsForUser(user._id, getForms);
-                   };
-
-                   FormService.updateFormById(updatedForm._id, updatedForm, updatedFormList);
+                   FormService.updateFormById(updatedForm._id, updatedForm)
+                       .then(renderForms);
 
                    $scope.fTitle = null;
                    $scope.fmessage = "Form updated!!!"
@@ -111,29 +129,18 @@
             }
         }
 
-
         function deleteForm(index)
         {
-
-            var updatedFormList = function(forms)
-            {
-                var getForms = function(cUserForms)
-                {
-                    $scope.userForms = cUserForms;
-                };
-
-                FormService.findAllFormsForUser(user._id, getForms);
-            };
-
-            FormService.deleteFormById($scope.userForms[index]._id, updatedFormList);
+            FormService.deleteFormById(vm.userForms[index]._id)
+                .then(renderForms);
             $scope.fmessage = "Form deleted!!!"
         }
 
         function selectForm(index)
         {
             //declaration of global variable selectedForm
-            $scope.selectedForm = $scope.userForms[index];
-            $scope.fTitle = $scope.selectedForm.title;
+            $scope.selectedForm = vm.userForms[index];
+            vm.fTitle = $scope.selectedForm.title;
         }
 
 

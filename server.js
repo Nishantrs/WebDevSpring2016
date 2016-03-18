@@ -16,11 +16,14 @@ app.use(bodyParser.json()); // for parsing application/json
 app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
 app.use(multer());
 
-// For assignment3 only
-require('./public/assignment/server/app.js')(app);
 
 //for generationg random id
 var uuid = require('node-uuid');
+
+// For assignment3 only
+require('./public/assignment/server/app.js')(app, uuid);
+
+
 
 
 var ipaddress = process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1';

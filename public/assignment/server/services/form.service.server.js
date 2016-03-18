@@ -4,7 +4,7 @@
 
 "use strict";
 
-module.exports = function(app, formModel)
+module.exports = function(app, formModel, uuid)
 {
 
     app.get("/api/assignment/user/:userId/form", findFormsByUserId);
@@ -16,6 +16,8 @@ module.exports = function(app, formModel)
 
     function findFormsByUserId(req, res)
     {
+        console.log("In server services findFormsByUserId");
+
         var userId = req.params.userId;
 
         //formModel
@@ -30,6 +32,8 @@ module.exports = function(app, formModel)
 
     function findFormById(req, res)
     {
+        console.log("In server services findFormById");
+
         var formId = req.params.formId;
 
         //formModel
@@ -44,6 +48,9 @@ module.exports = function(app, formModel)
 
     function deleteFormById(req, res)
     {
+
+        console.log("In server services deleteFormById");
+
         var formId = req.params.formId;
 
         //formModel
@@ -59,6 +66,8 @@ module.exports = function(app, formModel)
 
     function createFormByUserId(req, res)
     {
+        console.log("In server services createFormByUserId");
+
         var newForm = req.body;
         var userId = req.params.userId;
 
@@ -78,6 +87,8 @@ module.exports = function(app, formModel)
 
     function updateFormById(req, res)
     {
+
+        console.log("In server services updateFormById");
 
         var formId = req.params.formId;
         var formObj = req.body;

@@ -28,10 +28,12 @@ module.exports = function(app)
 
     function findFormsByUserId(userId)
     {
+        console.log("In Model findFormsByUserId");
+
             var formsFound = [];
-            for (var i = 0; forms.length; i++)
+            for (var i in forms)  //var i = 0; forms.length; i++
             {
-                if (forms[i].userId === userId)
+                if (forms[i].userId == userId)
                 {
                     formsFound.push(forms[i]);
                 }
@@ -42,10 +44,12 @@ module.exports = function(app)
 
     function findFormById(formId)
     {
+        console.log("In Model findFormById");
+
         var formFound = null;
-        for (var i = 0; forms.length; i++)
+        for (var i in forms)
         {
-            if (forms[i]._id === formId)
+            if (forms[i]._id == formId)
             {
                 formFound = forms[i];
                 break;
@@ -56,9 +60,12 @@ module.exports = function(app)
 
     function deleteFormById(formId)
     {
-        for (var i = 0; forms.length; i++)
+
+        console.log("In Model deleteFormById");
+
+        for (var i in forms)
         {
-            if (forms[i]._id === formId)
+            if (forms[i]._id == formId)
             {
                 forms.splice(i, 1);
                 break;
@@ -69,6 +76,8 @@ module.exports = function(app)
 
     function createForm(newForm)
     {
+        console.log("In Model createForm");
+
         forms.push(newForm);
 
         return forms;
@@ -76,9 +85,11 @@ module.exports = function(app)
 
     function updateFormById(formId, form)
     {
-        for (var i = 0; forms.length; i++)
+        console.log("In Model updateFormById");
+
+        for (var i in forms)
         {
-            if (forms[i]._id === formId)
+            if (forms[i]._id == formId)
             {
                 forms[i] = form;
                 break;
@@ -94,9 +105,9 @@ module.exports = function(app)
 
         var fields = [];
 
-        for (var i = 0; forms.length; i++)
+        for (var i in forms)
         {
-            if (forms[i]._id === formId)
+            if (forms[i]._id == formId)
             {
                 return forms[i].fields;
             }
@@ -107,9 +118,9 @@ module.exports = function(app)
     function addFormFieldByFormId(formId, field)
     {
 
-        for (var i = 0; forms.length; i++)
+        for (var i in forms)
         {
-            if (forms[i]._id === formId)
+            if (forms[i]._id == formId)
             {
                 forms[i].fields.push(field);
                 return forms[i].fields;
@@ -121,20 +132,20 @@ module.exports = function(app)
     {
         var field = null;
 
-        for (var i = 0; forms.length; i++)
+        for (var i in forms)
         {
-            if (forms[i]._id === formId)
+            if (forms[i]._id == formId)
             {
                 var fields = forms[i].fields;
 
-                for (var j = 0; fields.length; j++)
+                for (var j in fields)
                 {
-                    if (fields[j]._id === fieldId)
+                    if (fields[j]._id == fieldId)
                     {
                         field = fields[j];
                     }
 
-                    break;
+                    //break;
                 }
             }
 
@@ -145,20 +156,20 @@ module.exports = function(app)
 
     function updateFormFieldById(formId, fieldId, field)
     {
-        for (var i = 0; forms.length; i++)
+        for (var i in forms)
         {
-            if (forms[i]._id === formId)
+            if (forms[i]._id == formId)
             {
                 var fields = forms[i].fields;
 
-                for (var j = 0; fields.length; j++)
+                for (var j in fields)
                 {
-                    if (fields[j]._id === fieldId)
+                    if (fields[j]._id == fieldId)
                     {
-                        forms[i].field[j] = field;
+                        forms[i].fields[j] = field;
                     }
 
-                    break;
+                    //break;
                 }
             }
             return forms[i];
