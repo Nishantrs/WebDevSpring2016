@@ -74,6 +74,7 @@ module.exports = function(app, formModel, uuid)
         newForm.userId = userId;
 
         newForm._id = uuid.v1(); //time based id created.
+        newForm.fields = [];
 
         //formModel
         //    .createForm(newForm)
