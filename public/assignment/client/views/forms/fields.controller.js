@@ -10,7 +10,7 @@
         .module("FormBuilderApp")
         .controller("FieldsController", FieldsController);
 
-    function FieldsController(FieldService, FormService, $routeParams, $route) {
+    function FieldsController(FieldService, FormService, $routeParams) {
         var vm = this;
         vm.cField = null;
         vm.eField = null;
@@ -45,12 +45,14 @@
                 {key: "Radio Buttons Field", value: "RADIOS"}
             ];
 
-        function render(response) {
+        function render(response)
+        {
             vm.display = response.data;
             vm.fields = response.data;
         }
 
-        function init() {
+        function init()
+        {
             FieldService
                 .findFieldsByForm(formId)
                 .then(render);
@@ -63,14 +65,16 @@
         }
         init();
 
-        function sendEdit(field) {
+        function sendEdit(field)
+        {
             vm.cField = null;
             FieldService
                 .updateField(formId, field._id, field)
                 .then(init);
         }
 
-        function reorder() {
+        function reorder()
+        {
             vm.form.fields = vm.fields;
             FormService
                 .updateFormById(formId, vm.form)
@@ -78,14 +82,16 @@
 
         }
 
-        function deleteField(field) {
+        function deleteField(field)
+        {
             vm.cField = null;
             FieldService
                 .deleteField(formId, field._id)
                 .then(init);
         }
 
-        function translateFieldType(fieldType) {
+        function translateFieldType(fieldType)
+        {
             for (var k in optionMap) {
                 console.log(optionMap[k].key + " " + optionMap[k].value);
                 if (optionMap[k].key == fieldType){
@@ -94,7 +100,8 @@
             }
         }
 
-        function addField(fieldType) {
+        function addField(fieldType)
+        {
             var field = {"label": "", "type": translateFieldType(fieldType), "placeholder": "", "options": null};
             console.log(field);
             FieldService
@@ -103,12 +110,14 @@
         }
 
 
-        function editField(field) {
+        function editField(field)
+        {
             vm.eField = field;
 
             var isOption = !(vm.eField.type === 'TEXT' || vm.eField.type === 'TEXTAREA');
 
-            if (isOption) {
+            if (isOption)
+            {
                 var optionList = [];
                 var ol = vm.eField.options;
                 for (var o in ol) {
@@ -120,16 +129,19 @@
             }
         }
 
-        function commitEdit(field) {
+        function commitEdit(field)
+        {
             vm.eField = field;
 
             var isOption = !(field.type == 'TEXT' || field.type == 'TEXTAREA');
 
             var optionArray = [];
-            if (isOption) {
+            if (isOption)
+            {
                 console.log(vm.optionText);
                 var oa = vm.optionText;
-                for (var o in oa) {
+                for (var o in oa)
+                {
                     var a = oa[o].split(":");
                     optionArray.push({
                         label: a[0],
