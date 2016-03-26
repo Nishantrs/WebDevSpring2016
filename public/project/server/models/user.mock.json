@@ -1,0 +1,34 @@
+[
+  {
+    "_id": 123, "firstName": "Alice", "lastName": "Wonderland",
+    "username": "a", "password": "a", "roles": ["user"], "email":"", "bio": "I am a user.","city": "Boston","state": "Massachusetts",
+    "follower":[{"userId": 234, "username": "bob"}],
+    "following":[{"userId": 123, "username": "a"}]
+  },
+  {
+    "_id": 234, "firstName": "Bob", "lastName": "Hope",
+    "username": "b", "password": "b", "roles": ["admin"],"email":"", "bio": "I am a admin.","city": "Boston","state": "Massachusetts",
+    "follower":[],
+    "following":[]
+  },
+  {
+    "_id": 345, "firstName": "Charlie", "lastName": "Brown",
+    "username": "charlie", "password": "charlie", "roles": ["user"], "email":"", "bio": "I am a user.","city": "Boston","state": "Massachusetts",
+    "follower":[],
+    "following":[]
+  },
+  {
+    "_id": 456, "firstName": "Dan", "lastName": "Craig",
+    "username": "dan", "password": "dan", "roles": ["user", "admin"], "email":"", "bio": "I am a admin.","city": "Boston","state": "Massachusetts",
+    "follower":[],
+    "following":[]
+  },
+  {
+    "_id": 567, "firstName": "Edward", "lastName": "Norton",
+    "username": "ed", "password": "ed", "roles": ["user"], "email":"", "bio": "I am a user.","city": "Boston","state": "Massachusetts",
+    "follower":[],
+    "following":[]
+  }
+]
+
+

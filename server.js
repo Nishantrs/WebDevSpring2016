@@ -7,6 +7,13 @@ var bodyParser = require('body-parser');
 var multer = require('multer');
 
 
+//used to parse cookie from the header of the request
+var cookieParser = require('cookie-parser');
+
+//for storing user details in session
+var session = require('express-session');
+
+
 
 
 app.use(express.static(__dirname + '/public'));
@@ -15,14 +22,21 @@ app.use(express.static(__dirname + '/public'));
 app.use(bodyParser.json()); // for parsing application/json
 app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
 app.use(multer());
+app.use(session({secret: process.env.SECRET || "Hardcoded Value for now",
+    saveUninitialized: true,
+    resave: true})); //secret: "Hardcoded Value for now"
+app.use(cookieParser());
 
 
-//for generationg random id
+//for generating random id
 var uuid = require('node-uuid');
 
 // For assignment3 only
 require('./public/assignment/server/app.js')(app, uuid);
 
+
+// For project only
+require('./public/project/server/app.js')(app, uuid);
 
 
 

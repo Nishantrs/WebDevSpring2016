@@ -6,7 +6,7 @@
 </ul>
 <br>
 <table class="table table-responsive">
-    <tbody ng-model="model.fields"  ui-sortable="model.fields">
+    <tbody  ng-model="model.fields" ui-sortable="model.fields">  <!-- sort-fields field-axis="y" -->
     <tr  ng-switch="field.type" ng-repeat="field in model.fields">
         <td ng-switch-when="TEXT">
             <label>{{field.label}}</label>
