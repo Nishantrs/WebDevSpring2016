@@ -13,6 +13,25 @@ var cookieParser = require('cookie-parser');
 //for storing user details in session
 var session = require('express-session');
 
+//Database connection
+var mongoose = require('mongoose');
+
+
+// create a default connection string
+var connectionString = 'mongodb://127.0.0.1:27017/cs5610Spring2016';
+
+// use remote connection string
+// if running in remote server
+if(process.env.OPENSHIFT_MONGODB_DB_PASSWORD) {
+    connectionString = process.env.OPENSHIFT_MONGODB_DB_USERNAME + ":" +
+        process.env.OPENSHIFT_MONGODB_DB_PASSWORD + "@" +
+        process.env.OPENSHIFT_MONGODB_DB_HOST + ':' +
+        process.env.OPENSHIFT_MONGODB_DB_PORT + '/' +
+        process.env.OPENSHIFT_APP_NAME;
+}
+
+// connect to the database
+var db = mongoose.connect(connectionString);
 
 
 
@@ -32,11 +51,12 @@ app.use(cookieParser());
 var uuid = require('node-uuid');
 
 // For assignment3 only
-require('./public/assignment/server/app.js')(app, uuid);
+// db connection added for assignment 4
+require('./public/assignment/server/app.js')(app, db, mongoose);
 
 
 // For project only
-require('./public/project/server/app.js')(app, uuid);
+require('./public/project/server/app.js')(app, uuid, db, mongoose);
 
 
 

@@ -2,7 +2,6 @@
  * Created by NishantRatnakar on 3/17/2016.
  */
 
-var uuid = require('node-uuid');
 
 module.exports = function(app, userModel)
 {
@@ -24,11 +23,11 @@ module.exports = function(app, userModel)
         {
             findUserByCredentials(req, res);
         }
-        else if (req.params.username)
+        else if (req.query.username)
         {
             findUserByUsername(req, res);
         }
-        else if (req.params.id)
+        else if (req.query.id)
         {
             findUserById(req, res);
         }
@@ -45,57 +44,77 @@ module.exports = function(app, userModel)
         console.log("In server services create");
         var newUser = req.body;
 
-        newUser._id = uuid.v1(); //time based id created.
+       // userModel.createUser(newUser);
 
-        //userModel
-        //    .createUser(newUser)
-        //    .then(function (users)
-        //            {
-        //        res.json(users);
-        //            })
+        userModel
+            .createUser (newUser)
+               .then (
+                   function(user)
+                   {
+                       //req.session.currentUser = user;
+                       res.json(user);
+                   },
+                   function(err)
+                   {
+                       res.status(400).send(err);
+                   });
+        //newUser._id = uuid.v1(); //time based id created.
 
-        res.json(userModel.createUser(newUser));
     }
 
     function getAllUsers(req, res)
     {
-        //userModel
-        //    .getAllUsers()
-        //    .then(function(users)
-        //            {
-        //                res.json(users);
-        //            })
-
         console.log("In server services getAllUsers");
-        res.json(userModel.getAllUsers());
+        //res.json(userModel.getAllUsers());
+        userModel
+        .getAllUsers()
+            .then (
+                function(users)
+                {
+                    res.json(users);
+                },
+                function(err)
+                {
+                    res.status(400).send(err);
+                });
     }
 
     function findUserById(req, res)
     {
-        var userId = req.params.id;
+        var userId = req.query.id;
+        console.log(userId);
 
-        //userModel
-        //    .findUserById(userId)
-        //    .then(function(user)
-        //            {
-        //                res.json(user);
-        //            })
+        userModel
+            .findUserById(userId)
+            .then(function(user)
+                    {
+                        res.json(user);
+                    },
+                function(err)
+                {
+                    res.status(400).send(err);
+                });
 
-        res.json(userModel.findUserById(userId));
+        //res.json(userModel.findUserById(userId));
     }
 
     function findUserByUsername(req, res)
     {
         var userName = req.params.username;
+        console.log(userName);
 
-        //userModel
-        //    .findUserByUsername(userName)
-        //    .then(function(user)
-        //            {
-        //                res.json(user);
-        //            })
+        userModel
+            .findUserByUsername(userName)
+            .then(function(user)
+                    {
+                        res.json(user);
+                    },
+                function(err)
+                {
+                    res.status(400).send(err);
+                });
 
-        res.json(userModel.findUserByUsername(userName));
+        //res.json(userModel.findUserByUsername(userName));
     }
 
     function findUserByCredentials(req, res)
@@ -103,22 +122,23 @@ module.exports = function(app, userModel)
         var userName = req.query.username;
         var userPassword = req.query.password;
 
-        //var userName = req.params.username;
-        //var userPassword = req.params.password;
-
         console.log(userName);
         console.log(userPassword);
 
-        //userModel
-        //    .findUserByCredentials(userName, userPassword)
-        //    .then(function(user)
-        //            {
-        //                res.json(user);
-        //            })
+        userModel
+            .findUserByCredentials(userName, userPassword)
+            .then(function(user)
+                    {
+                        res.json(user);
+                    },
+                function(err)
+                    {
+                        res.status(400).send(err);
+                    });
 
         console.log("In server services credential");
 
-        res.json(userModel.findUserByCredentials(userName, userPassword));
+        //res.json(userModel.findUserByCredentials(userName, userPassword));
     }
 
     function updateUserById(req, res)
@@ -131,14 +151,19 @@ module.exports = function(app, userModel)
         console.log(userId);
         console.log(userObj);
 
-        //userModel
-        //    .updateUserById(userId, userObj)
-        //    .then(function(users)
-        //    {
-        //        res.json(users);
-        //    });
+        userModel
+            .updateUserById(userId, userObj)
+            .then(function(user)
+            {
+                //res.send(200);
+                res.json(user);
+            },
+                function(err)
+                {
+                    res.status(400).send(err);
+                });
 
-        res.json(userModel.updateUserById(userId, userObj));
+        //res.json(userModel.updateUserById(userId, userObj));
 
     }
 
@@ -146,14 +171,18 @@ module.exports = function(app, userModel)
     {
         var userId = req.params.id;
 
-        //userModel
-        //    .deleteUserById(userId)
-        //    .then(function(users)
-        //    {
-        //        res.json(users);
-        //    });
+        userModel
+            .deleteUserById(userId)
+            .then(function(stats)
+            {
+                res.send(200);
+            },
+                function(err)
+                {
+                    res.status(400).send(err);
+                });
 
-        res.json(userModel.deleteUserById(userId));
+        //res.json(userModel.deleteUserById(userId));
     }
 
 

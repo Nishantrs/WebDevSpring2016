@@ -1,105 +1,300 @@
 
 
 
+<!--<div class="container">-->
+<!--<form class="form-horizontal">-->
+    <!--<h2 class="col-sm-offset-2">Personal Details</h2>-->
 
-<form class="form-horizontal">
-    <h2 class="col-sm-offset-2">Personal Details</h2>
+    <!--<div ng-show="pmessage" class="alert alert-success text-center" role="alert">{{pmessage}}</div>-->
 
-    <div ng-show="pmessage" class="alert alert-success text-center" role="alert">{{pmessage}}</div>
+    <!--<hr>-->
 
-    <hr>
-
-    <div class="form-group">
-        <label for="ProfileUsername" class="col-sm-offset-2 col-sm-1 control-label-left">Username:</label>
-        <div class="col-sm-6">
-            <input ng-model="model.name" type="text" class="form-control" id="ProfileUsername" placeholder="Username" maxlength="10">
-        </div>
-    </div>
-
-    <div class="form-group">
-        <label for="ProfilePassword" class="col-sm-offset-2 col-sm-1 control-label-left">Password:</label>
-        <div class="col-sm-6">
-            <input ng-model="model.Password" type="password" class="form-control" id="ProfilePassword" placeholder="Password" maxlength="20">
-        </div>
-    </div>
-
-    <hr>
-
-    <div class="form-group">
-        <label for="ProfileFirstname" class="col-sm-offset-2 col-sm-1 control-label-left">First Name:</label>
-        <div class="col-sm-6">
-            <input ng-model="model.FirstName" type="text" class="form-control" id="ProfileFirstname" placeholder="First Name" maxlength="20">
-        </div>
-    </div>
-
-    <div class="form-group">
-        <label for="ProfileSecondname" class="col-sm-offset-2 col-sm-1 control-label-left">Last Name:</label>
-        <div class="col-sm-6">
-            <input ng-model="model.LastName" type="text" class="form-control" id="ProfileSecondname" placeholder="Last Name" maxlength="20">
-        </div>
-    </div>
-
-    <div class="form-group">
-        <label for="ProfileEmail" class="col-sm-offset-2 col-sm-1 control-label-left">Email:</label>
-        <div class="col-sm-6">
-            <input ng-model="model.Email" type="email" class="form-control" id="ProfileEmail" placeholder="Email">
-        </div>
-    </div>
-
-    <div class="form-group">
-        <label for="ProfileBio" class="col-sm-offset-2 col-sm-1 control-label-left">Bio:</label>
-        <div class="col-sm-6">
-            <input ng-model="model.bio" type="text" class="form-control" id="ProfileBio" placeholder="Bio" maxlength="100">
-        </div>
-    </div>
-
-    <hr>
-
-    <div class="form-group">
-        <div class="col-sm-offset-3 col-sm-6">
-            <button ng-click="update(model)" type="submit" class="btn btn-block btn-success">Update</button>
-        </div>
-    </div>
-
-</form>
-
-<!--<div class="wrapper">-->
-<!--<div class="profile-background row">-->
-    <!--<div class="col-sm-2 col-md-2 col-lg-2 hidden-md hidden-sm hidden-xs"></div>-->
-    <!--<div class="col-md-8 col-lg-8 container-fluid">-->
-        <!--&lt;!&ndash;<div class="col-md-3 col-lg-3">&ndash;&gt;-->
-            <!--&lt;!&ndash;<div class="row">&ndash;&gt;-->
-            <!--&lt;!&ndash;<div class="profile">&ndash;&gt;-->
-                <!--&lt;!&ndash;<img src="../../images/profile.jpg" class="img-circle img-responsive img-no-padding">&ndash;&gt;-->
-            <!--&lt;!&ndash;</div>&ndash;&gt;-->
-            <!--&lt;!&ndash;</div>&ndash;&gt;-->
-            <!--&lt;!&ndash;<div class="row">&ndash;&gt;-->
-            <!--&lt;!&ndash;<div>&ndash;&gt;-->
-                <!--&lt;!&ndash;<btn ng-click="userEdit()" class="btn btn-primary"><i class="fa fa-cog"></i> Edit </btn>&ndash;&gt;-->
-            <!--&lt;!&ndash;</div>&ndash;&gt;-->
-            <!--&lt;!&ndash;</div>&ndash;&gt;-->
-        <!--&lt;!&ndash;</div>&ndash;&gt;-->
-        <!--<div class="col-md-6 col-lg-6">-->
-            <!--<h2>Nishant</h2>-->
-            <!--<h4>Bio!!!</h4>-->
+    <!--<div class="form-group">-->
+        <!--<label for="ProfileUsername" class="col-sm-offset-2 col-sm-1 control-label-left">Username:</label>-->
+        <!--<div class="col-sm-6">-->
+            <!--<input ng-model="model.username" type="text" class="form-control" id="ProfileUsername" placeholder="Username" maxlength="10">-->
         <!--</div>-->
     <!--</div>-->
-    <!--<div class="col-sm-2 col-md-2 col-lg-2 hidden-md hidden-sm hidden-xs"></div>-->
+
+    <!--<div class="form-group">-->
+        <!--<label for="ProfilePassword" class="col-sm-offset-2 col-sm-1 control-label-left">Password:</label>-->
+        <!--<div class="col-sm-6">-->
+            <!--<input ng-model="model.newPassword" type="password" class="form-control" id="ProfilePassword" placeholder="Password" maxlength="20">-->
+        <!--</div>-->
+    <!--</div>-->
+
+    <!--<hr>-->
+
+    <!--<div class="form-group">-->
+        <!--<label for="ProfileFirstname" class="col-sm-offset-2 col-sm-1 control-label-left">First Name:</label>-->
+        <!--<div class="col-sm-6">-->
+            <!--<input ng-model="model.newFirstName" type="text" class="form-control" id="ProfileFirstname" placeholder="First Name" maxlength="20">-->
+        <!--</div>-->
+    <!--</div>-->
+
+    <!--<div class="form-group">-->
+        <!--<label for="ProfileSecondname" class="col-sm-offset-2 col-sm-1 control-label-left">Last Name:</label>-->
+        <!--<div class="col-sm-6">-->
+            <!--<input ng-model="model.newLastName" type="text" class="form-control" id="ProfileSecondname" placeholder="Last Name" maxlength="20">-->
+        <!--</div>-->
+    <!--</div>-->
+
+    <!--<div class="form-group">-->
+        <!--<label for="ProfileEmail" class="col-sm-offset-2 col-sm-1 control-label-left">Email:</label>-->
+        <!--<div class="col-sm-6">-->
+            <!--<input ng-model="model.newEmail" type="email" class="form-control" id="ProfileEmail" placeholder="Email">-->
+        <!--</div>-->
+    <!--</div>-->
+
+    <!--<div class="form-group">-->
+        <!--<label for="ProfileBio" class="col-sm-offset-2 col-sm-1 control-label-left">Bio:</label>-->
+        <!--<div class="col-sm-6">-->
+            <!--<input ng-model="model.newbio" type="text" class="form-control" id="ProfileBio" placeholder="Bio" maxlength="100">-->
+        <!--</div>-->
+    <!--</div>-->
+
+<!--<div class="form-group">-->
+<!--<label for="ProfileCity" class="col-sm-offset-2 col-sm-1 control-label-left">City:</label>-->
+<!--<div class="col-sm-6">-->
+<!--<input ng-model="model.newCity" type="text" class="form-control" id="ProfileCity" placeholder="City:" maxlength="100">-->
 <!--</div>-->
-<!--<div class="profile-body row">-->
-    <!--<div class="col-sm-2 col-md-2 col-lg-2 hidden-md hidden-sm hidden-xs"></div>-->
-    <!--<div class="col-md-8 col-lg-8 container-fluid">-->
-        <!--<div class="row"> For Follow button-->
+<!--</div>-->
+
+<!--<div class="form-group">-->
+<!--<label for="ProfileState" class="col-sm-offset-2 col-sm-1 control-label-left">State:</label>-->
+<!--<div class="col-sm-6">-->
+<!--<input ng-model="model.newState" type="text" class="form-control" id="ProfileState" placeholder="State" maxlength="100">-->
+<!--</div>-->
+<!--</div>-->
+
+    <!--<hr>-->
+
+    <!--<div class="form-group">-->
+        <!--<div class="col-sm-offset-3 col-sm-6">-->
+            <!--<button ng-click="update(model)" type="submit" class="btn btn-block btn-success">Update</button>-->
+        <!--</div>-->
+    <!--</div>-->
+
+<!--</form>-->
+<!--</div>-->
+
+<div class="wrapper">
+    <div class="row">
+        <div class="profile-background">
+            <div class="col-sm-2 col-md-2 col-lg-2">
+            </div>
+    <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 container-fluid">
+        <!--<div class="col-md-3 col-lg-3">-->
+            <!--<div class="row">-->
+            <!--<div class="profile">-->
+                <!--<img src="../../images/profile.jpg" class="img-circle img-responsive img-no-padding">-->
+            <!--</div>-->
+            <!--</div>-->
+            <!--<div class="row">-->
+            <!--<div>-->
+                <!--<btn ng-click="userEdit()" class="btn btn-primary"><i class="fa fa-cog"></i> Edit </btn>-->
+            <!--</div>-->
+            <!--</div>-->
+        <!--</div>-->
+        <div class="col-md-6 col-lg-6">
+            <h2>{{model.displayUser.username}}</h2>
+            <h4>{{model.displayUser.bio}}</h4>
+        </div>
+    </div>
+    <div class="col-sm-2 col-md-2 col-lg-2"></div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="profile-body">
+            <div class="container">
+                <div class="col-sm-2 col-md-2 col-lg-2"></div>
+                <div class="col-md-8 col-lg-8 col-sm-8 col-xs-12">
+
+
+        <!--<div class="row">-->
             <!--<btn ng-click="userFollow()" class="btn btn-primary"><i class="fa fa-cog"></i> Follow </btn>-->
         <!--</div>-->
 
-        <!--<div class="row">For Edit Button-->
-            <!--<div class="center-block">-->
-                <!--<btn ng-click="userEdit()" class="btn btn-primary"><i class="fa fa-cog"></i> Edit </btn>-->
-            <!--</div>-->
-        <!--</div>-->
-        <!--<div class="row">For Navigation Table</div>-->
-    <!--</div>-->
-    <!--<div class="col-sm-2 col-md-2 col-lg-2 hidden-md hidden-sm hidden-xs"></div>-->
-<!--</div>-->
-<!--</div>-->
+        <div class="row">
+            <div class="center-block">
+                <btn ng-if="currentUser.username == displayUser.username" ng-click="model.profileEdit()" class="btn btn-primary"><i class="fa fa-cog"></i> Edit </btn>
+            </div>
+        </div>
+
+
+
+
+        <div class="row">
+            <div class="container">
+                <br />
+                <table class="table col-md-1 col-md-offset-0 col-sm-4 col-sm-offset-3">
+                    <thead>
+
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td style="border-top: none">
+                            First Name:
+                        </td>
+                        <td style="border-top: none">
+                            {{model.displayUser.firstName}}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="border-top: none">
+                            Last Name:
+                        </td>
+                        <td style="border-top: none">
+                            {{model.displayUser.lastName}}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="border-top: none">
+                            Email:
+                        </td>
+                        <td style="border-top: none">
+                            {{model.displayUser.email}}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="border-top: none">
+                            City:
+                        </td>
+                        <td style="border-top:none">
+                            {{model.displayUser.city}}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="border-top: none">
+                            State:
+                        </td>
+                        <td style="border-top: none">
+                            {{model.displayUser.state}}
+                        </td>
+                    </tr>
+
+                    </tbody>
+                </table>
+                </div>
+            </div>
+
+        <div ng-show="model.userdetailsedit">
+            <!--<br>-->
+            <table class="table table-bordered">
+                <thead>
+
+                </thead>
+                <tbody>
+                <tr>
+                    <td style="padding-top: 18px">First Name:</td>
+
+                    <td class="text-center">
+                        <input style="border:1px " type="text"  class="form-control" ng-model="model.update.firstname">
+                    </td>
+
+                </tr>
+                <tr>
+                    <td style="padding-top: 18px">Last Name:</td>
+                    <td>
+                        <input type="text" class="form-control" ng-model="model.update.lastname">
+                    </td>
+                </tr>
+
+                <tr>
+                    <td style="padding-top: 18px">Password:</td>
+                    <td>
+                        <input type="password" class="form-control" ng-model="model.update.password">
+                    </td>
+                </tr>
+                 <tr>
+                    <td style="padding-top: 18px">Bio:</td>
+                    <td>
+                        <input type="text" class="form-control" ng-model="model.update.bio">
+                    </td>
+                </tr>
+                <tr>
+                    <td style="padding-top: 18px">Email:</td>
+                    <td>
+                        <input type="text" class="form-control" ng-model="model.update.email">
+                    </td>
+                </tr>
+                <tr>
+                    <td style="padding-top: 18px">City:</td>
+                    <td>
+                        <input type="text" class="form-control" ng-model="model.update.city">
+                    </td>
+                </tr>
+
+                <tr>
+                    <td style="padding-top: 18px">State:</td>
+                    <td>
+                        <input type="text" class="form-control" ng-model="model.update.state">
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+
+                    </td>
+                    <td>
+                        <button ng-click="model.saveProfileEdit(model.update)" type="button" class="btn btn-default" aria-label="Left Align">
+                            <!--<span class="glyphicon glyphicon-ok" aria-hidden="true"></span>-->
+                            Save
+                        </button>
+                        &nbsp;&nbsp;
+                        <button ng-click="model.cancelEdit()" type="button" class="btn btn-default" aria-label="Left Align">
+                            Cancel<!--<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>-->
+                        </button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+
+
+        <div class="row">
+            <div id="navigationTab">
+                <div class="container">
+            <ul class="nav nav-tabs nav-justified" data-tabs="tabs">
+                <li class="active"><a data-toggle="tab" href="#home">
+                    <div ng-if = "currentUser.username != displayUser.username">{{model.displayUser.username}}'s reviews</div>
+                    <div ng-if = "currentUser.username == displayUser.username">Your reviews</div>
+                </a></li>
+                <li><a data-toggle="tab" href="#menu1">
+                    <div ng-if = "currentUser.username != displayUser.username">{{model.displayUser.username}} Follows</div>
+                    <div ng-if = "currentUser.username == displayUser.username">You are Following</div>
+                </a></li>
+                <li><a data-toggle="tab" href="#menu2">
+                    <div ng-if = "currentUser.username != displayUser.username">{{model.displayUser.username}}'s Followers</div>
+                    <div ng-if = "currentUser.username == displayUser.username">Your Followers</div>
+                </a></li>
+            </ul>
+
+            <div class="tab-content">
+                <div id="home" class="tab-pane fade in active">
+                    <h3>HOME</h3>
+                    <p>Some content.</p>
+                </div>
+                <div id="menu1" class="tab-pane fade">
+                    <h3>Menu 1</h3>
+                    <p>Some content in menu 1.</p>
+                </div>
+                <div id="menu2" class="tab-pane fade">
+                    <h3>Menu 2</h3>
+                    <p>Some content in menu 2.</p>
+                </div>
+            </div>
+                </div>
+            </div>
+        </div>
+
+
+      </div>
+    </div>
+            <div class="col-sm-2 col-md-2 col-lg-2">
+            </div>
+        </div>
+    </div>
+</div>

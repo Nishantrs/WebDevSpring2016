@@ -61,20 +61,25 @@
             }
 
 
-                var userObj = {"username": user.username, "password": user.password, "email": user.email, "roles":"[student]", "firstName": "", "lastName": ""};
+                var userObj = {"username": user.username, "password": user.password, "emails": user.email, "roles":"[student]", "firstName": "", "lastName": ""};
 
                 UserService.createUser(userObj)
                     .then(function(response)
                     {
-                        if(response.data)
+                       var newUser = response.data;
+
+                        if(newUser)
                         {
-                            UserService.setCurrentUser(response.data);
-                            $location.url("/profile");
+                            UserService.setCurrentUser(newUser);
+                            $location.url("/profile/"+ newUser._id);
                         }
                         else
                         {
                             $scope.rmessage = "Please try again"
                         }
+                    },function (error)
+                    {
+                        console.log(error);
                     });
 
         }

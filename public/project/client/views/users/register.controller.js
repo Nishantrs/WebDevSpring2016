@@ -101,6 +101,7 @@
                                     {
                                         UserService.setCurrentUser(currentUser);
                                         UserService.setDisplayUser(currentUser);
+                                        UserService.userLogged(true);
                                         $location.path("/profile/"+currentUser._id)
                                     }
                                 },function (err)

@@ -51,38 +51,13 @@
                         if (response.data)
                         {
                             UserService.setCurrentUser(response.data);
-                            $location.url("/profile");
+                            $location.url("/profile/"+UserService.getCurrentUser()._id);
                         }
                         else
                         {
                             $scope.lmessage = "Invalid Credential";
                         }
                     });
-
-                //$scope.$location = $location;
-                //$scope.lmessage = null;
-                //
-                //$scope.login = login;
-                //
-                //function login(username, password)
-                //{
-                //
-                //    var userLogin = function (cUser)
-                //    {
-                //        if (cUser == null)
-                //        {
-                //            $scope.lmessage = "Invalid credentials."
-                //        }
-                //        else
-                //        {
-                //            $scope.lmessage = null;
-                //            $rootScope.currentUser = cUser;
-                //            $location.url("/profile")
-                //        }
-                //
-                //    };
-                //
-                //    UserService.findUserByCredentials(username, password, userLogin);
 
             }
         }

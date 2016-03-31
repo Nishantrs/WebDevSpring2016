@@ -4,7 +4,7 @@
 
 "use strict";
 
-module.exports = function(app, formModel, uuid)
+module.exports = function(app, formModel)
 {
 
     app.get("/api/assignment/user/:userId/form", findFormsByUserId);
@@ -20,14 +20,18 @@ module.exports = function(app, formModel, uuid)
 
         var userId = req.params.userId;
 
-        //formModel
-        //    .findFormsByUserId(userId)
-        //    .then(function(forms)
-        //    {
-        //        res.json(forms);
-        //    })
+        formModel
+            .findFormsByUserId(userId)
+            .then(function(forms)
+            {
+                res.json(forms);
+            },
+                function(err)
+                {
+                    res.status(400).send(err);
+                });
 
-        res.json(formModel.findFormsByUserId(userId));
+        //res.json(formModel.findFormsByUserId(userId));
     }
 
     function findFormById(req, res)
@@ -36,14 +40,18 @@ module.exports = function(app, formModel, uuid)
 
         var formId = req.params.formId;
 
-        //formModel
-        //    .findFormById(formId)
-        //    .then(function(form)
-        //    {
-        //        res.json(form);
-        //    })
+        formModel
+            .findFormById(formId)
+            .then(function(form)
+            {
+                res.json(form);
+            },
+                function(err)
+                {
+                    res.status(400).send(err);
+                });
 
-        res.json(formModel.findFormById(formId));
+        //res.json(formModel.findFormById(formId));
     }
 
     function deleteFormById(req, res)
@@ -53,14 +61,19 @@ module.exports = function(app, formModel, uuid)
 
         var formId = req.params.formId;
 
-        //formModel
-        //    .deleteFormById(formId)
-        //    .then(function(forms)
-        //    {
-        //        res.json(forms);
-        //    })
+        formModel
+            .deleteFormById(formId)
+            .then(function(forms)
+            {
+                res.send(200);
+                //res.json(forms);
+            },
+                function(err)
+                {
+                    res.status(400).send(err);
+                });
 
-        res.json(formModel.deleteFormById(formId));
+        //res.json(formModel.deleteFormById(formId));
 
     }
 
@@ -73,17 +86,22 @@ module.exports = function(app, formModel, uuid)
 
         newForm.userId = userId;
 
-        newForm._id = uuid.v1(); //time based id created.
+        //newForm._id = uuid.v1(); //time based id created.
         newForm.fields = [];
 
-        //formModel
-        //    .createForm(newForm)
-        //    .then(function (forms)
-        //    {
-        //        res.json(forms);
-        //    })
+        formModel
+            .createForm(newForm)
+            .then(function (forms)
+            {
+                res.send(200);
+                //res.json(forms);
+            },
+                function(err)
+                {
+                    res.status(400).send(err);
+                });
 
-        res.json(formModel.createForm(newForm));
+        //res.json(formModel.createForm(newForm));
     }
 
     function updateFormById(req, res)
@@ -94,14 +112,19 @@ module.exports = function(app, formModel, uuid)
         var formId = req.params.formId;
         var formObj = req.body;
 
-        //formModel
-        //    .updateFormById(formId, formObj)
-        //    .then(function(forms)
-        //    {
-        //        res.json(forms);
-        //    });
+        formModel
+            .updateFormById(formId, formObj)
+            .then(function(form)
+            {
+                //res.send(200);
+                res.json(form);
+            },
+                function(err)
+                {
+                    res.status(400).send(err);
+                });
 
-        res.json(formModel.updateFormById(formId, formObj));
+        //res.json(formModel.updateFormById(formId, formObj));
 
     }
 

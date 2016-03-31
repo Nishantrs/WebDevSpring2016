@@ -15,9 +15,9 @@
 
         reviews =
             [
-                {"_id": "000", "title": "Taiwan Café", "userId": 123, "comment":"It is a good place TC.","hotelId":"taiwan-café-boston-2", "username": "alice"},
-                {"_id": "010", "title": "Chef Chang's on Back Bay", "userId": 123, comment:"It is a good place CCBB.", "hotelId":"chef-changs-on-back-bay-boston", "username": "alice"},
-                {"_id": "020", "title": "New Dong Khanh", "userId": 234, comment:"It is a good place NDK.", "hotelId":"new-dong-khanh-boston", "username": "bob"}
+                {"_id": "000", "title": "Taiwan Café", "userId": 123, "comment":"It is a good place TC.","hotelId":"taiwan-café-boston-2", "username": "alice", "likes": [], "unlikes": []},
+                {"_id": "010", "title": "Chef Chang's on Back Bay", "userId": 123, comment:"It is a good place CCBB.", "hotelId":"chef-changs-on-back-bay-boston", "username": "alice", "likes": [], "unlikes": []},
+                {"_id": "020", "title": "New Dong Khanh", "userId": 234, comment:"It is a good place NDK.", "hotelId":"new-dong-khanh-boston", "username": "bob", "likes": [], "unlikes": []}
             ];
 
         //Function declarations

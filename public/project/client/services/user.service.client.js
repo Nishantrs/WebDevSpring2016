@@ -58,33 +58,19 @@
             isDisplayUser: isDisplayUser,
             isNotDisplayUser: isNotDisplayUser,
             setDisplayUser: setDisplayUser,
+            getDisplayUser: getDisplayUser,
 
             //local functions: admin
             isAdmin: isAdmin,
             isNotAdmin: isNotAdmin,
+
+            userLogged: userLogged,
 
             logout: logout
         };
 
         return api;
 
-
-        //Function implementation
-        //function findUserByCredentials(username, password, callback)
-        //{
-        //    console.log("In findUserByCredentials");
-        //    var found = null;
-        //
-        //    for (var i = 0; i < users.length; i++) {
-        //
-        //        if (users[i].username == username && users[i].password == password) {
-        //            found = users[i];
-        //            break;
-        //        }
-        //    }
-        //
-        //    callback(found);
-        //}
 
         function findUserByCredentials(credentials)
         {
@@ -94,29 +80,12 @@
         }
 
 
-
-        //function findAllUsers(callback)
-        //{
-        //    console.log("In findAllUsers");
-        //    callback(users);
-        //}
-
         function findAllUsers()
         {
             console.log("In User Services Client....findAllUsers");
             return $http.get("/api/project/user");
         }
 
-
-        //function createUser(user, callback)
-        //{
-        //    console.log("In createUser");
-        //    var newId = (new Date).getTime();
-        //    user._id = newId;
-        //    users.push(user);
-        //    callback(user);
-        //    console.log(user);
-        //}
 
         function createUser(user)
         {
@@ -126,20 +95,6 @@
 
 
 
-        //function deleteUserById(userId, callback)
-        //{
-        //    console.log("In deleteUserById");
-        //    for(var i=0; i < users.length; i++)
-        //    {
-        //        if(users[i]._id == userId)
-        //        {
-        //            users.splice(i,1);
-        //            break;
-        //        }
-        //    }
-        //    callback(users);
-        //}
-
         function deleteUserById(userId)
         {
             console.log("In User Services Client....deleteUserById");
@@ -147,22 +102,6 @@
         }
 
 
-        //function updateUser(userId, user, callback)
-        //{
-        //    console.log("In updateUser");
-        //    for(var i=0; i < users.length; i++)
-        //    {
-        //        console.log("In loop");
-        //        if(users[i]._id == userId)
-        //        {
-        //            users[i] = user;
-        //            console.log(users[i]);
-        //            callback(users[i]);
-        //
-        //            break;
-        //        }
-        //    }
-        //}
 
         function updateUser(userId,user)
         {
@@ -182,7 +121,8 @@
         function findUserById(userId)
         {
             console.log("In User Services Client....findUserById");
-            return $http.get("/api/project/user/" + userId);
+            console.log(userId);
+            return $http.get("/api/project/user?id=" + userId);
         }
 
 
@@ -198,7 +138,7 @@
             console.log("In User Services Client....getCurrentUser/loggedIn");
             //return  $rootScope.currentUser;
 
-            return $http.post("/api/project/loggedin");
+            return $http.get("/api/project/loggedin");
         }
 
 
@@ -221,6 +161,12 @@
             $rootScope.displayUser = user;
         }
 
+        function getDisplayUser()
+        {
+            console.log("In User Services Client....getDisplayUser");
+            return $rootScope.displayUser;
+        }
+
 
         //local functions: admin
         function isAdmin(user)
@@ -233,6 +179,11 @@
         {
             console.log("In User Services Client....isNotAdmin");
             $rootScope.isAdminUser = false;
+        }
+
+        function userLogged(value)
+        {
+            $rootScope.userLogged = value;
         }
 
         function logout()

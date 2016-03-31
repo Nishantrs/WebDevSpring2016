@@ -21,7 +21,7 @@
                 //    getLoggedIn: getLoggedIn
                 //}
             })
-            .when("/profile/:username?",{
+            .when("/profile/:id",{
                 templateUrl:"views/users/profile.view.html",
                 controller: "ProfileController",
                 controllerAs: "model"

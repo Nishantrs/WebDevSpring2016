@@ -18,10 +18,10 @@
                 controller: "HomeController",
                 controllerAs: "model"
             })
-            .when("/profile",{
-                templateUrl:"views/users/profile.view.html",
-                controller: "ProfileController"
-            })
+            //.when("/profile",{
+            //    templateUrl:"views/users/profile.view.html",
+            //    controller: "ProfileController"
+            //})
             .when("/profile/:userId", {
                 templateUrl: "views/users/profile.view.html",
                 controller: "ProfileController",

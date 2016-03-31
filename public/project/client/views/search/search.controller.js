@@ -10,7 +10,17 @@
     function SearchController($scope, $rootScope, $routeParams, $location, SearchService) {
 
         var model = this;
+
+        model.goHome = goHome;
+
         $scope.$location = $location;
+
+
+
+        function goHome()
+        {
+            $location.path("/home");
+        }
 
 
         function init() {
@@ -45,7 +55,7 @@
             function render(resp)
             {
                 console.log("In search controller...in render");
-                console.log(resp)
+                console.log(resp);
                 if (resp === undefined)
                 {
                             alert("Item you are trying to search could not be found");
@@ -61,6 +71,7 @@
                             model.searches = resp.businesses;
                 }
             }
+
         }
         init();
     }

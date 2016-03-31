@@ -60,6 +60,7 @@
                         {
                             UserService.setCurrentUser(userFound);
                             UserService.setDisplayUser(userFound);
+                            UserService.userLogged(true);
                             $location.path("/profile/"+userFound._id);
 
                         }

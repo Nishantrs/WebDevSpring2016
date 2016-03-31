@@ -11,26 +11,47 @@
         .module("FormBuilderApp")
         .controller("ProfileController", ProfileController);
 
-    function ProfileController($location, $scope, UserService){
+    function ProfileController($location, $scope, UserService, $routeParams){
 
         var vm = this;
         vm.update = update;
-        var currentUser = UserService.getCurrentUser();
-        vm.username= currentUser.username;
-        vm.password= currentUser.password;
-        vm.firstName = currentUser.firstName;
-        vm.lastName = currentUser.lastName;
-        vm.email = currentUser.email;
+        var userId = $routeParams.id;
+
 
         function init()
         {
 
             console.log("In profile controller");
 
-            if(!currentUser)
+            UserService
+            .findUserById(userId)
+            .then(function(response)
             {
-                $location.url("/home");
-            }
+                var user = response.data;
+
+                console.log(user);
+
+                if(user)
+                {
+                    UserService.setCurrentUser(user);
+
+                    var currentUser = UserService.getCurrentUser();
+
+                    vm.username= currentUser.username;
+                    vm.password= currentUser.password;
+                    vm.firstName = currentUser.firstName;
+                    vm.lastName = currentUser.lastName;
+                    vm.email = currentUser.emails;
+                }
+                else
+                {
+                    $location.url("/home");
+                }
+            },function(err)
+            {
+                console.log(err);
+            });
+
         }
 
         init();
@@ -48,6 +69,8 @@
             }
             else
             {
+                var currentUser = UserService.getCurrentUser();
+
                 var id = currentUser._id;
 
                 var userDetails =
@@ -57,8 +80,9 @@
                     "password":Password,
                     "firstName":FirstName,
                     "lastName":LastName,
-                    "email":Email,
-                    "roles":currentUser.roles
+                    "emails":Email,
+                    "roles":currentUser.roles,
+                    "phones":currentUser.phones
                 };
                 UserService.updateUser(id,userDetails)
                     .then(function(response)
@@ -74,6 +98,9 @@
                         {
                             $scope.pmessage = "Sorry! Please enter your details again!!!";
                         }
+                    },function (err)
+                    {
+                        console.log(err);
                     });
             }
         }

@@ -10,7 +10,7 @@
     angular.module("HotelReview")
         .factory("RestaurantService", RestaurantService);
 
-    function BusinessService($http, $q, $rootScope) {
+    function RestaurantService($http, $q, $rootScope) {
 
         var api={
             searchByBusinessId:searchByBusinessId

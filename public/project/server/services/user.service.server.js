@@ -32,7 +32,7 @@ module.exports = function(app, userModel)
         {
             findUserByUsername(req, res);
         }
-        else if (req.params.id)
+        else if (req.query.id)
         {
             findUserById(req, res);
         }
@@ -84,7 +84,7 @@ module.exports = function(app, userModel)
     {
         console.log("In server user services findUserById");
 
-        var userId = req.params.id;
+        var userId = req.query.id;
 
         res.json(userModel.findUserById(userId));
     }

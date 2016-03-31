@@ -62,18 +62,6 @@
 
 
 
-        //getCurrentUserForms(user);
-        //
-        //function getCurrentUserForms(cUser)
-        //{
-        //    var getForms = function(cUserForms)
-        //    {
-        //        $scope.userForms = cUserForms
-        //    };
-        //
-        //    FormService.findAllFormsForUser(user._id,getForms)
-        //}
-
 
         function addForm(formTitle)
         {

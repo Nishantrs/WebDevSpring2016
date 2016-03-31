@@ -30,6 +30,7 @@
                 {
                     console.log("In header controller after returning");
                     UserService.setCurrentUser(null);
+                    UserService.userLogged(false);
                     $location.url("/home")
                 }
 

@@ -78,6 +78,8 @@ module.exports = function (app, uuid) {
 
     function findUserById(userId)
     {
+        //console.log(userId);
+
         console.log("In Model findUserById");
 
         var userFound = null;
@@ -89,6 +91,8 @@ module.exports = function (app, uuid) {
                 break;
             }
         }
+
+        //console.log(userFound);
         return userFound;
     }
 
