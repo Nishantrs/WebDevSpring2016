@@ -7,11 +7,12 @@
     angular.module("HotelReview")
         .controller("SearchController", SearchController);
 
-    function SearchController($scope, $rootScope, $routeParams, $location, SearchService) {
+    function SearchController($scope, $rootScope, $routeParams, $location, SearchService, RestaurantService) {
 
         var model = this;
 
         model.goHome = goHome;
+        model.viewRestaurant = viewRestaurant;
 
         $scope.$location = $location;
 
@@ -74,5 +75,19 @@
 
         }
         init();
+
+        function viewRestaurant(restaurantId)
+        {
+
+            RestaurantService.searchByRestaurantId(restaurantId)
+            .then(function(reponse)
+            {
+
+            },
+            function(err)
+            {
+
+            });
+        }
     }
 })();

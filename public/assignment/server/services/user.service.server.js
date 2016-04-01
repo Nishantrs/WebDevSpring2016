@@ -14,8 +14,9 @@ module.exports = function(app, userModel)
     //app.get("/api/assignment/user/:username/:password",findUserByCredentials);
     app.put("/api/assignment/user/:id", updateUserById);
     app.delete("/api/assignment/user/:id", deleteUserById);
-
     app.get("/api/assignment/user", decideEndpoint);
+    app.post("/api/assignment/user/logout", logout);
+    app.get("/api/assignment/user/loggedin", loggedin);
 
     function decideEndpoint(req, res)
     {
@@ -51,7 +52,7 @@ module.exports = function(app, userModel)
                .then (
                    function(user)
                    {
-                       //req.session.currentUser = user;
+                       req.session.currentUser = user;
                        res.json(user);
                    },
                    function(err)
@@ -129,6 +130,7 @@ module.exports = function(app, userModel)
             .findUserByCredentials(userName, userPassword)
             .then(function(user)
                     {
+                        req.session.currentUser = user;
                         res.json(user);
                     },
                 function(err)
@@ -183,6 +185,20 @@ module.exports = function(app, userModel)
                 });
 
         //res.json(userModel.deleteUserById(userId));
+    }
+
+    function loggedin(req, res)
+    {
+        console.log("In User Services Server....loggedin");
+
+        res.json(req.session.currentUser);
+    }
+
+    function logout(req, res)
+    {
+        console.log("In User Services Server....logout");
+        req.session.destroy();
+        res.send(200);
     }
 
 

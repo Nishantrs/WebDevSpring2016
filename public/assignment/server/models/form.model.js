@@ -19,7 +19,7 @@ module.exports = function (db, mongoose) {
      deleteFormById : deleteFormById,
      createForm : createForm,
      updateFormById : updateFormById,
-        getAllForms : getAllForms
+     getAllForms : getAllForms
     };
     return api;
 
@@ -57,6 +57,10 @@ module.exports = function (db, mongoose) {
     {
         console.log("In Model createForm");
 
+        newForm.fields = [];
+        newForm.created = new Date();
+        newForm.updated = new Date();
+
         return Form.create(newForm);
     }
 
@@ -72,6 +76,8 @@ module.exports = function (db, mongoose) {
             //            return Form.find();
             //            });
         console.log("In Model updateFormById");
+
+        form.updated = new Date();
 
         Form
             .update({_id:formId},

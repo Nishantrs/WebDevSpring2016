@@ -28,7 +28,8 @@
             getCurrentUser: getCurrentUser,
             setCurrentUser: setCurrentUser,
             findUserByUsername:findUserByUsername,
-            findUserById:findUserById
+            findUserById:findUserById,
+            logout:logout
         };
 
         return api;
@@ -105,7 +106,15 @@
         {
             console.log("In User Services...getCurrentUser");
 
-            return  $rootScope.currentUser;
+            return $http.get("/api/assignment/user/loggedin");
+
+            //return  $rootScope.currentUser;
+        }
+
+        function logout()
+        {
+            console.log("In User Services...logout");
+            return $http.post("/api/assignment/user/logout");
         }
 
     }

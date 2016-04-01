@@ -51,7 +51,8 @@
                         if (response.data)
                         {
                             UserService.setCurrentUser(response.data);
-                            $location.url("/profile/"+UserService.getCurrentUser()._id);
+                            $location.url("/profile");
+                            //$location.url("/profile/"+UserService.getCurrentUser()._id);
                         }
                         else
                         {

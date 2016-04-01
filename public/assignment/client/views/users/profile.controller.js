@@ -15,7 +15,9 @@
 
         var vm = this;
         vm.update = update;
-        var userId = $routeParams.id;
+
+        vm.user = null;
+        //var userId = $routeParams.id;
 
 
         function init()
@@ -23,35 +25,28 @@
 
             console.log("In profile controller");
 
-            UserService
-            .findUserById(userId)
-            .then(function(response)
-            {
-                var user = response.data;
-
-                console.log(user);
-
-                if(user)
+            var user = UserService.getCurrentUser()
+                .then(function(response)
                 {
-                    UserService.setCurrentUser(user);
+                    var user = response.data;
 
-                    var currentUser = UserService.getCurrentUser();
+                    if(user)
+                    {
 
-                    vm.username= currentUser.username;
-                    vm.password= currentUser.password;
-                    vm.firstName = currentUser.firstName;
-                    vm.lastName = currentUser.lastName;
-                    vm.email = currentUser.emails;
-                }
-                else
+                        vm.username= user.username;
+                        vm.password= user.password;
+                        vm.firstName = user.firstName;
+                        vm.lastName = user.lastName;
+                        vm.email = user.emails;
+                    }
+                    //else
+                    //{
+                    //    $location.url("/home");
+                    //}
+                },function (err)
                 {
-                    $location.url("/home");
-                }
-            },function(err)
-            {
-                console.log(err);
-            });
-
+                    console.log(err);
+                });
         }
 
         init();
@@ -69,39 +64,49 @@
             }
             else
             {
-                var currentUser = UserService.getCurrentUser();
-
-                var id = currentUser._id;
-
-                var userDetails =
-                {
-                    "_id":id,
-                    "username":username,
-                    "password":Password,
-                    "firstName":FirstName,
-                    "lastName":LastName,
-                    "emails":Email,
-                    "roles":currentUser.roles,
-                    "phones":currentUser.phones
-                };
-                UserService.updateUser(id,userDetails)
+                UserService.getCurrentUser()
                     .then(function(response)
                     {
-                        console.log(response.data);
+                        var currentUser = response.data;
 
-                        if(response.data)
+                        var id = currentUser._id;
+
+                        var userDetails =
                         {
-                            UserService.setCurrentUser(response.data);
-                            $scope.pmessage = "Your Profile has been updated!!!";
-                        }
-                        else
-                        {
-                            $scope.pmessage = "Sorry! Please enter your details again!!!";
-                        }
+                            "_id":id,
+                            "username":username,
+                            "password":Password,
+                            "firstName":FirstName,
+                            "lastName":LastName,
+                            "emails":Email,
+                            "roles":currentUser.roles,
+                            "phones":currentUser.phones
+                        };
+                        UserService.updateUser(id,userDetails)
+                            .then(function(response)
+                            {
+                                console.log(response.data);
+
+                                if(response.data)
+                                {
+                                    UserService.setCurrentUser(response.data);
+                                    $scope.pmessage = "Your Profile has been updated!!!";
+                                }
+                                else
+                                {
+                                    $scope.pmessage = "Sorry! Please enter your details again!!!";
+                                }
+                            },function (err)
+                            {
+                                console.log(err);
+                            });
+
                     },function (err)
                     {
                         console.log(err);
                     });
+
+
             }
         }
         }

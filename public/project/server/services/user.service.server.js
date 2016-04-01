@@ -161,5 +161,17 @@ module.exports = function(app, userModel)
         res.send("logged out");
     }
 
+    //function loggedin(req, res)
+    //{
+    //    res.json(req.session.currentUser);
+    //}
+    //
+    //function logout(req, res)
+    //{
+    //    console.log("In User Services Server....logout");
+    //    req.session.destroy();
+    //    res.send(200);
+    //}
+
 
 };

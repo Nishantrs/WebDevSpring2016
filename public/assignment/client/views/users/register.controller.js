@@ -71,7 +71,8 @@
                         if(newUser)
                         {
                             UserService.setCurrentUser(newUser);
-                            $location.url("/profile/"+ newUser._id);
+                            $location.url("/profile");
+                            //$location.url("/profile/"+ newUser._id);
                         }
                         else
                         {

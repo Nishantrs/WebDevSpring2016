@@ -10,6 +10,8 @@
         .controller("SidebarController", SidebarController);
 
     function SidebarController($location, $scope){
+
+        console.log("In sidebar controller");
         $scope.$location=$location;
     }
 

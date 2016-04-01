@@ -4,9 +4,15 @@
 
 
 
-var Field = require("./field.schema.server.js");
+
 
 module.exports = function(mongoose){
+
+    var Field = require("./field.schema.server.js")(mongoose);
+
+    //had done require Field outside the module.
+    //had not passed the mongoose instance instead created a instance over there.
+    // had not named the collection:'field' in the field schema.
 
     var FormSchema = mongoose.Schema({
 

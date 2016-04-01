@@ -14,12 +14,6 @@
     function FormController($scope, $rootScope, $location, FormService, UserService)
     {
 
-
-        //$scope.addForm = addForm;
-        //$scope.updateForm = updateForm;
-        //$scope.deleteForm = deleteForm;
-        //$scope.selectForm = selectForm;
-
         var vm =this;
         vm.addForm = addForm;
         vm.updateForm=updateForm;
@@ -27,8 +21,7 @@
         vm.selectForm=selectForm;
 
 
-        var user = UserService.getCurrentUser();
-
+        var user = null;
         $scope.fmessage = null;
         $scope.selectedForm = [];
 
@@ -42,8 +35,24 @@
 
             console.log("before request");
 
-            FormService.findAllFormsForUser(user._id)
-                .then(renderForms);
+            UserService.getCurrentUser()
+                .then(function(response)
+                {
+                    var loggedUser = response.data;
+
+                    console.log(loggedUser);
+
+                    if(loggedUser)
+                    {
+                        user = loggedUser;
+
+                        FormService.findAllFormsForUser(user._id)
+                            .then(renderForms);
+                    }
+                },function(err)
+                {
+                    console.log(err);
+                });
 
             console.log("after request");
         }
@@ -68,7 +77,7 @@
             console.log(formTitle);
             if(formTitle != null)
             {
-                var newForm = {"_id": null, "title": formTitle, "userId": null};
+                var newForm = {"_id": null, "title": formTitle, "userId": user._id};
 
                 FormService.createFormForUser(user._id, newForm)
                     .then(init);

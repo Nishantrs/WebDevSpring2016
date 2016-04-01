@@ -27,6 +27,11 @@
                 controller: "ProfileController",
                 controllerAs: "model"
             })
+            .when("/restaurant/:restaurantId", {
+                templateUrl: "views/restaurant/restaurant.view.html",
+                controller: "RestaurantController",
+                controllerAs: "model"
+            })
             .when("/register",{
                 templateUrl:"views/users/register.view.html",
                 controller: "RegisterController",

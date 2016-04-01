@@ -1,6 +1,6 @@
 
 
-<nav class="navbar navbar-inverse navbar-fixed-top transparency" ng-controller="HeaderController">
+<nav class="navbar navbar-inverse navbar-fixed-top transparency" ng-controller="HeaderController as model">
     <div class="container-fluid">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
@@ -20,15 +20,15 @@
                     <a href="#/login"><u>Login</u></a>
                 </li>
                 <li ng-show="currentUser">
-                    <a href="#/profile/{{currentUser._id}}">{{currentUser.username}}</a>
+                    <a href="#/profile">{{currentUser.username}}</a>  <!--href="#/profile/{{currentUser._id}}" -->
                 </li>
                 <li class="visible-xs" ng-if="currentUser" ng-class="{'active' : $location.url().indexOf('forms') != -1}">
                     <a href="#/forms">Forms</a>
                 </li>
                 <li ng-show="currentUser && currentUser.roles.indexOf('admin') >= 0">
-                    <a href="#/admin/{{currentUser._id}}">Admin</a>
+                    <a href="#/admin">Admin</a> <!--href="#/admin/{{currentUser._id}}" -->
                 </li>
-                <li ng-show="currentUser" ng-click="logout()">
+                <li ng-show="currentUser" ng-click="model.logout()">
                     <a href=""><u>Logout</u></a>
                 </li>
             </ul>

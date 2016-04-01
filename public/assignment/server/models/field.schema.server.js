@@ -3,17 +3,17 @@
  */
 
 
-var mongoose = require("mongoose");
+//var mongoose = require("mongoose");
 
-module.exports = function(){
+module.exports = function(mongoose){
 
     var FieldSchema = mongoose.Schema({
 
         label: String,
         type: String,
         placeholder: String,
-        options: [{label:String,value:String}]
-    });
+        options: [{label: String, value: String}]
+    },{collection: 'field'});
 
     return FieldSchema;
 

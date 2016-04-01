@@ -12,8 +12,9 @@
 
     function RestaurantService($http, $q, $rootScope) {
 
-        var api={
-            searchByBusinessId:searchByBusinessId
+        var api =
+        {
+            searchByRestaurantId:searchByRestaurantId
         };
 
         return api;
@@ -25,12 +26,12 @@
             return result;
         }
 
-        function searchByBusinessId(bid)
+        function searchByRestaurantId(bid)
         {
 
             ////console.log("Here..........");
 
-            var deferred=$q.defer();
+            var deferred = $q.defer();
 
 
 
@@ -42,18 +43,18 @@
             var params = {
                 callback: 'angular.callbacks._0',
 
-                oauth_consumer_key: 'VuklhoLZCMZlHoioieLPew',
-                oauth_token: 'wx2QaMJoVlkngzuh5EavVI0FNyhtBRUF',
+                oauth_consumer_key: 'wQnT8lY_CG7c4hlDdLCp1Q',
+                oauth_token: '7kWihlN8A45yDkmcV-wQOIrQYUCiYTJB',
                 oauth_signature_method: "HMAC-SHA1",
                 oauth_timestamp: new Date().getTime(),
                 oauth_nonce: randomString(32, '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'),
-                term: "food",
+                term: "food"
 
 
 
             };
-            var consumerSecret = 'HrqvdDlChpNaOyobojXUTAR8Sus';
-            var tokenSecret = 'DxAev56PBQ8KTrnkPbQ_mleWEUs';
+            var consumerSecret = 'rPXe_SkNTjqDK9L1RxozdQSkBYU';
+            var tokenSecret = 'c_Pqo-Vb-jsKLqGKzJfDEFrsqGE';
             var signature = oauthSignature.generate(method, url, params, consumerSecret, tokenSecret, {
                 encodeSignature: false
             });

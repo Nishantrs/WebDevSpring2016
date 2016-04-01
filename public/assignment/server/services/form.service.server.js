@@ -84,10 +84,10 @@ module.exports = function(app, formModel)
         var newForm = req.body;
         var userId = req.params.userId;
 
-        newForm.userId = userId;
+        //newForm.userId = userId;
 
         //newForm._id = uuid.v1(); //time based id created.
-        newForm.fields = [];
+        //newForm.fields = [];
 
         formModel
             .createForm(newForm)

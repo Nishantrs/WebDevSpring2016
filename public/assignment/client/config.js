@@ -16,23 +16,34 @@
         $routeProvider
             .when("/home",{
                 templateUrl:"views/home/home.view.html",
-                controller: "HomeController"
-                //resolve: {
-                //    getLoggedIn: getLoggedIn
-                //}
+                controller: "HomeController",
+                resolve: {
+                    checkCurrentUser: checkCurrentUser
+                }
+            })
+            .when("/profile",{
+                templateUrl:"views/users/profile.view.html",
+                controller: "ProfileController",
+                controllerAs: "model",
+                resolve: {
+                    checkLoggedIn: checkLoggedIn
+                }
             })
             .when("/profile/:id",{
                 templateUrl:"views/users/profile.view.html",
                 controller: "ProfileController",
-                controllerAs: "model"
-                //resolve: {
-                //    checkLoggedIn: checkLoggedIn
-                //}
-            }) //placeholders required
+                controllerAs: "model",
+                resolve: {
+                    checkLoggedIn: checkLoggedIn
+                }
+            })
             .when("/admin", {
                 templateUrl: "views/admin/admin.view.html",
                 controller: "AdminController",
-                controllerAs: "model"
+                controllerAs: "model",
+                resolve: {
+                    checkLoggedIn: checkLoggedIn
+                }
             })
             .when("/register",{
                 templateUrl:"views/users/register.view.html",
@@ -47,60 +58,72 @@
             .when("/forms",{
                 templateUrl:"views/forms/forms.view.html",
                 controller: "FormController",
-                controllerAs: "model"
+                controllerAs: "model",
+                resolve: {
+                    checkLoggedIn: checkLoggedIn
+                }
             })
             .when("/fields",{
                 templateUrl:"views/forms/fields.view.html",
                 controller: "FieldsController",
-                controllerAs: "model"
+                controllerAs: "model",
+                resolve: {
+                    checkLoggedIn: checkLoggedIn
+                }
             })
             .when("/form/:formId/fields", {
                 templateUrl: "views/forms/fields.view.html",
                 controller: "FieldsController",
-                controllerAs: "model"
+                controllerAs: "model",
+                resolve: {
+                    checkLoggedIn: checkLoggedIn
+                }
             })
             .otherwise({
                 redirectTo: "/home"
             });
     }
 
-    //function getLoggedIn(UserService, $q)
-    //{
-    //    var deferred = $q.defer();
-    //
-    //    UserService
-    //    .getCurrentUser()
-    //    .then(function(response)
-    //    {
-    //        var currentUser = response.data;
-    //        UserService.setCurrentUser(currentUser);
-    //        deferred.resolve();
-    //    });
-    //
-    //    return deferred.promise;
-    //
-    //
-    //}
-    //
-    //function checkLoggedIn(UserService, $q, $location){
-    //
-    //    var deferred = $q.defer();
-    //
-    //    UserService
-    //        .getCurrentUser()
-    //        .then(function(response)
-    //        {
-    //            var currentUser = response.data;
-    //            if(currentUser) {
-    //                UserService.setCurrentUser(currentUser);
-    //                deferred.resolve();
-    //            }else{
-    //                deferred.reject();
-    //                $location.path("/home");
-    //
-    //            }
-    //        });
-    //
-    //    return deferred.promise;
-    //}
+    var checkLoggedIn = function($q, $timeout, $http, $location, $rootScope)
+    {
+        var deferred = $q.defer();
+
+        $http.get('/api/assignment/user/loggedin').success(function(user)
+        {
+            // User is Authenticated
+            if (user) //user !== 0 to be used in passport js.
+            {
+                $rootScope.currentUser = user;
+                deferred.resolve();
+            }
+            // User is Not Authenticated
+            else
+            {
+                alert("You need to log in.");
+                deferred.reject();
+                $location.url('/login');
+            }
+        });
+
+        return deferred.promise;
+    };
+
+    var checkCurrentUser = function($q, $timeout, $http, $location, $rootScope)
+    {
+        var deferred = $q.defer();
+
+        $http.get('/api/assignment/user/loggedin').success(function(user)
+        {
+            // User is Authenticated
+            if (user) //user !== 0 to be used in passport js.
+            {
+                $rootScope.currentUser = user;
+
+            }
+
+            deferred.resolve();
+        });
+
+        return deferred.promise;
+    }
 })();
