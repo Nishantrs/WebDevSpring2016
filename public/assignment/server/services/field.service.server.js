@@ -8,6 +8,7 @@ module.exports = function(app, formModel, fieldModel) {
     app.delete("/api/assignment/form/:formId/field/:fieldId", deleteFieldById);
     app.post("/api/assignment/form/:formId/field", addFieldToForm);
     app.put("/api/assignment/form/:formId/field/:fieldId", updateFieldById);
+    app.put("/api/assignment/:formId/form", updateFields);
 
     function fieldsForFormId(req, res)
     {
@@ -30,13 +31,13 @@ module.exports = function(app, formModel, fieldModel) {
     }
 
     function getFieldById(req, res) {
-        var formId;
-        var fieldId;
-        var field;
-        formId = req.params.formId;
-        fieldId = req.params.fieldId;
-        field = fieldModel.findField(formId, fieldId);
-        res.json(field);
+        //var formId;
+        //var fieldId;
+        //var field;
+        //formId = req.params.formId;
+        //fieldId = req.params.fieldId;
+        //field = fieldModel.findField(formId, fieldId);
+        //res.json(field);
     }
 
     function deleteFieldById(req, res)
@@ -82,15 +83,47 @@ module.exports = function(app, formModel, fieldModel) {
         });
     }
 
-    function updateFieldById(req, res) {
-        var fieldId;
-        var formId;
-        var field;
-        var r;
-        field = req.body;
-        fieldId = req.params.fieldId;
-        formId = req.params.formId;
-        r = fieldModel.updateFieldById(formId, fieldId, field);
-        res.json(r);
+    function updateFieldById(req, res)
+    {
+        var field = req.body;
+        var fieldId = req.params.fieldId;
+        var formId = req.params.formId;
+        fieldModel.updateFieldById(formId, fieldId, field)
+            .then(
+                function (doc) {
+                    res.send(200);
+                },
+                function (err) {
+                    res.status(400).send(err);
+                }
+            );
+    }
+
+    function updateFields (req, res)
+    {
+               var formId = req.params.formId;
+                var startIndex = req.query.startIndex;
+                var endIndex = req.query.endIndex;
+
+                if(startIndex && endIndex) {
+                    fieldModel
+                        .sortField(formId, startIndex, endIndex)
+                        .then(
+                            function(stat) {
+                                return fieldModel.fieldsForFormId(formId);
+                            },
+                            function(err) {
+                                res.status(400).send(err);
+                            }
+                        )
+                        .then(
+                            function(form) {
+                                res.json(form.fields);
+                           },
+                            function(err) {
+                                res.status(400).send(err);
+                            }
+                        );
+                }
     }
 };

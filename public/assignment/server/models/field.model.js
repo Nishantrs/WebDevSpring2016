@@ -11,7 +11,8 @@ module.exports = function (db, formModel, mongoose) {
         deleteFieldById: deleteFieldById,
         findField: findField,
         updateFieldById: updateFieldById,
-        findFieldsByFormId: findFieldsByFormId
+        findFieldsByFormId: findFieldsByFormId,
+        sortField: sortField
     };
 
     return api;
@@ -177,5 +178,32 @@ module.exports = function (db, formModel, mongoose) {
         return deferred.promise;
 
     }
+
+
+    function sortField(formId, startIndex, endIndex) {
+        var deferred = q.defer();
+        formModel.findFormById(formId)
+            .then(
+                function(form){
+                    form.fields.splice(endIndex, 0, form.fields.splice(startIndex, 1)[0]);
+                    form.markModified("fields");
+
+                    form.save(function (err, doc) {
+                        if (err) {
+                            deferred.reject(err);
+                        }
+                        else {
+                            deferred.resolve(doc);
+                        }
+                    });
+
+                },
+                function (err) {
+                    res.status(400).send(err);
+                }
+            );
+        return deferred.promise;
+    }
+
 
 };

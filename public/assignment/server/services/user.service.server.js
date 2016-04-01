@@ -157,6 +157,7 @@ module.exports = function(app, userModel)
             .updateUserById(userId, userObj)
             .then(function(user)
             {
+                //req.session.currentUser = user;
                 //res.send(200);
                 res.json(user);
             },
