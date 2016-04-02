@@ -59,25 +59,65 @@
 
                 userObj.emails = user.email.split(",");
 
-                UserService.createUser(userObj)
-                    .then(function(response)
-                    {
-                       var newUser = response.data;
+            //console.log(userObj.username);
 
-                        if(newUser)
+
+            UserService.findUserByUsername(userObj.username)
+            .then(function(response)
+            {
+
+                var user = response.data;
+
+                if(user)
+                {
+                    $scope.rmessage = "Username Already Exists!!!"
+                }
+                else
+                {
+                    UserService.createUser(userObj)
+                        .then(function(response)
                         {
-                            UserService.setCurrentUser(newUser);
-                            $location.url("/profile");
-                            //$location.url("/profile/"+ newUser._id);
-                        }
-                        else
+                            var newUser = response.data;
+
+                            if(newUser)
+                            {
+                                UserService.setCurrentUser(newUser);
+                                $location.url("/profile");
+                                //$location.url("/profile/"+ newUser._id);
+                            }
+                            else
+                            {
+                                $scope.rmessage = "Please try again"
+                            }
+                        },function (error)
                         {
-                            $scope.rmessage = "Please try again"
-                        }
-                    },function (error)
-                    {
-                        console.log(error);
-                    });
+                            console.log(error);
+                        });
+                }
+            },function (error)
+            {
+                console.log(error);
+            });
+
+                //UserService.createUser(userObj)
+                //    .then(function(response)
+                //    {
+                //       var newUser = response.data;
+                //
+                //        if(newUser)
+                //        {
+                //            UserService.setCurrentUser(newUser);
+                //            $location.url("/profile");
+                //            //$location.url("/profile/"+ newUser._id);
+                //        }
+                //        else
+                //        {
+                //            $scope.rmessage = "Please try again"
+                //        }
+                //    },function (error)
+                //    {
+                //        console.log(error);
+                //    });
 
         }
     }

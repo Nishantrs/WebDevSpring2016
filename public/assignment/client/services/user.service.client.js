@@ -85,6 +85,8 @@
         {
             console.log("In User Services...findUserByUsername");
 
+            console.log(username);
+
             return $http.get("/api/assignment/user?username=" + username);
         }
 

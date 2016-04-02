@@ -111,6 +111,7 @@ module.exports = function (db, mongoose) {
                     }
                     else
                     {
+                        console.log(user);
                         deferred.resolve (user);
                     }
                 });

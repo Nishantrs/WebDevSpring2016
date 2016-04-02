@@ -101,7 +101,7 @@ module.exports = function(app, userModel)
 
     function findUserByUsername(req, res)
     {
-        var userName = req.params.username;
+        var userName = req.query.username;
         console.log(userName);
 
         userModel
