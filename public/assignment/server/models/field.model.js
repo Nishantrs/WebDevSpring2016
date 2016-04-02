@@ -9,7 +9,7 @@ module.exports = function (db, formModel, mongoose) {
     var api = {
         addFieldToForm: addFieldToForm,
         deleteFieldById: deleteFieldById,
-        findField: findField,
+        //findField: findField,
         updateFieldById: updateFieldById,
         findFieldsByFormId: findFieldsByFormId,
         sortField: sortField
@@ -108,17 +108,17 @@ module.exports = function (db, formModel, mongoose) {
 
     }
 
-    function findField(formId, fieldId) {
-        var form;
-        var fields;
-        form = formModel.findFormById(formId);
-        fields = form.fields;
-        for (f in fields) {
-            if (fields[f]._id == fieldId) {
-                return fields[f];
-            }
-        }
-    }
+    //function findField(formId, fieldId) {
+    //    var form;
+    //    var fields;
+    //    form = formModel.findFormById(formId);
+    //    fields = form.fields;
+    //    for (f in fields) {
+    //        if (fields[f]._id == fieldId) {
+    //            return fields[f];
+    //        }
+    //    }
+    //}
 
     function findFieldsByFormId(formId)
     {
@@ -180,7 +180,8 @@ module.exports = function (db, formModel, mongoose) {
     }
 
 
-    function sortField(formId, startIndex, endIndex) {
+    function sortField(formId, startIndex, endIndex)
+    {
         var deferred = q.defer();
         formModel.findFormById(formId)
             .then(

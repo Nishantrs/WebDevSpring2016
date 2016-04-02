@@ -152,7 +152,13 @@ module.exports = function (db, mongoose) {
 
         User
             .update({_id:userId},
-                    {$set:user},
+                    {
+                        username:user.username,
+                        password:user.password,
+                        firstName:user.firstName,
+                        lastName:user.lastName,
+                        emails:user.emails
+                    },
                     function(err,stats)
                     {
                         if(stats)

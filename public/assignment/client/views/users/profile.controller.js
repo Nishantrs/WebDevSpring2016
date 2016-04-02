@@ -71,6 +71,11 @@
 
                         var id = currentUser._id;
 
+                        if(typeof Email == "string")
+                        {
+                            Email = Email.split(",");
+                        }
+
                         var userDetails =
                         {
                             "_id":id,

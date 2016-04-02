@@ -45,6 +45,8 @@
 
         function sortField(formId, startIndex, endIndex)
         {
+
+            console.log("in field service client");
             return $http.put("/api/assignment/"+formId+"/form?startIndex="+startIndex+"&endIndex="+endIndex);
         }
 

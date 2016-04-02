@@ -90,10 +90,12 @@ module.exports = function(app, formModel, fieldModel) {
         var formId = req.params.formId;
         fieldModel.updateFieldById(formId, fieldId, field)
             .then(
-                function (doc) {
+                function (doc)
+                {
                     res.send(200);
                 },
-                function (err) {
+                function (err)
+                {
                     res.status(400).send(err);
                 }
             );
@@ -101,6 +103,10 @@ module.exports = function(app, formModel, fieldModel) {
 
     function updateFields (req, res)
     {
+
+        console.log("................................");
+        console.log("In server service...updateFields");
+
                var formId = req.params.formId;
                 var startIndex = req.query.startIndex;
                 var endIndex = req.query.endIndex;
@@ -109,10 +115,17 @@ module.exports = function(app, formModel, fieldModel) {
                     fieldModel
                         .sortField(formId, startIndex, endIndex)
                         .then(
-                            function(stat) {
-                                return fieldModel.fieldsForFormId(formId);
+                            function(stat)
+                            {
+                                console.log("................................");
+                                console.log("After sort....before returning sorted fields");
+
+                                console.log(formId);
+
+                                return fieldModel.findFieldsByFormId(formId);
                             },
-                            function(err) {
+                            function(err)
+                            {
                                 res.status(400).send(err);
                             }
                         )

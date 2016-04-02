@@ -81,7 +81,10 @@ module.exports = function (db, mongoose) {
 
         Form
             .update({_id:formId},
-                {$set:form},
+                {
+                    title:form.title,
+                    updated:form.updated
+                },
                 function(err,stats)
                 {
                     if(stats)

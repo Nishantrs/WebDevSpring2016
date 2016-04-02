@@ -29,13 +29,6 @@
         function register(user)
         {
 
-            //if (user.username == null || user.password == null || user.passwordverify == null || user.email == null) // null as object is still not created in register.
-            //{
-            //    console.log(user.username);
-            //    $scope.rmessage = "Please enter all the details";
-            //    return;
-            //}
-
             if(!user.username)
             {
                 $scope.rmessage = "Please provide a username";
@@ -61,7 +54,10 @@
             }
 
 
+
                 var userObj = {"username": user.username, "password": user.password, "emails": user.email, "roles":"[student]", "firstName": "", "lastName": ""};
+
+                userObj.emails = user.email.split(",");
 
                 UserService.createUser(userObj)
                     .then(function(response)
