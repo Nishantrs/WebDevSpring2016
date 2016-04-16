@@ -29,7 +29,8 @@
         function searchByRestaurantId(bid)
         {
 
-            ////console.log("Here..........");
+            //console.log("In Restaurant service.....searchByRestaurantId");
+            //console.log(bid);
 
             var deferred = $q.defer();
 
@@ -62,9 +63,15 @@
             //put signature in params
             params.oauth_signature = signature;
 
+            //console.log(params);
+            //console.log(url);
+
             $http.jsonp(url, {
                 params: params
             }).success(function(response) {
+
+                //console.log("In Restaurant Service...response received");
+                //console.log(response);
 
                 deferred.resolve(response);
 

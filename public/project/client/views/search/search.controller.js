@@ -14,7 +14,7 @@
         model.goHome = goHome;
         model.viewRestaurant = viewRestaurant;
 
-        $scope.$location = $location;
+        model.$location = $location;
 
 
 
@@ -26,13 +26,15 @@
 
         function init() {
 
-            console.log("In search control");
+            //console.log("In search control");
 
             model.data = $routeParams.data;
             model.place = $routeParams.place;
 
+            //console.log(model.data);
+            //console.log(model.place);
+
             if (model.data !== undefined && model.place !== undefined) {
-                model.display = model.data + " &  " + model.place;
 
                 SearchService.searchByTermAndPlace(model.data, model.place, 0, render);
                     //.then(function(resp) {
@@ -52,10 +54,18 @@
 
 
             }
+            else if(model.data == undefined)
+            {
+                SearchService.searchByTermAndPlace('food', model.place, 0, render);
+            }
+            else
+            {
+                SearchService.searchByTermAndPlace(model.data, 'Boston', 0, render);
+            }
 
             function render(resp)
             {
-                console.log("In search controller...in render");
+                //console.log("In search controller...in render");
                 console.log(resp);
                 if (resp === undefined)
                 {
@@ -78,16 +88,17 @@
 
         function viewRestaurant(restaurantId)
         {
+            console.log("In search controller...view controller");
 
-            RestaurantService.searchByRestaurantId(restaurantId)
-            .then(function(reponse)
+            if (restaurantId)
             {
-
-            },
-            function(err)
+                $location.path("/restaurant/"+restaurantId)
+            }
+            else
             {
+                alert("No further details about the restaurant you are trying to explore!!!");
+            }
 
-            });
         }
     }
 })();

@@ -5,16 +5,18 @@
 
 "use strict";
 
-module.exports = function (app, uuid) {
+module.exports = function (app, db, mongoose) {
 
-    //Following will change with database instance as parameters, once it is created.
-    var userModel = require("./models/user.model.js")(app, uuid);
+    var UserSchema = require("./models/user.schema.server.js")(mongoose,db);
+    var ReviewSchema = require("./models/review.schema.server.js")(mongoose,db);
+    var RestaurantSchema = require("./models/restaurant.schema.server.js")(mongoose,db);
 
-    //Following files hold the endpoint on the server side.
+    var userModel = require("./models/user.model.js")(db, mongoose, UserSchema);
+    var reviewModel = require("./models/review.model.js")(db, mongoose, ReviewSchema);
+    var restaurantModel = require("./models/restaurant.model.js")(db, mongoose, RestaurantSchema);
+
     var userService = require("./services/user.service.server.js")(app, userModel);
+    var reviewService = require("./services/review.service.server.js")(app, reviewModel);
+    //var restaurantService = require("./services/restaurant.service.server.js") (app, restaurantModel);
 
-    // alternative way
-    //userService(app, userModel);
-    //formService(app, formModel);
-    //fieldService(app, formModel);
 };

@@ -8,48 +8,23 @@
 
     angular
         .module("HotelReview")
-        //.directive(currentPosition, function() {
-        //
-        //    var start = null;
-        //    var end = null;
-        //
-        //    function link(scope) {
-        //
-        //
-        //        $(element).sortable({
-        //            axis: jgaAxis,
-        //            start: function(event, ui) {
-        //                start = ui.item.index();
-        //            },
-        //            stop: function(event, ui) {
-        //                end = ui.item.index();
-        //                var fields = scope.model.fields;
-        //                var temp = fields[start];
-        //                fields[start] = fields[end];
-        //                fields[end] = temp;
-        //                scope.$apply();
-        //            }
-        //        });
-        //    }
-        //
-        //    return {
-        //        link: link
-        //    };
-        //})
         .controller("HomeController", HomeController);
 
     function HomeController($scope, $rootScope, $routeParams, $location, SearchService, $http) {
 
+        //console.log("In home controller");
+
         var model = this;
         model.search = search;
         model.searchData = {city:'', query:''};
+
         var geocoder;
         geocoder = new google.maps.Geocoder();
 
 
         function setPosition(position)
         {
-            console.log("In set position");
+            //console.log("In set position");
 
             var latlng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
 
@@ -60,7 +35,7 @@
                     {
                         if (results.length > 1)
                         {
-                            console.log(results);
+                            //console.log(results);
                             //get the best match
                             var best = results[0].address_components;
                             var city_found = 0;
@@ -71,11 +46,11 @@
                                 {
                                     if (best[i].types[j] == 'locality')
                                     {
-                                        console.log("finding the best match for locality");
-                                        console.log(best[i].long_name);
+                                        //console.log("finding the best match for locality");
+                                        //console.log(best[i].long_name);
                                         model.searchData.city = best[i].long_name;
                                         $scope.$apply();
-                                        console.log(model.searchData.city);
+                                        //console.log(model.searchData.city);
                                         city_found = 1;
                                         break;
                                     }
@@ -108,23 +83,9 @@
         function init()
         {
 
-            //$http.get("http://ipinfo.io")
-            //    .success(function(res) {
-            //        console.log ( res);
-            //        if (typeof res !== "undefined") {
-            //            model.searchData.city = res.city;
-            //        } else {
-            //            ////console.log("not supported");
-            //            //set default location
-            //            model.searchData.city = 'Boston';
-            //        }
-            //    });
-
-           // navigator.geolocation.getCurrentPosition(setPosition);
-
             angular.element(document).ready(function ()
             {
-                console.log("In Geolocation section");
+                //console.log("In Geolocation section");
 
                 //Set geolocation
                 if (navigator.geolocation)
@@ -144,40 +105,71 @@
         init();
 
 
-
         function search(data)
         {
 
-            console.log("In home controller");
+            //console.log("In home controller");
             console.log(data);
 
-            if (!data) //(data.query === undefined && data.city === undefined)
+            //if (!data) //(data.query === undefined && data.city === undefined)
+            //{
+            //    alert("Enter valid value to search");
+            //}
+            //else if(!data.query)
+            //{
+            //    alert("Enter valid cuisine");
+            //}
+            //else if(!data.city)
+            //{
+            //    alert("Enter valid city");
+            //}
+            //else
+            //{
+            //    var current = data.query;
+            //    var place = data.city;
+            //
+            //    //console.log("This is query:" + data.query);
+            //    //console.log("This is city:" + data.city);
+            //
+            //    if (typeof current !== undefined && typeof place == undefined)
+            //    {
+            //        $location.path("/search/type/" + current);
+            //    } else if (typeof current == undefined && typeof place !== undefined)
+            //    {
+            //        $location.path("/search/place/" + place);
+            //    } else
+            //    {
+            //        $location.path("/search/type/" + current + "/place/" + place);
+            //    }
+            //}
+
+            if (data.query == "" && data.city == "") //(data.query === undefined && data.city === undefined)
             {
                 alert("Enter valid value to search");
-            }
-            else if(!data.query)
-            {
-                alert("Enter valid cuisine");
-            }
-            else if(!data.city)
-            {
-                alert("Enter valid city");
+                init();
             }
             else
             {
+
+                //console.log("In else");
+
                 var current = data.query;
                 var place = data.city;
+                //
+                //console.log("This is query:" + data.query);
+                //console.log("This is city:" + data.city);
 
-                console.log("This is query:" + data.query);
-                console.log("This is city:" + data.city);
-
-                if (typeof current !== undefined && typeof place == undefined)
+                if (data.query !== "" && data.city == "")
                 {
+                    //console.log("No place");
                     $location.path("/search/type/" + current);
-                } else if (typeof current == undefined && typeof place !== undefined)
+                }
+                else if (data.query == "" && data.city !== "")
                 {
+                    //console.log("No cuisine");
                     $location.path("/search/place/" + place);
-                } else
+                }
+                else
                 {
                     $location.path("/search/type/" + current + "/place/" + place);
                 }

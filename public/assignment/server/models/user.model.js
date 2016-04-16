@@ -31,7 +31,7 @@ module.exports = function (db, mongoose) {
 
         var deferred = q.defer();
 
-        console.log("In Model createUser");
+        //console.log("In Model createUser");
 
         User.create(user, function(err, doc){
             if (err)
@@ -75,7 +75,7 @@ module.exports = function (db, mongoose) {
     {
         var deferred = q.defer();
 
-        console.log("In Model findUserById");
+        //console.log("In Model findUserById");
 
         User
             .findOne({_id: userId}, //findById(userId,...
@@ -119,13 +119,32 @@ module.exports = function (db, mongoose) {
         return deferred.promise;
     }
 
-    function findUserByCredentials(userName, userPassword)
+    function findUserByCredentials(user)  //(userName, userPassword)
     {
+        //var deferred = q.defer();
+        //
+        //console.log("In Model findUserByCredential");
+        //User
+        //    .findOne({$and: [{username: userName},{password: userPassword}]},
+        //        function(err, user)
+        //        {
+        //            if (err)
+        //            {
+        //                deferred.reject (err);
+        //            }
+        //            else
+        //            {
+        //                deferred.resolve (user);
+        //            }
+        //        });
+        //
+        //return deferred.promise;
+
         var deferred = q.defer();
 
         console.log("In Model findUserByCredential");
         User
-            .findOne({$and: [{username: userName},{password: userPassword}]},
+            .findOne({username: user.username, password: user.password},
                 function(err, user)
                 {
                     if (err)
@@ -145,7 +164,7 @@ module.exports = function (db, mongoose) {
     {
         var deferred = q.defer();
 
-        console.log("In Model updateUserById");
+        //console.log("In Model updateUserById");
 
         //might use findAndModify(query,[['_id',1]],payload,{new:true},function(err,result) {} as profile controller expecting a user.
         //can same deferred be used twice for reject and resolve???
@@ -158,7 +177,8 @@ module.exports = function (db, mongoose) {
                         password:user.password,
                         firstName:user.firstName,
                         lastName:user.lastName,
-                        emails:user.emails
+                        emails:user.emails,
+                        roles:user.roles
                     },
                     function(err,stats)
                     {
@@ -173,8 +193,8 @@ module.exports = function (db, mongoose) {
                                 }
                                 else
                                 {
-                                    console.log('after update');
-                                    console.log(user);
+                                    //console.log('after update');
+                                    //console.log(user);
                                     deferred.resolve(user);
                                 }
                             });
@@ -194,6 +214,7 @@ module.exports = function (db, mongoose) {
 
         var deferred = q.defer();
 
+        console.log(".........................");
         console.log("In Model deleteUserById");
 
         User
@@ -206,6 +227,8 @@ module.exports = function (db, mongoose) {
                     }
                     else
                     {
+                        console.log(".........................");
+                        console.log("Successfully deleted!!!");
                         deferred.resolve (stats);
                     }
                 }

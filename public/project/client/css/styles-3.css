@@ -103,7 +103,7 @@ a {
 	transition: all 0.2s linear;
 }
 a:hover {
-	color:#E90E6C;
+	color:#c0392b;
 	text-decoration: none;
 }
 
@@ -129,6 +129,7 @@ border-top: 1px solid #1D1D1D;
 
 
 .page-section {
+	background: #ffffff;
 	width: 100%;
 	height: auto;
 	padding: 35px 0;
@@ -166,6 +167,7 @@ line-height: 50px;
 }
 
 .heading h2 {
+
 	color: #222;
 	font-family: 'Titillium Web', sans-serif;
 	text-transform:capitalize !important;
@@ -173,6 +175,10 @@ line-height: 50px;
 	padding:0 0 25px !important;
 }
 
+.aboutUsBg
+{
+	background: #ffffff;
+}
 .heading {
 	padding: 3px 10px;
 	padding-bottom: 15px;
@@ -199,7 +205,8 @@ img {
 	margin-bottom: 54px;
 }
 #aboutUs .right {
-	padding-left: 32px;
+	padding-left: 20px;
+	padding-right: 20px;
 	float: right;
 }
 #aboutUs .left {
@@ -226,7 +233,7 @@ color:#000;
 	float: right;
 }
 .row .area1 {
-	width: 65%;
+	width: 50%;
 }
 .row .area2 {
 	width: 35%;
@@ -273,7 +280,7 @@ color:#000;
 	opacity: 0;
 }
 #portfolio .items a .overlay span {
-	color: #FFF;
+	color: #c0392b;
 	position: absolute;
 	height: 50px;
 	top: 50%;
@@ -281,6 +288,8 @@ color:#000;
 	right: 0px;
 	margin-top: -25px;
 	line-height: 50px;
+	font-weight: 800;
+	font-size:15px;
 	/*background: url('../images/zoom.png') top center no-repeat;*/
 	padding: 17px 0;
 }
@@ -295,7 +304,7 @@ color:#000;
 	transform: scale(1.1);
 }
 
-#portfolio .item .col-xs-6, .col-sm-3{
+#portfolio .item .col-xs-6, .col-sm-3, .col-sm-6{
 
 	padding-bottom: 15px;
 	padding-top: 15px;

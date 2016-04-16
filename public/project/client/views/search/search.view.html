@@ -42,7 +42,7 @@
     <div class="col-lg-3"></div>
     <div class="col-lg-6">
         <div class="card elevation1 search-result" ng-repeat="restaurant in model.searches">
-        <a ng-click="model.viewRestaurant({{restaurant.id}})">    <!--href="{{restaurant.url}}-->
+        <a ng-click="model.viewRestaurant(restaurant.id)">    <!--href="{{restaurant.url}}-->
             <div class="row container-fluid search-content">
                 <div class="col-lg-3 col-md-3 col-sm-3">
                     <img class="img img-responsive img-thumbnail search-image" ng-src="{{restaurant.image_url}}">
@@ -51,7 +51,7 @@
                     <h3>{{restaurant.name}}</h3>
                         <span>{{restaurant.rating}}</span>
                     <p><i>
-                        <span ng-repeat="category in restaurant.categories" class="ng-binding">{{category[0]}}&nbsp</span>
+                        <span ng-repeat="category in restaurant.categories" class="ng-binding">{{category[0]}}&nbsp</span>  <!-- &#13 -->
                     </i>
                     </p>
 

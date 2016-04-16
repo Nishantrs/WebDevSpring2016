@@ -90,8 +90,8 @@
             //put signature in params
             params.oauth_signature = signature;
 
-            console.log(params);
-            console.log(url);
+            //console.log(params);
+            //console.log(url);
 
             $http.jsonp(url, {
                 params: params
@@ -103,7 +103,7 @@
             //
             //})
                 .error(function(response, status, header, config) {
-                console.log(response);
+                //console.log(response);
                     callback(response);
                  //deferred.resolve(response);
             });

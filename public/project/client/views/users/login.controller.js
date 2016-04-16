@@ -15,7 +15,7 @@
     function LoginController($location,UserService)
     {
 
-        console.log("in login controller");
+        //console.log("in login controller");
 
         var vm = this;
         vm.login = login;
@@ -31,7 +31,7 @@
         function login(cred)
         {
 
-            if(!cred)
+            if(cred.username == "" && cred.password == "")
             {
                 vm.lmessage = "Please enter credentials.";
                 return;
@@ -54,14 +54,14 @@
                     {
                         var userFound = response.data;
 
-                        console.log(userFound);
+                        //console.log(userFound);
 
                         if(userFound !== null)
                         {
                             UserService.setCurrentUser(userFound);
                             UserService.setDisplayUser(userFound);
-                            UserService.userLogged(true);
-                            $location.path("/profile/"+userFound._id);
+                            //$location.path("/profile/"+userFound._id);
+                            $location.path("/profile")
 
                         }
                         else

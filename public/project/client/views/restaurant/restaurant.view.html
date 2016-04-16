@@ -1,3 +1,137 @@
 
 
-<h1> Movies page </h1>
+<!--<h1> {{model.restaurant.name}} </h1>-->
+
+<div class="container-fluid restaurant-color-background restaurant-header elevation3 ng-scope">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3 col-md-3">
+                <img class="img img-responsive img-thumbnail restaurant-logo-image" alt="" ng-src="{{model.restaurant.image_url}}">
+            </div>
+
+            <div class="col-lg-6 col-xs-12 col-sm-6 col-md-6">
+                <div class="inverted-color">
+                    <h1 class="ng-binding">{{model.restaurant.name}}</h1>
+                    <p class="subtext inverted-color">Address:</p>
+                    <p class="subtext inverted-color"><i><span ng-repeat="address in model.restaurant.location.display_address">{{address}}<br></span></i></p>
+                    <p class="subtext inverted-color">Contact Info:<i>&nbsp&nbsp{{model.restaurant.display_phone}}</i></p>
+                    <p class="subtext inverted-color">Tags:
+                    <!--</p><p class="subtext inverted-color"><i>-->
+                        <i><span ng-repeat="category in model.restaurant.categories" class="ng-binding">{{category[0]}}&nbsp&nbsp</span>  <!-- &nbsp -->
+                    </i></p>
+                    <!--<p><i class="inverted-color">Rating:&nbsp&nbsp<span>{{model.restaurant.rating}}</span></i></p>-->
+                </div>
+            </div>
+
+            <div class="col-lg-3 col-xs-12 col-sm-6 col-md-3">
+            <h1 class="inverted-color big-bold ng-binding">{{model.restaurant.rating}}</h1>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <h3 class="inverted-color"><i class="ng-binding">{{model.restaurant.snippet_text}}</i></h3>
+    </div>
+</div>
+<div class="banner">
+    <ng-map class="map-container" center="[{{model.restaurant.location.coordinate.latitude}},{{model.restaurant.location.coordinate.longitude}}]">
+        <marker animation="Animation.BOUNCE"
+                position="[{{model.restaurant.location.coordinate.latitude}},{{model.restaurant.location.coordinate.longitude}}]"
+                title="{{model.restaurant.name}}"
+                centered="true"
+                draggable="true">
+        </marker>
+    </ng-map>
+</div>
+<div class="container">
+<div class="row">
+    <div class="col-lg-2 col-md-2"></div>
+    <div class="col-lg-8 col-xs-12 col-md-8 col-sm-12">
+        <div class="card elevation1">
+            <div class="form-header">
+                <h3 class="container-fluid site-color text-center">Been to {{model.restaurant.name}}? Share your experience below!</h3>
+            </div>
+            <div class="container-fluid review">
+                <label for="user_rating">Rating:
+                <!--<div class="input-group">-->
+                    <span><select ng-model="model.review.rating" class="form-control" id="user_rating">
+                        <option>0(forgetful)</option>
+                        <option>1(bad)</option>
+                        <option>2(Average)</option>
+                        <option>3(Good)</option>
+                        <option>4(Amazing)</option>
+                        <option>5(The Best!!!)</option>
+                    </select></span></label>
+
+                    <form class="form-horizontal ng-valid ng-dirty ng-valid-parse">
+                        <textarea placeholder="Write a review!" class="form-control review-textarea ng-valid ng-dirty ng-valid-parse ng-touched msd-elastic" name="name" rows="8" cols="40" ng-model="model.review.comment"></textarea>
+                        <button class="btn btn-primary big-square-button site-color-background form-control" ng-click="model.addReview(model.review)">Submit Review</button>
+                    </form>
+                <!--</div>-->
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-2 col-md-2"></div>
+</div>
+
+<div class="row">
+<div class="col-xs-12 col-sm-12 col-lg-12 col-md-12" style="padding-top: 20px">
+    <ul class="nav nav-tabs nav-justified">
+        <li ng-class="{'active': model.isReviews}"><a ng-click="model.showReviews()">
+            {{model.restaurant.name}} reviews
+        </a></li>
+        <li ng-class="{'active': model.isFollower}"><a ng-click="model.showFollower()">
+            {{model.restaurant.name}} Followers
+        </a></li>
+    </ul>
+
+    <div>
+        <div ng-if="model.isReviews">
+            <div ng-if="model.reviews">
+            <h3>Reviews</h3>
+            <div class="panel panel-default"
+                 ng-repeat="review in model.reviews">
+                <div class="panel-heading">
+                    <div ng-if="currentUser._id != review.userId">
+                    <a href="#/profile/{{review.userId}}">
+                        {{review.username}}
+                    </a>
+                        <div class="pull-right">Rating:{{review.rating}}</div>
+                    </div>
+                    <div ng-if="currentUser._id == review.userId">
+                        <a href="#/profile">
+                            {{review.username}}
+                        </a>
+                        <div class="pull-right">Rating:{{review.rating}}</div>
+                    </div>
+                </div>
+                <div class="panel-body">
+                        {{review.comment}}
+                </div>
+                <div class="panel-footer">
+                    <div class="button-div vote-button-up" type="submit" ng-click="model.upvote(review)">
+                        <!--<span class="glyphicon glyphicon-thumbs-up"></span>-->
+                        <i class="fa fa-thumbs-up"></i>{{review.likes}}</div>
+                    <div class="button-div vote-button-down" type="submit" ng-click="model.downvote(review)">
+                        <!--<span class="glyphicon glyphicon-thumbs-down"></span>-->
+                        <i class="fa fa-thumbs-down"></i>{{review.unlikes}}</div>
+                    <!--<div class="pull-left">likes:{{review.likes}}</div>-->
+                    <!--<div class="pull-right">unlikes:{{review.unlikes}}</div>-->
+                </div>
+            </div>
+            </div>
+            <div ng-hide="model.reviews">
+                <h3>No Reviews</h3>
+            </div>
+        </div>
+        <div ng-if="model.isFollower">
+            <h3>Menu 2</h3>
+            <p>List of followers.</p>
+        </div>
+    </div>
+</div>
+</div>
+</div>
+
+
+<!-- restaurant.location.coordinate.latitude, restaurant.location.coordinate.longitude -->

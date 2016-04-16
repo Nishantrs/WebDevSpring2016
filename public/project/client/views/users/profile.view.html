@@ -1,111 +1,28 @@
-
-
-
-<!--<div class="container">-->
-<!--<form class="form-horizontal">-->
-    <!--<h2 class="col-sm-offset-2">Personal Details</h2>-->
-
-    <!--<div ng-show="pmessage" class="alert alert-success text-center" role="alert">{{pmessage}}</div>-->
-
-    <!--<hr>-->
-
-    <!--<div class="form-group">-->
-        <!--<label for="ProfileUsername" class="col-sm-offset-2 col-sm-1 control-label-left">Username:</label>-->
-        <!--<div class="col-sm-6">-->
-            <!--<input ng-model="model.username" type="text" class="form-control" id="ProfileUsername" placeholder="Username" maxlength="10">-->
-        <!--</div>-->
-    <!--</div>-->
-
-    <!--<div class="form-group">-->
-        <!--<label for="ProfilePassword" class="col-sm-offset-2 col-sm-1 control-label-left">Password:</label>-->
-        <!--<div class="col-sm-6">-->
-            <!--<input ng-model="model.newPassword" type="password" class="form-control" id="ProfilePassword" placeholder="Password" maxlength="20">-->
-        <!--</div>-->
-    <!--</div>-->
-
-    <!--<hr>-->
-
-    <!--<div class="form-group">-->
-        <!--<label for="ProfileFirstname" class="col-sm-offset-2 col-sm-1 control-label-left">First Name:</label>-->
-        <!--<div class="col-sm-6">-->
-            <!--<input ng-model="model.newFirstName" type="text" class="form-control" id="ProfileFirstname" placeholder="First Name" maxlength="20">-->
-        <!--</div>-->
-    <!--</div>-->
-
-    <!--<div class="form-group">-->
-        <!--<label for="ProfileSecondname" class="col-sm-offset-2 col-sm-1 control-label-left">Last Name:</label>-->
-        <!--<div class="col-sm-6">-->
-            <!--<input ng-model="model.newLastName" type="text" class="form-control" id="ProfileSecondname" placeholder="Last Name" maxlength="20">-->
-        <!--</div>-->
-    <!--</div>-->
-
-    <!--<div class="form-group">-->
-        <!--<label for="ProfileEmail" class="col-sm-offset-2 col-sm-1 control-label-left">Email:</label>-->
-        <!--<div class="col-sm-6">-->
-            <!--<input ng-model="model.newEmail" type="email" class="form-control" id="ProfileEmail" placeholder="Email">-->
-        <!--</div>-->
-    <!--</div>-->
-
-    <!--<div class="form-group">-->
-        <!--<label for="ProfileBio" class="col-sm-offset-2 col-sm-1 control-label-left">Bio:</label>-->
-        <!--<div class="col-sm-6">-->
-            <!--<input ng-model="model.newbio" type="text" class="form-control" id="ProfileBio" placeholder="Bio" maxlength="100">-->
-        <!--</div>-->
-    <!--</div>-->
-
-<!--<div class="form-group">-->
-<!--<label for="ProfileCity" class="col-sm-offset-2 col-sm-1 control-label-left">City:</label>-->
-<!--<div class="col-sm-6">-->
-<!--<input ng-model="model.newCity" type="text" class="form-control" id="ProfileCity" placeholder="City:" maxlength="100">-->
-<!--</div>-->
-<!--</div>-->
-
-<!--<div class="form-group">-->
-<!--<label for="ProfileState" class="col-sm-offset-2 col-sm-1 control-label-left">State:</label>-->
-<!--<div class="col-sm-6">-->
-<!--<input ng-model="model.newState" type="text" class="form-control" id="ProfileState" placeholder="State" maxlength="100">-->
-<!--</div>-->
-<!--</div>-->
-
-    <!--<hr>-->
-
-    <!--<div class="form-group">-->
-        <!--<div class="col-sm-offset-3 col-sm-6">-->
-            <!--<button ng-click="update(model)" type="submit" class="btn btn-block btn-success">Update</button>-->
-        <!--</div>-->
-    <!--</div>-->
-
-<!--</form>-->
-<!--</div>-->
-
 <div class="wrapper">
-    <div class="row">
+    <!--<div class="row">-->
         <div class="profile-background">
-            <div class="col-sm-2 col-md-2 col-lg-2">
-            </div>
-    <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 container-fluid">
-        <!--<div class="col-md-3 col-lg-3">-->
-            <!--<div class="row">-->
-            <!--<div class="profile">-->
-                <!--<img src="../../images/profile.jpg" class="img-circle img-responsive img-no-padding">-->
+            <div class="col-sm-2 col-md-2 col-lg-2"></div>
+            <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 container-fluid">
+                <!--<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">-->
+                <h2>{{model.displayUser.username}}</h2>
+                <h4>{{model.displayUser.bio}}</h4>
+                </div>
             <!--</div>-->
-            <!--</div>-->
-            <!--<div class="row">-->
-            <!--<div>-->
-                <!--<btn ng-click="userEdit()" class="btn btn-primary"><i class="fa fa-cog"></i> Edit </btn>-->
-            <!--</div>-->
-            <!--</div>-->
-        <!--</div>-->
-        <div class="col-md-6 col-lg-6">
-            <h2>{{model.displayUser.username}}</h2>
-            <h4>{{model.displayUser.bio}}</h4>
+        <div class="col-sm-2 col-md-2 col-lg-2"></div>
         </div>
-    </div>
-    <div class="col-sm-2 col-md-2 col-lg-2"></div>
-        </div>
-    </div>
+    <!--</div>-->
 
-    <div class="row">
+    <!--<div class="col-sm-2 col-md-2 col-lg-2">-->
+    <!--</div>-->
+    <!--<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 container-fluid">-->
+    <!--<div class="col-md-6 col-lg-6">-->
+    <!--<h2>{{model.displayUser.username}}</h2>-->
+    <!--<h4>{{model.displayUser.bio}}</h4>-->
+    <!--</div>-->
+    <!--</div>-->
+    <!--<div class="col-sm-2 col-md-2 col-lg-2"></div>-->
+
+    <!--<div class="row">-->
         <div class="profile-body">
             <div class="container">
                 <div class="col-sm-2 col-md-2 col-lg-2"></div>
@@ -113,22 +30,15 @@
 
 
         <!--<div class="row">-->
-            <!--<btn ng-click="userFollow()" class="btn btn-primary"><i class="fa fa-cog"></i> Follow </btn>-->
+            <div class="row col-sm-offset-5 col-md-offset-5 col-xs-offset-5 col-lg-offset-5" style="padding-top: 10px">
+                <btn ng-if="currentUser" ng-click="model.profileEdit()" class="btn btn-primary"><i class="fa fa-cog"></i> Edit </btn>
+            </div>
         <!--</div>-->
 
         <div class="row">
-            <div class="center-block">
-                <btn ng-if="currentUser.username == displayUser.username" ng-click="model.profileEdit()" class="btn btn-primary"><i class="fa fa-cog"></i> Edit </btn>
-            </div>
-        </div>
-
-
-
-
-        <div class="row">
-            <div class="container">
-                <br />
-                <table class="table col-md-1 col-md-offset-0 col-sm-4 col-sm-offset-3">
+            <div class="container col-xs-12 col-sm-12 col-lg-12 col-md-12">
+                <br>
+                <table class="table">
                     <thead>
 
                     </thead>
@@ -179,8 +89,13 @@
                 </div>
             </div>
 
-        <div ng-show="model.userdetailsedit">
-            <!--<br>-->
+
+
+
+                        <div ng-show="model.userdetailsedit">
+                            <div class="row">
+                <div class="container col-xs-12 col-sm-12 col-lg-12 col-md-12">
+            <br>
             <table class="table table-bordered">
                 <thead>
 
@@ -190,14 +105,14 @@
                     <td style="padding-top: 18px">First Name:</td>
 
                     <td class="text-center">
-                        <input style="border:1px " type="text"  class="form-control" ng-model="model.update.firstname">
+                        <input style="border:1px " type="text"  class="form-control" ng-model="model.update.firstName">
                     </td>
 
                 </tr>
                 <tr>
                     <td style="padding-top: 18px">Last Name:</td>
                     <td>
-                        <input type="text" class="form-control" ng-model="model.update.lastname">
+                        <input type="text" class="form-control" ng-model="model.update.lastName">
                     </td>
                 </tr>
 
@@ -250,51 +165,120 @@
                 </tr>
                 </tbody>
             </table>
-        </div>
-
-
-
-        <div class="row">
-            <div id="navigationTab">
-                <div class="container">
-            <ul class="nav nav-tabs nav-justified" data-tabs="tabs">
-                <li class="active"><a data-toggle="tab" href="#home">
-                    <div ng-if = "currentUser.username != displayUser.username">{{model.displayUser.username}}'s reviews</div>
-                    <div ng-if = "currentUser.username == displayUser.username">Your reviews</div>
-                </a></li>
-                <li><a data-toggle="tab" href="#menu1">
-                    <div ng-if = "currentUser.username != displayUser.username">{{model.displayUser.username}} Follows</div>
-                    <div ng-if = "currentUser.username == displayUser.username">You are Following</div>
-                </a></li>
-                <li><a data-toggle="tab" href="#menu2">
-                    <div ng-if = "currentUser.username != displayUser.username">{{model.displayUser.username}}'s Followers</div>
-                    <div ng-if = "currentUser.username == displayUser.username">Your Followers</div>
-                </a></li>
-            </ul>
-
-            <div class="tab-content">
-                <div id="home" class="tab-pane fade in active">
-                    <h3>HOME</h3>
-                    <p>Some content.</p>
-                </div>
-                <div id="menu1" class="tab-pane fade">
-                    <h3>Menu 1</h3>
-                    <p>Some content in menu 1.</p>
-                </div>
-                <div id="menu2" class="tab-pane fade">
-                    <h3>Menu 2</h3>
-                    <p>Some content in menu 2.</p>
+                 </div>
                 </div>
             </div>
+
+
+
+                    <div class="row">
+                        <div id="navigationTab">
+                            <div class="col-xs-12 col-sm-12 col-lg-12 col-md-12">
+                                <ul class="nav nav-tabs nav-justified">
+                                    <li ng-class="{'active': model.isReviews}"><a ng-click="model.showReviews()">
+                                        Your reviews
+                                    </a></li>
+                                    <li ng-class="{'active': model.isFollowing}"><a ng-click="model.showFollowing()">
+                                        You Follow
+                                    </a></li>
+                                    <li ng-class="{'active': model.isFollower}"><a ng-click="model.showFollower()">
+                                        Your Followers
+                                    </a></li>
+                                </ul>
+
+                                <div>
+                                    <div ng-if="model.isReviews">
+                                        <div ng-if="model.reviews">
+                                            <h3>Reviews</h3>
+                                            <div class="panel panel-default"
+                                                 ng-repeat="review in model.reviews track by $index">
+                                                <div class="panel-heading">
+                                                    <div>
+                                                        <a href="#/restaurant/{{review.hotelId}}">
+                                                            {{review.hotelname}}
+                                                        </a>
+                                                        <hr class="hr-little-spacing-review">
+                                                        <!--class="hr-no-spacing-review"-->
+                                                        <!--<div class="pull-right">-->
+                                                        <span><label for="user_rating">Rating:
+
+                                                                    <select ng-model="review.rating" class="form-box" id="user_rating">
+                                                                        <option selected>{{review.rating}}</option>
+                                                                <option>0(forgetful)</option>
+                                                                <option>1(bad)</option>
+                                                                <option>2(Average)</option>
+                                                                <option>3(Good)</option>
+                                                                <option>4(Amazing)</option>
+                                                                <option>5(The Best!!!)</option>
+                                                                </select>
+                                                        </label>
+                                                                </span>
+
+                                                        <!--</div>-->
+                                                    </div>
+                                                </div>
+                                                <div class="panel-body">
+                                                    <div>
+                                                        <textarea class="form-control review-textarea ng-valid ng-dirty ng-valid-parse ng-touched msd-elastic"
+                                                                  name="name"
+                                                                  rows="5" cols="40" ng-model="review.comment"></textarea>
+                                                        <!--{{review.comment}}-->
+                                                    </div>
+                                                </div>
+                                                <div class="panel-footer">
+                                                    <div class="btn btn-success box-button form-box" type="submit" ng-click="model.updateReview(review)">
+                                                        <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+                                                    </div>
+                                                    <div class="btn btn-danger box-button form-box" type="submit" ng-click="model.deleteReview(review)">
+                                                        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div ng-hide="model.reviews">
+                                            <h3>No Reviews</h3>
+                                        </div>
+                                    </div>
+                                    <div ng-if="model.isFollowing">
+                                        <div ng-if="model.followings">
+                                            <h3>Following</h3>
+                                            <div class="user-relation-template panel"
+                                                 ng-repeat="following in model.followings track by $index">
+                                            <div class="panel-heading">
+                                                <a href="#/profile/{{following.userId}}">
+                                                {{following.username}}
+                                                </a>
+                                            </div>
+                                        </div>
+                                        </div>
+                                        <div ng-hide="model.followings">
+                                            <h3>No Following</h3>
+                                        </div>
+                                    </div>
+                                    <div ng-if="model.isFollower">
+                                        <div ng-if="model.followers">
+                                            <h3>Followers</h3>
+                                            <div class="user-relation-template panel"
+                                                 ng-repeat="follower in model.followers track by $index">
+                                                <div class="panel-heading">
+                                                    <a href="#/profile/{{follower.userId}}">
+                                                        {{follower.username}}
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div ng-hide="model.followers">
+                                            <h3>No Follower</h3>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-
-
-      </div>
-    </div>
             <div class="col-sm-2 col-md-2 col-lg-2">
             </div>
         </div>
-    </div>
+</div>
 </div>

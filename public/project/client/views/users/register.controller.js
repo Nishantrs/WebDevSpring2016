@@ -20,10 +20,10 @@
 
         function init()
         {
-            console.log("In register controller");
+            //console.log("In register controller");
 
             vm.rmessage = null;
-            vm.user = {username: "", password: "", passwordverify: "", email: "", city: "", state: "", firstName: "", lastName: ""};
+            vm.user = {username: "", password: "", passwordverify: "", email: "", firstName: "", lastName: ""};
 
         }
 
@@ -31,12 +31,6 @@
 
         function register(user)
         {
-
-            if(!user)
-            {
-                vm.rmessage = "Please enter required details";
-                return;
-            }
 
             if(!user.username)
             {
@@ -73,36 +67,30 @@
                     .then(function (response) {
 
                         var duplicateUser = response.data;
-                        console.log("In register controller...duplicate check");
-                        console.log(duplicateUser);
-                        console.log(duplicateUser !== null);
+                        //console.log("In register controller...duplicate check");
+                        //console.log(duplicateUser);
+                        //console.log(duplicateUser !== null);
 
                         if (duplicateUser !== null)
                         {
-                            console.log("In isUsernameDuplicate true");
+                            //console.log("In isUsernameDuplicate true");
                             vm.rmessage = "Username already exists";
                             return;
                         }
                         else
                         {
-                            //console.log("In isUsernameDuplicate false");
-                            //
-                            //console.log("Before Create User Body");
-                            //
-                            //console.log(user);
-
                             UserService
                                 .createUser(user)
                                 .then(function(response)
                                 {
                                     var currentUser = response.data;
-                                    console.log(currentUser);
+                                    //console.log(currentUser);
                                     if(currentUser)
                                     {
                                         UserService.setCurrentUser(currentUser);
                                         UserService.setDisplayUser(currentUser);
-                                        UserService.userLogged(true);
-                                        $location.path("/profile/"+currentUser._id)
+                                        //$location.path("/profile/"+currentUser._id)
+                                        $location.path("/profile")
                                     }
                                 },function (err)
                                 {

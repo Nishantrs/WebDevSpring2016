@@ -5,5 +5,5 @@
 
 (function(){
     angular
-        .module("HotelReview",["ngRoute"])
+        .module("HotelReview",["ngRoute","ngMap","ui.bootstrap","monospaced.elastic"])
 })();

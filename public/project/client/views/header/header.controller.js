@@ -12,13 +12,15 @@
     function HeaderController($location, $scope, UserService)
     {
 
-        $scope.$location=$location;
+        //$scope.$location=$location;
 
         $scope.logout = logout;
 
         function logout()
         {
-            console.log("In header controller logout function");
+            //console.log("In header controller logout function");
+
+            $scope.$location=$location;
 
             UserService
             .logout()
@@ -28,9 +30,8 @@
 
                 if(reply)
                 {
-                    console.log("In header controller after returning");
+                    //console.log("In header controller after returning");
                     UserService.setCurrentUser(null);
-                    UserService.userLogged(false);
                     $location.url("/home")
                 }
 

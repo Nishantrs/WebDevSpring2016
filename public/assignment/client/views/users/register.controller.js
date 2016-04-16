@@ -18,7 +18,7 @@
 
         function init()
         {
-            console.log("In register controller");
+            //console.log("In register controller");
         }
 
         init();
@@ -55,49 +55,66 @@
 
 
 
-                var userObj = {"username": user.username, "password": user.password, "emails": user.email, "roles":"[student]", "firstName": "", "lastName": ""};
+            //var userObj = {"username": user.username, "password": user.password, "emails": user.email, "firstName": "", "lastName": ""};
 
-                userObj.emails = user.email.split(",");
+            //userObj.emails = user.email.split(",");
 
             //console.log(userObj.username);
 
 
-            UserService.findUserByUsername(userObj.username)
-            .then(function(response)
-            {
-
-                var user = response.data;
-
-                if(user)
-                {
-                    $scope.rmessage = "Username Already Exists!!!"
-                }
-                else
-                {
-                    UserService.createUser(userObj)
-                        .then(function(response)
+            UserService
+                .register(user)
+                .then(
+                    function(response) {
+                        var user = response.data;
+                        if(user != null) {
+                            $rootScope.currentUser = user;
+                            $location.url("/profile");
+                        }
+                        else
                         {
-                            var newUser = response.data;
-
-                            if(newUser)
-                            {
-                                UserService.setCurrentUser(newUser);
-                                $location.url("/profile");
-                                //$location.url("/profile/"+ newUser._id);
-                            }
-                            else
-                            {
-                                $scope.rmessage = "Please try again"
-                            }
-                        },function (error)
-                        {
-                            console.log(error);
-                        });
-                }
-            },function (error)
-            {
-                console.log(error);
-            });
+                            $scope.rmessage = "Username Already Exists!!!"
+                        }
+                    },
+                    function(err) {
+                        $scope.error = err;
+                    });
+            //UserService.findUserByUsername(userObj.username)
+            //.then(function(response)
+            //{
+            //
+            //    var user = response.data;
+            //
+            //    if(user)
+            //    {
+            //        $scope.rmessage = "Username Already Exists!!!"
+            //    }
+            //    else
+            //    {
+            //        UserService.createUser(userObj)
+            //            .then(function(response)
+            //            {
+            //                var newUser = response.data;
+            //
+            //                if(newUser)
+            //                {
+            //                    UserService.setCurrentUser(newUser);
+            //                    $location.url("/profile");
+            //                    //$location.url("/profile/"+ newUser._id);
+            //                }
+            //                else
+            //                {
+            //                    $scope.rmessage = "Please try again"
+            //                }
+            //            },function (error)
+            //            {
+            //                console.log(error);
+            //            });
+            //    }
+            //},function (error)
+            //{
+            //    console.log(error);
+            //});
 
                 //UserService.createUser(userObj)
                 //    .then(function(response)

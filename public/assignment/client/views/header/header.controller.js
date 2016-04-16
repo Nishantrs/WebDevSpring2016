@@ -17,7 +17,7 @@
 
         function init()
         {
-            console.log("In Header Controller");
+            //console.log("In Header Controller");
 
             vm.$location = $location;
         }

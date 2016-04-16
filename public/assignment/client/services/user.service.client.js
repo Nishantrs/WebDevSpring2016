@@ -29,7 +29,13 @@
             setCurrentUser: setCurrentUser,
             findUserByUsername:findUserByUsername,
             findUserById:findUserById,
-            logout:logout
+            logout:logout,
+
+            login:login,
+            register : register,
+
+            //admin
+            editUser : editUser
         };
 
         return api;
@@ -58,7 +64,7 @@
         {
             console.log("In User Services...createUser");
 
-            return $http.post("/api/assignment/user", user);
+            return $http.post("/api/assignment/admin/user", user);
         }
 
 
@@ -119,6 +125,22 @@
             return $http.post("/api/assignment/user/logout");
         }
 
+        function login(user)
+        {
+                return $http.post("/api/assignment/login", user);
+        }
+
+        function register(user)
+        {
+            return $http.post("/api/assignment/register", user);
+        }
+
+
+        function editUser(userId, user)
+        {
+            console.log("In User Services...editUser");
+            return $http.put("/api/assignment/admin/user/"+userId, user);
+        }
     }
 
 })();

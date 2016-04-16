@@ -62,3 +62,15 @@ hr {
 
     color: royalblue;
 }
+
+
+.sortorder:after {
+    content: '\25b2';
+}
+.sortorder.reverse:after {
+    content: '\25bc';
+}
+
+.action-column {
+    white-space: nowrap;
+}

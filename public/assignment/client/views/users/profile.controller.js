@@ -17,13 +17,14 @@
         vm.update = update;
 
         vm.user = null;
+        vm.location = $location;
         //var userId = $routeParams.id;
 
 
         function init()
         {
 
-            console.log("In profile controller");
+            //console.log("In profile controller");
 
             var user = UserService.getCurrentUser()
                 .then(function(response)
@@ -53,7 +54,9 @@
 
         function update(username, Password, FirstName, LastName, Email)
         {
-            console.log("In update function");
+
+            //have to change logic of the code.....dependency on currentUser instead of expecting just single user after update
+            //console.log("In update function");
 
             $scope.message="null";
 
@@ -90,12 +93,13 @@
                         UserService.updateUser(id,userDetails)
                             .then(function(response)
                             {
-                                console.log(response.data);
+                                //console.log(response.data);
 
                                 if(response.data)
                                 {
                                     UserService.setCurrentUser(response.data);
                                     $scope.pmessage = "Your Profile has been updated!!!";
+                                    //init();
                                 }
                                 else
                                 {

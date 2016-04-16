@@ -1,6 +1,9 @@
 
 
-<nav class="navbar navbar-default navbar-fixed-top transparency nav-header" ng-controller="HeaderController">
+<!--<nav class="navbar navbar-default navbar-fixed-top transparency nav-header">-->
+<header class="home-header">
+    <div class="container">
+<nav class="navbar navbar-inverse navbar-fixed-top transparency" style="border-top: 1px solid #ddd;">
     <div class="container-fluid">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
@@ -23,12 +26,9 @@
                     <a href="#/login"><u>Login</u></a>
                 </li>
                 <li ng-show="currentUser" ng-class="{'active': ($location.url().indexOf('profile')!=-1) && !($location.url().indexOf('reviews')!=-1)}">
-                    <a ng-href="#/profile/{{currentUser._id}}"><span ng-bind="currentUser.username"></span></a>
+                    <a ng-href="#/profile"><span ng-bind="currentUser.username"></span></a>
                 </li>
-                <li ng-if="currentUser" ng-class="{'active': $location.url().indexOf('reviews')!=-1}">
-                    <a href="#/profile/{{currentUser._id}}/reviews">Reviews</a>
-                </li>
-                <li ng-show="currentUser && currentUser.roles.indexOf('admin') >= 0"
+                <li ng-show="currentUser && currentUser.roles.indexOf('admin') >= 0 && isAdminUser"
                     ng-class="{'active': $location.url().indexOf('admin')!=-1}">
                     <a href="#/admin">Admin</a>
                 </li>
@@ -39,6 +39,8 @@
         </div>
     </div>
 </nav>
+    </div>
+</header>
 
 
 

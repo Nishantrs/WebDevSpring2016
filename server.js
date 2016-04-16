@@ -7,6 +7,9 @@ var bodyParser = require('body-parser');
 var multer = require('multer');
 
 
+//for passport
+var passport = require('passport');
+
 //used to parse cookie from the header of the request
 var cookieParser = require('cookie-parser');
 
@@ -47,6 +50,12 @@ app.use(session({secret: process.env.SECRET || "Hardcoded Value for now",
 app.use(cookieParser());
 
 
+//order matters
+app.use(passport.initialize());
+app.use(passport.session());
+
+
+
 //for generating random id
 var uuid = require('node-uuid');
 
@@ -56,7 +65,7 @@ require('./public/assignment/server/app.js')(app, db, mongoose);
 
 
 // For project only
-require('./public/project/server/app.js')(app, uuid, db, mongoose);
+require('./public/project/server/app.js')(app, db, mongoose);
 
 
 

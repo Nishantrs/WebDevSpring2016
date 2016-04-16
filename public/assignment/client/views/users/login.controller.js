@@ -16,10 +16,13 @@
         var vm = this;
         vm.login = login;
 
+
         function init()
         {
 
-            console.log("In login controller");
+            //console.log("In login controller");
+            vm.user = {username:"",password:""};
+
         }
         init();
 
@@ -42,11 +45,11 @@
             }
             else {
 
-                UserService.findUserByCredentials(user) //{username:user.username, password:user.password}
+                UserService.login(user) //{username:user.username, password:user.password}
                     .then(function (response)
                     {
 
-                        console.log(response.data);
+                        //console.log(response.data);
 
                         if (response.data)
                         {

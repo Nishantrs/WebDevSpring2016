@@ -12,31 +12,7 @@
 
     function UserService($http, $rootScope) {
 
-        console.log("In UserService");
-        //var users =
-        //    [
-        //        {
-        //            "_id": 123, "firstName": "Alice", "lastName": "Wonderland",
-        //            "username": "a", "password": "a", "roles": ["user"], "email":"", "bio": "I am a user.","city": "Boston","state": "Massachusetts"
-        //        },
-        //        {
-        //            "_id": 234, "firstName": "Bob", "lastName": "Hope",
-        //            "username": "b", "password": "b", "roles": ["admin"],"email":"", "bio": "I am a admin.","city": "Boston","state": "Massachusetts"
-        //        },
-        //        {
-        //            "_id": 345, "firstName": "Charlie", "lastName": "Brown",
-        //            "username": "charlie", "password": "charlie", "roles": ["user"], "email":"", "bio": "I am a user.","city": "Boston","state": "Massachusetts"
-        //        },
-        //        {
-        //            "_id": 456, "firstName": "Dan", "lastName": "Craig",
-        //            "username": "dan", "password": "dan", "roles": ["user", "admin"], "email":"", "bio": "I am a admin.","city": "Boston","state": "Massachusetts"
-        //        },
-        //        {
-        //            "_id": 567, "firstName": "Edward", "lastName": "Norton",
-        //            "username": "ed", "password": "ed", "roles": ["user"], "email":"", "bio": "I am a user.","city": "Boston","state": "Massachusetts"
-        //        }
-        //    ];
-
+        //console.log("In UserService");
 
         //Function declarations
         var api = {
@@ -45,6 +21,8 @@
             createUser: createUser,
             deleteUserById: deleteUserById,
             updateUser: updateUser,
+            addFollower : addFollower,
+            removeFollower : removeFollower,
 
             // New functions
             findUserByUsername:findUserByUsername,
@@ -55,16 +33,13 @@
             setCurrentUser: setCurrentUser,
 
             //local functions: displayUser
-            isDisplayUser: isDisplayUser,
-            isNotDisplayUser: isNotDisplayUser,
             setDisplayUser: setDisplayUser,
             getDisplayUser: getDisplayUser,
 
             //local functions: admin
             isAdmin: isAdmin,
             isNotAdmin: isNotAdmin,
-
-            userLogged: userLogged,
+            editUser : editUser,
 
             logout: logout
         };
@@ -98,7 +73,7 @@
         function deleteUserById(userId)
         {
             console.log("In User Services Client....deleteUserById");
-            return $http.delete("/api/project/user/" +userId);
+            return $http.delete("/api/project/admin/" +userId);
         }
 
 
@@ -121,7 +96,7 @@
         function findUserById(userId)
         {
             console.log("In User Services Client....findUserById");
-            console.log(userId);
+            //console.log(userId);
             return $http.get("/api/project/user?id=" + userId);
         }
 
@@ -129,13 +104,13 @@
         //local functions: currentUser
         function setCurrentUser(user)
         {
-            console.log("In User Services Client....setCurrentUser");
+            //console.log("In User Services Client....setCurrentUser");
             $rootScope.currentUser = user;
         }
 
         function getCurrentUser()
         {
-            console.log("In User Services Client....getCurrentUser/loggedIn");
+            //console.log("In User Services Client....getCurrentUser/loggedIn");
             //return  $rootScope.currentUser;
 
             return $http.get("/api/project/loggedin");
@@ -143,52 +118,55 @@
 
 
         //local functions: displayUser
-        function isDisplayUser(user)
-        {
-            console.log("In User Services Client....setDisplayUser");
-            $rootScope.isDisplayUser = true;
-        }
-
-        function isNotDisplayUser()
-        {
-            console.log("In User Services Client....getDisplayUser");
-            $rootScope.isDisplayUser = false;
-        }
 
         function setDisplayUser(user)
         {
-            console.log("In User Services Client....setDisplayUser");
+            //console.log("In User Services Client....setDisplayUser");
             $rootScope.displayUser = user;
         }
 
         function getDisplayUser()
         {
-            console.log("In User Services Client....getDisplayUser");
+            //console.log("In User Services Client....getDisplayUser");
             return $rootScope.displayUser;
         }
 
 
         //local functions: admin
-        function isAdmin(user)
+        function isAdmin()
         {
             console.log("In User Services Client....isAdmin");
             $rootScope.isAdminUser = true;
         }
 
-        function isNotAdmin(user)
+        function isNotAdmin()
         {
             console.log("In User Services Client....isNotAdmin");
             $rootScope.isAdminUser = false;
         }
 
-        function userLogged(value)
+        function addFollower(userId,follower)
         {
-            $rootScope.userLogged = value;
+            console.log("In User Services Client....addFollower");
+            //return $http.put("/api/project/user?userId=" + userId+ "&follower=" + follower);
+            return $http.put("/api/project/user?userId=" + userId, follower);
+        }
+
+        function removeFollower(updatedDisplayUser)
+        {
+            console.log("In User Services Client....removeFollower");
+            return $http.put("/api/project/unfollow", updatedDisplayUser);
+        }
+
+        function editUser(userId, user)
+        {
+            console.log("In User Services...editUser");
+            return $http.put("/api/project/admin/user/"+userId, user);
         }
 
         function logout()
         {
-            console.log("In User Services Client....logout");
+            //console.log("In User Services Client....logout");
             return $http.post("/api/project/logout");
         }
     }

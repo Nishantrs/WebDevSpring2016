@@ -9,126 +9,73 @@
         .factory("ReviewService", ReviewService);
 
 
-    function ReviewService(){
-
-        var reviews = [];
-
-        reviews =
-            [
-                {"_id": "000", "title": "Taiwan Café", "userId": 123, "comment":"It is a good place TC.","hotelId":"taiwan-café-boston-2", "username": "alice", "likes": [], "unlikes": []},
-                {"_id": "010", "title": "Chef Chang's on Back Bay", "userId": 123, comment:"It is a good place CCBB.", "hotelId":"chef-changs-on-back-bay-boston", "username": "alice", "likes": [], "unlikes": []},
-                {"_id": "020", "title": "New Dong Khanh", "userId": 234, comment:"It is a good place NDK.", "hotelId":"new-dong-khanh-boston", "username": "bob", "likes": [], "unlikes": []}
-            ];
+    function ReviewService($http)
+    {
 
         //Function declarations
         var api = {
 
-            createReviewForUser: createReviewForUser, //temporary fix
-            findAllReviewsForUser: findAllReviewsForUser,
-            findAllReviewsForHotel: findAllReviewsForHotel,
+            createReview: createReview,
+            findReviewsForUser: findReviewsForUser,
+            findReviewsForHotel: findReviewsForHotel,
             deleteReviewById: deleteReviewById,
             updateReviewById: updateReviewById,
             deleteReviewByUserId: deleteReviewByUserId,
             findAllReviews: findAllReviews,
             findReviewById: findReviewById
-                };
+
+        };
 
         return api;
 
         //Function implementation
-        function createReviewForUser(uid, review, callback)
+        function createReview(reviewObj)
         {
-            review._id = (new Date).getTime();
-            review.userId = uid;
-            reviews.push(review);
-            callback(review);
+            console.log("In Review Services Client....createReview");
+            return $http.post("/api/project/review", reviewObj);
         }
 
-        function findAllReviewsForUser(userId, callback)
+        function findReviewsForUser(userId)
         {
-            var userReviews = [];
-
-            for (var i=0; i < reviews.length; i++)
-            {
-                if (reviews[i].userId == userId)
-                {
-                    userReviews.push(reviews[i]);
-                }
-            }
-            callback(userReviews);
+            console.log("In Review Services Client....findReviewsForUser");
+            return $http.get("/api/project/review?userId=" + userId);
         }
 
-        function findAllReviewsForHotel(hotelId, callback)
+        function findReviewsForHotel(hotelId)
         {
-            var userReviews = [];
-
-            for (var i=0; i < reviews.length; i++)
-            {
-                if (reviews[i].hotelId == hotelId)
-                {
-                    userReviews.push(reviews[i]);
-                }
-            }
-            callback(userReviews);
+            console.log("In Review Services Client....findReviewsForHotel");
+            return $http.get("/api/project/review?hotelId=" + hotelId);
         }
 
-        function deleteReviewById(reviewId, callback)
+        function deleteReviewById(reviewId)
         {
-            for(var i=0; i < reviews.length; i++)
-            {
-                if(reviews[i]._id == reviewId)
-                {
-                    reviews.splice(i,1);
-                    break;
-                }
-            }
-            callback(reviews);
+            console.log("In Review Services Client....deleteReviewById");
+            return $http.delete("/api/project/review?reviewId=" + reviewId);
         }
 
-        function findReviewById(reviewId, callback)
+        function findReviewById(reviewId)
         {
-            for(var i=0; i < reviews.length; i++)
-            {
-                if(reviews[i]._id == reviewId)
-                {
-                    callback(reviews[i]);
-                    break;
-                }
-            }
-
+            console.log("In Review Services Client....findReviewById");
+            return $http.get("/api/project/review?reviewId=" + reviewId);
         }
 
-        function updateReviewById(reviewId, newReview, callback)
+        function updateReviewById(reviewId, newReview)
         {
-            for(var i=0; i < reviews.length; i++)
-            {
-                if(reviews[i]._id == reviewId)
-                {
-                    reviews[i] = newReview;
-                    callback(reviews[i]);
-                    break;
-                }
-            }
-
+            console.log("In Review Services Client....updateReviewById");
+            return $http.put("/api/project/review/" + reviewId, newReview);
         }
 
 
-        function deleteReviewByUserId(userId, callback)
+        function deleteReviewByUserId(userId)
         {
-            for(var i=0; i < reviews.length; i++)
-            {
-                if(reviews[i].userId == userId)
-                {
-                    reviews.splice(i,1);
-                    //break;
-                }
-            }
-            callback(reviews);
+            console.log("In Review Services Client....deleteReviewByUserId");
+            return $http.delete("/api/project/review?userId=" + userId);
         }
 
-        function findAllReviews(callback)
+        function findAllReviews()
         {
-            callback(reviews);
+            console.log("In Review Services Client....findAllReviews");
+            return $http.get("/api/project/review");
         }
 
 

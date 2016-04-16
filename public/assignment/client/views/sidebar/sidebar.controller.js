@@ -11,7 +11,7 @@
 
     function SidebarController($location, $scope){
 
-        console.log("In sidebar controller");
+        //console.log("In sidebar controller");
         $scope.$location=$location;
     }
 

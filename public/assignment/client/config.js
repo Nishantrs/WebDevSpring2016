@@ -42,7 +42,7 @@
                 controller: "AdminController",
                 controllerAs: "model",
                 resolve: {
-                    checkLoggedIn: checkLoggedIn
+                    checkAdmin: checkAdmin
                 }
             })
             .when("/register",{
@@ -91,7 +91,7 @@
         $http.get('/api/assignment/user/loggedin').success(function(user)
         {
             // User is Authenticated
-            if (user) //user !== 0 to be used in passport js.
+            if (user !== '0') //user !== 0 to be used in passport js.
             {
                 $rootScope.currentUser = user;
                 deferred.resolve();
@@ -115,7 +115,7 @@
         $http.get('/api/assignment/user/loggedin').success(function(user)
         {
             // User is Authenticated
-            if (user) //user !== 0 to be used in passport js.
+            if (user !== '0') //user !== 0 to be used in passport js.
             {
                 $rootScope.currentUser = user;
 
@@ -125,5 +125,29 @@
         });
 
         return deferred.promise;
-    }
+    };
+
+    var checkAdmin = function($q, $timeout, $http, $location, $rootScope)
+    {
+        var deferred = $q.defer();
+
+        $http.get('/api/assignment/user/loggedin').success(function(user)
+        {
+
+            // User is Authenticated
+            if (user !== '0' && user.roles.indexOf('admin') != -1)
+            {
+                $rootScope.currentUser = user;
+                deferred.resolve();
+            }
+            else
+            {
+                alert("You need to log in.");
+                deferred.reject();
+                $location.url('/login');
+            }
+        });
+
+        return deferred.promise;
+    };
 })();
