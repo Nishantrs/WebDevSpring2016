@@ -24,11 +24,13 @@ body {
 ::selection {
 	color: #fff;
 	background: #F39D17;
+	/*background: #FFF9c4;*/
 }
 
 ::-moz-selection {
  color: #fff;
  background: #F39D17;
+	/*background: #FFF9c4;*/
 }
 p {
 	color: #858585;
@@ -172,7 +174,7 @@ line-height: 50px;
 	font-family: 'Titillium Web', sans-serif;
 	text-transform:capitalize !important;
 	font-weight: normal !important;
-	padding:0 0 25px !important;
+	/*padding:0 0 25px !important;*/
 }
 
 .aboutUsBg
@@ -182,7 +184,8 @@ line-height: 50px;
 .heading {
 	padding: 3px 10px;
 	padding-bottom: 15px;
-	margin-bottom: 30px;
+	margin-bottom: 0px;
+	/*margin-bottom: 30px;*/
 	display: block;
 }
 .heading p {
@@ -272,7 +275,9 @@ color:#000;
 	width: 100%;
 	height: 100%;
 	/*background-color: #000;*/
-	background-color:rgba(243, 157, 23, 0.62);
+	/*background-color:#FFF9c4;*/
+	background-color:rgba(255, 249, 196, 0.6);
+	/*background-color:rgba(243, 157, 23, 0.62);*/
 	-webkit-transition: all 0.3s ease-in-out;
 	-moz-transition: all 0.3s ease-in-out;
 	-o-transition: all 0.3s ease-in-out;

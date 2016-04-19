@@ -38,6 +38,7 @@ module.exports = function (db, mongoose, UserSchema) {
         newUser.following = [];
         newUser.votedFor = [];
         newUser.reviewedFor = [];
+        newUser.restaurant = [];
 
 
         var deferred = q.defer();
@@ -187,8 +188,8 @@ module.exports = function (db, mongoose, UserSchema) {
 
         var deferred = q.defer();
 
-        //console.log(".....................................................");
-        //console.log("In Model updateUserById");
+        console.log(".....................................................");
+        console.log("In Model updateUserById");
 
         User
             .findByIdAndUpdate(userId,
@@ -203,9 +204,10 @@ module.exports = function (db, mongoose, UserSchema) {
                 password:user.password,
                 votedFor:user.votedFor,
                 reviewedFor:user.reviewedFor,
-                followers:user.followers,   //newly added
-                following:user.following,//newly added
-                roles:user.roles}}, //newly added
+                followers:user.followers,
+                following:user.following,
+                roles:user.roles,
+                restaurant:user.restaurant}}, //newly added
             function(err , stats)
             {
                 if(stats)

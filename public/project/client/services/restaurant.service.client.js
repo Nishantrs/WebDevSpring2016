@@ -14,7 +14,11 @@
 
         var api =
         {
-            searchByRestaurantId:searchByRestaurantId
+            searchByRestaurantId:searchByRestaurantId,
+            followRestaurant:followRestaurant,
+            unfollowRestaurant:unfollowRestaurant,
+            findRestaurantById:findRestaurantById,
+            createRestaurant:createRestaurant
         };
 
         return api;
@@ -86,6 +90,34 @@
 
 
 
+        }
+
+
+        function followRestaurant(restaurantObj)
+        {
+            console.log("In User Services Client....followRestaurant");
+            console.log(restaurantObj);
+            return $http.put("/api/project/restaurant/follow/" + restaurantObj._id, restaurantObj.followers);
+        }
+
+        function unfollowRestaurant(restaurantObj)
+        {
+            console.log("In User Services Client....unfollowRestaurant");
+            console.log(restaurantObj);
+            return $http.put("/api/project/restaurant/unfollow/" + restaurantObj._id, restaurantObj.followers);
+        }
+
+        function findRestaurantById(restaurantId)
+        {
+            console.log("In User Services Client....findRestaurantById");
+            console.log(restaurantId);
+            return $http.get("/api/project/restaurant?id=" + restaurantId);
+        }
+
+        function createRestaurant(restaurantObj)
+        {
+            console.log("In User Services Client....createRestaurant");
+            return $http.post("/api/project/restaurant", restaurantObj);
         }
     }
 

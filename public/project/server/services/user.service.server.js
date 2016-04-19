@@ -160,9 +160,6 @@ module.exports = function(app, userModel)
                 {
                     res.status(400).send(err);
                 });
-
-        //req.session.currentUser = userModel.findUserByCredentials(userName, userPassword);
-        //res.json(userModel.findUserByCredentials(userName, userPassword));
     }
 
     function updateUserById(req, res)
@@ -231,7 +228,7 @@ module.exports = function(app, userModel)
         var newUser = req.body;
 
         if(!newUser.roles || !newUser.roles.length > 0)
-            newUser.roles = ["student"];
+            newUser.roles = ["user"];
 
 
         console.log(newUser);

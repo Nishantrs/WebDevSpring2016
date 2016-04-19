@@ -2,37 +2,61 @@
 
 <!--<h1> {{model.restaurant.name}} </h1>-->
 
-<div class="container-fluid restaurant-color-background restaurant-header elevation3 ng-scope">
+<div class="container-fluid">
     <div class="container">
         <div class="row">
-            <div class="col-lg-3 col-md-3">
+            <!--<div class="col-lg-3 col-md-3">-->
+                <!--<img class="img img-responsive img-thumbnail restaurant-logo-image" alt="" ng-src="{{model.restaurant.image_url}}">-->
+            <!--</div>-->
+            <div ng-if="model.restaurant.image_url" class="col-lg-3 col-md-3">
                 <img class="img img-responsive img-thumbnail restaurant-logo-image" alt="" ng-src="{{model.restaurant.image_url}}">
+            </div>
+            <div ng-if="!model.restaurant.image_url" class="col-lg-3 col-md-3">
+                <img class="img img-responsive img-thumbnail restaurant-logo-image" alt="" src="../../images/image-not-available.jpg">
             </div>
 
             <div class="col-lg-6 col-xs-12 col-sm-6 col-md-6">
-                <div class="inverted-color">
+                <div class="inverted-color-new">
                     <h1 class="ng-binding">{{model.restaurant.name}}</h1>
-                    <p class="subtext inverted-color">Address:</p>
-                    <p class="subtext inverted-color"><i><span ng-repeat="address in model.restaurant.location.display_address">{{address}}<br></span></i></p>
-                    <p class="subtext inverted-color">Contact Info:<i>&nbsp&nbsp{{model.restaurant.display_phone}}</i></p>
-                    <p class="subtext inverted-color">Tags:
+                    <p class="subtext inverted-color-new">Address:</p>
+                    <p class="subtext inverted-color-new"><i><span ng-repeat="address in model.restaurant.location.display_address">{{address}}<br></span></i></p>
+                    <p class="subtext inverted-color-new">Contact Info:<i>&nbsp&nbsp{{model.restaurant.display_phone}}</i></p>
+                    <p class="subtext inverted-color-new">Tags:
                     <!--</p><p class="subtext inverted-color"><i>-->
                         <i><span ng-repeat="category in model.restaurant.categories" class="ng-binding">{{category[0]}}&nbsp&nbsp</span>  <!-- &nbsp -->
                     </i></p>
                     <!--<p><i class="inverted-color">Rating:&nbsp&nbsp<span>{{model.restaurant.rating}}</span></i></p>-->
+                    <p ng-if="!model.restaurant.is_closed" class="subtext inverted-color-new">Status:&nbsp;<b class="resto-open"> Open</b></p>
+                    <p ng-if="model.restaurant.is_closed" class="subtext inverted-color-new" >Status:&nbsp;<b class="site-color">Closed!!!</b></p>
                 </div>
             </div>
 
             <div class="col-lg-3 col-xs-12 col-sm-6 col-md-3">
-            <h1 class="inverted-color big-bold ng-binding">{{model.restaurant.rating}}</h1>
+                <div class="col-offset-lg-5 col-offset-md-5 col-offset-sm-5 col-offset-xs-5">
+            <!--<h1 class="inverted-color big-bold ng-binding">{{model.restaurant.rating}}</h1>-->
+                <!--<div class="button res-rating-nf-resto rating-resto level-6"><span class="glyphicon glyphicon-star star-Bg" aria-hidden="true"></span>&nbsp;{{model.restaurant.rating}}</div>-->
+                <div class="button res-rating-nf-resto rating-resto level-6" ng-class="{'level-1': model.restaurant.rating < 3.6}">
+                    <span class="glyphicon glyphicon-star star-Bg" aria-hidden="true"></span>&nbsp;{{model.restaurant.rating}}</div>
+                <!--<div class="button res-rating-nf rating level-6 right" ng-class="{'level-1': {{model.restaurant.rating}} < 3.6}">{{model.restaurant.rating}}</div>-->
+            </div>
             </div>
         </div>
     </div>
 
     <div class="container">
-        <h3 class="inverted-color"><i class="ng-binding">{{model.restaurant.snippet_text}}</i></h3>
+        <h3 class="inverted-color-new"><i class="ng-binding">{{model.restaurant.snippet_text}}</i></h3>
+    </div>
+
+    <div class="row col-sm-offset-6 col-md-offset-5 col-xs-offset-3 col-lg-offset-5" style="padding-top: 10px">
+        <btn ng-if="!model.alreadyFollowing" ng-click="model.restaurantFollow(model.restaurant)" class="btn sample-button-resto-display"><i class="fa fa-heart" style="color: #c0392b"></i> Follow </btn>
+        <btn ng-if="model.alreadyFollowing" ng-click="model.restaurantUnFollow(model.restaurant)" class="btn sample-button-resto-display"><i class="ionicons ion-heart-broken" style="color: #c0392b"></i> Unfollow </btn>
     </div>
 </div>
+
+<!--<hr>-->
+
+
+
 <div class="banner">
     <ng-map class="map-container" center="[{{model.restaurant.location.coordinate.latitude}},{{model.restaurant.location.coordinate.longitude}}]">
         <marker animation="Animation.BOUNCE"
@@ -43,11 +67,15 @@
         </marker>
     </ng-map>
 </div>
+
+
+
+<!--<div class="resto-body">-->
 <div class="container">
 <div class="row">
     <div class="col-lg-2 col-md-2"></div>
     <div class="col-lg-8 col-xs-12 col-md-8 col-sm-12">
-        <div class="card elevation1">
+        <div class="card elevation2">
             <div class="form-header">
                 <h3 class="container-fluid site-color text-center">Been to {{model.restaurant.name}}? Share your experience below!</h3>
             </div>
@@ -64,8 +92,8 @@
                     </select></span></label>
 
                     <form class="form-horizontal ng-valid ng-dirty ng-valid-parse">
-                        <textarea placeholder="Write a review!" class="form-control review-textarea ng-valid ng-dirty ng-valid-parse ng-touched msd-elastic" name="name" rows="8" cols="40" ng-model="model.review.comment"></textarea>
-                        <button class="btn btn-primary big-square-button site-color-background form-control" ng-click="model.addReview(model.review)">Submit Review</button>
+                        <textarea placeholder="Write a review!" class="form-control review-textarea-resto ng-valid ng-dirty ng-valid-parse ng-touched msd-elastic" name="name" rows="8" cols="40" ng-model="model.review.comment"></textarea>
+                        <button class="btn big-square-button site-color-background form-control" ng-click="model.addReview(model.review)">Submit Review</button>
                     </form>
                 <!--</div>-->
             </div>
@@ -74,13 +102,15 @@
     <div class="col-lg-2 col-md-2"></div>
 </div>
 
+    <hr class="hr-little-spacing-resto">
+
 <div class="row">
 <div class="col-xs-12 col-sm-12 col-lg-12 col-md-12" style="padding-top: 20px">
     <ul class="nav nav-tabs nav-justified">
-        <li ng-class="{'active': model.isReviews}"><a ng-click="model.showReviews()">
+        <li ng-class="{'site-color-background-tab': model.isReviews}"><a style="color: black" ng-click="model.showReviews()">
             {{model.restaurant.name}} reviews
         </a></li>
-        <li ng-class="{'active': model.isFollower}"><a ng-click="model.showFollower()">
+        <li ng-class="{'site-color-background-tab': model.isFollower}"><a style="color: black" ng-click="model.showFollower()">
             {{model.restaurant.name}} Followers
         </a></li>
     </ul>
@@ -88,28 +118,32 @@
     <div>
         <div ng-if="model.isReviews">
             <div ng-if="model.reviews">
-            <h3>Reviews</h3>
-            <div class="panel panel-default"
+            <h3 class="dark-color">Reviews</h3>
+            <div class="panel panel-default resto-review-body-full"
                  ng-repeat="review in model.reviews">
                 <div class="panel-heading">
                     <div ng-if="currentUser._id != review.userId">
                     <a href="#/profile/{{review.userId}}">
                         {{review.username}}
                     </a>
-                        <div class="pull-right">Rating:{{review.rating}}</div>
+                        <div class="pull-right button res-rating-nf rating level-6" ng-class="{'level-1': {{review.rating}} < 3.6}">
+                            <span class="glyphicon glyphicon-star star-Bg" aria-hidden="true"></span>&nbsp{{review.rating}}
+                        </div>
                     </div>
                     <div ng-if="currentUser._id == review.userId">
                         <a href="#/profile">
                             {{review.username}}
                         </a>
-                        <div class="pull-right">Rating:{{review.rating}}</div>
+                        <div class="pull-right button res-rating-nf rating level-6" ng-class="{'level-1': {{review.rating}} < 3.6}"><span class="glyphicon glyphicon-star star-Bg" aria-hidden="true"></span>&nbsp{{review.rating}}
+                        </div>
                     </div>
                 </div>
-                <div class="panel-body">
+                <div class="panel-body resto-review-body">
                         {{review.comment}}
                 </div>
                 <div class="panel-footer">
                     <div class="button-div vote-button-up" type="submit" ng-click="model.upvote(review)">
+                        <!--data-toggle="modal"-->
                         <!--<span class="glyphicon glyphicon-thumbs-up"></span>-->
                         <i class="fa fa-thumbs-up"></i>{{review.likes}}</div>
                     <div class="button-div vote-button-down" type="submit" ng-click="model.downvote(review)">
@@ -121,12 +155,32 @@
             </div>
             </div>
             <div ng-hide="model.reviews">
-                <h3>No Reviews</h3>
+                <div class="user-relation-template panel elevation2 dark-color" style="margin-top: 20px">
+                    <div class="panel-heading text-center">
+                        No reviews posted for this restaurant yet....Be the first to post a review!!!
+                    </div>
+                </div>
             </div>
         </div>
         <div ng-if="model.isFollower">
-            <h3>Menu 2</h3>
-            <p>List of followers.</p>
+            <div ng-if="model.restaurantFollower">
+                <h3 class="dark-color">Followers</h3>
+                <div class="user-relation-template panel"
+                     ng-repeat="follower in model.restaurantFollower track by $index">
+                    <div class="panel-heading">
+                        <a href="#/profile/{{follower.userId}}" data-dismiss="modal" data-target="#noUser">
+                            {{follower.username}}
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div ng-hide="model.restaurantFollower">
+                <div class="user-relation-template panel elevation2 dark-color" style="margin-top: 20px">
+                    <div class="panel-heading text-center">
+                        No followers for this restaurant as yet....Be the first to follow!!!
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
@@ -134,4 +188,22 @@
 </div>
 
 
-<!-- restaurant.location.coordinate.latitude, restaurant.location.coordinate.longitude -->
+<div id= "noUser" class="modal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">Modal title</h4>
+            </div>
+            <div class="modal-body">
+                    <p>User Profile does not exist as it has been deleted!!! You will be directed to home page.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Okay</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

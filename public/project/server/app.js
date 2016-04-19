@@ -17,6 +17,6 @@ module.exports = function (app, db, mongoose) {
 
     var userService = require("./services/user.service.server.js")(app, userModel);
     var reviewService = require("./services/review.service.server.js")(app, reviewModel);
-    //var restaurantService = require("./services/restaurant.service.server.js") (app, restaurantModel);
+    var restaurantService = require("./services/restaurant.service.server.js") (app, restaurantModel);
 
 };

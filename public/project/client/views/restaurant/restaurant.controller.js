@@ -13,6 +13,10 @@
 
         var restaurantId = $routeParams.restaurantId;
 
+        var restaurantInstance = null;
+
+        var currentUserInstance = null;
+
         model.restaurant = null;
 
         model.isReviews = true;
@@ -24,12 +28,22 @@
         model.addReview = addReview;
         model.upvote = upvote;
         model.downvote = downvote;
+        model.restaurantFollow = restaurantFollow;
+        model.restaurantUnFollow = restaurantUnFollow;
+        model.restaurantFollower = null;
+        model.votedAlready = false;
+        model.alreadyFollowing = false;
+
+
 
         model.$location = $location;
 
 
 
         function init() {
+
+
+            model.alreadyFollowing = false;
 
             model.review = {comment:"",rating:""};
 
@@ -44,14 +58,40 @@
 
                         model.restaurant = restaurantData;
 
-                    },
-                    function(err)
+                    },function(err)
                     {
 
                         console.log("In restaurant data not received");
                         console.log(err);
                     });
 
+            RestaurantService
+                .findRestaurantById(restaurantId)
+                .then(function(response)
+                {
+                    console.log("In findRestaurantById");
+                    console.log(response.data);
+                    restaurantInstance = response.data;
+
+                    if(restaurantInstance)
+                    {
+                        if(restaurantInstance.followers == null || restaurantInstance.followers.length == 0)
+                        {
+                            model.restaurantFollower = null;
+                        }
+                        else
+                        {
+                            model.restaurantFollower = restaurantInstance.followers;
+                        }
+
+                    }
+
+                },function(err)
+                {
+
+                    console.log("Error in finding restaurant in restaurant Schema");
+                    console.log(err);
+                });
 
             ReviewService
                 .findReviewsForHotel(restaurantId)
@@ -78,7 +118,41 @@
                 {
                     alert("Unable to find reviews for particular hotel");
                     console.log(err);
-                })
+                });
+
+            UserService
+                .getCurrentUser()
+                .then(function(response)
+                {
+                    var user = response.data;
+
+                    if(user)
+                    {
+                        var restaurantList = user.restaurant;
+
+                        currentUserInstance = user;
+
+                        for (var i = 0; i < restaurantList.length; i++)
+                        {
+
+                            if (restaurantList[i].hotelId == restaurantId)
+                            {
+                                model.alreadyFollowing = true;
+                                break;
+                            }
+
+                        }
+
+                    }
+                    else
+                    {
+                        model.alreadyFollowing = false;
+                    }
+                },function(err)
+                {
+                    alert("Unable to find current loggedin user");
+                    console.log(err);
+                });
 
 
         }
@@ -196,7 +270,8 @@
                         else
                         {
                             alert("You need to login to review!!!");
-                            $location.path("/login");
+                            //init();
+                            //$location.path("/login");
                         }
                     },function(err)
                     {
@@ -299,8 +374,9 @@
                         }
                         else
                         {
+                            init();
                             alert("You need to login to vote!!!");
-                            $location.path("/login");
+                            //$location.path("/login");
                         }
                     },function(err)
                     {
@@ -405,7 +481,7 @@
                     else
                     {
                         alert("You need to login to vote!!!");
-                        $location.path("/login");
+                        //$location.path("/login");
                     }
                 },function(err)
                 {
@@ -413,7 +489,6 @@
                     console.log("Error of finding currentUser");
                     console.log(err);
                 });
-
 
         }
 
@@ -445,6 +520,305 @@
             }
         }
 
+        function restaurantFollow(restaurantObj)
+        {
+            console.log("In restaurantFollow");
+            console.log(restaurantObj);
+
+            console.log(restaurantInstance);
+
+            UserService
+                .getCurrentUser()
+                .then(function(response)
+                {
+                    //console.log(response.data);
+                    var user = response.data;
+
+                    if(user)
+                    {
+
+                        var alreadyFollowing = false;
+
+                        var restaurantList = user.restaurant;
+
+                        for (var i = 0; i < restaurantList.length; i++)
+                        {
+
+                            if (restaurantList[i].hotelId == restaurantId)
+                            {
+                                alreadyFollowing = true;
+                                break;
+                            }
+
+                        }
+
+
+                        if(alreadyFollowing)
+                        {
+                            alert("You have already following for this restaurant!!!");
+                            init();
+                        }
+                        else
+                        {
+
+                            var followerObj = {userId:user._id,username:user.username};
+
+                            //console.log(followerObj);
+
+                            //console.log(restaurantInstance);
+
+                            if(restaurantInstance)
+                            {
+                                var newRestaurantInstance = restaurantInstance;
+
+                                newRestaurantInstance.followers.push(followerObj);
+
+                                //console.log(newRestaurantInstance);
+
+                                RestaurantService
+                                    .followRestaurant(newRestaurantInstance)
+                                    .then(function(response)
+                                    {
+                                        var updatedRestaurantInstance = response.data;
+
+                                        console.log(updatedRestaurantInstance);
+
+                                        if(updatedRestaurantInstance)
+                                        {
+                                            var restoObj = {hotelId:updatedRestaurantInstance.hotelId,
+                                                            hotelName:updatedRestaurantInstance.hotelName,
+                                                            hotelImage:updatedRestaurantInstance.hotelPoster};
+
+                                            var restoFollowUser = user;
+
+                                            restoFollowUser.restaurant.push(restoObj);
+
+                                            console.log(restoFollowUser);
+
+
+
+                                            UserService
+                                                .updateUser(user._id,restoFollowUser)
+                                                .then(function(response)
+                                                {
+                                                    var updatedUser = response.data;
+
+                                                    console.log(updatedUser);
+
+                                                    if(updatedUser)
+                                                    {
+                                                        init();
+                                                    }
+                                                    else
+                                                    {
+                                                        console.log("Cannot find the user to update");
+                                                    }
+                                                },function(err)
+                                                {
+                                                    console.log("Error of updating user with restaurant");
+                                                    console.log(err);
+                                                });
+
+                                        }
+                                        else
+                                        {
+                                            console.log("Unable to follow restaurant!!!");
+                                        }
+                                    },function(err)
+                                    {
+                                        console.log("Error of updating restaurant instance");
+                                        console.log(err);
+                                    });
+                            }
+                            else
+                            {
+                                var hotelObj = {};
+
+                                hotelObj.hotelId = restaurantObj.id;
+                                hotelObj.hotelName = restaurantObj.name;
+                                hotelObj.hotelPoster = restaurantObj.image_url;
+
+                                //console.log(hotelObj);
+
+
+                                RestaurantService
+                                    .createRestaurant(hotelObj)
+                                    .then(function(response)
+                                    {
+                                        //console.log(response.data);
+
+                                        var newRestaurant = response.data;
+
+                                        //console.log(newRestaurant.followers);
+
+                                        newRestaurant.followers.push(followerObj);
+
+                                        //console.log(newRestaurant);
+
+                                        RestaurantService
+                                            .followRestaurant(newRestaurant)
+                                            .then(function(response)
+                                            {
+                                                var updatedRestaurantInstance = response.data;
+
+                                                //console.log(updatedRestaurantInstance);
+
+                                                if(updatedRestaurantInstance)
+                                                {
+                                                    var restoObj = {hotelId:updatedRestaurantInstance.hotelId,
+                                                        hotelName:updatedRestaurantInstance.hotelName,
+                                                        hotelImage:updatedRestaurantInstance.hotelPoster};
+
+                                                    var restoFollowUser = user;
+
+                                                    restoFollowUser.restaurant.push(restoObj);
+
+                                                    //console.log(restoFollowUser);
+
+
+
+                                                    UserService
+                                                        .updateUser(user._id,restoFollowUser)
+                                                        .then(function(response)
+                                                        {
+                                                            var updatedUser = response.data;
+
+                                                            //console.log(updatedUser);
+
+                                                            if(updatedUser)
+                                                            {
+                                                                init();
+                                                            }
+                                                            else
+                                                            {
+                                                                console.log("Cannot find the user to update");
+                                                            }
+                                                        },function(err)
+                                                        {
+                                                            console.log("Error of updating user with restaurant");
+                                                            console.log(err);
+                                                        });
+
+                                                }
+                                                else
+                                                {
+                                                    console.log("Unable to follow restaurant!!!");
+                                                }
+                                            },function(err)
+                                            {
+                                                console.log("Error of updating restaurant instance");
+                                                console.log(err);
+                                            });
+
+                                    },function(err)
+                                    {
+                                        console.log("Error of creating restaurant instance");
+                                        console.log(err);
+                                    });
+                            }
+                        }
+
+                    }
+                    else
+                    {
+                        alert("You need to login to follow!!!");
+                        //$location.path("/login");
+                    }
+                },function(err)
+                {
+                    console.log("Error of finding currentUser");
+                    console.log(err);
+                });
+
+
+        }
+
+        function restaurantUnFollow(restaurantObj)
+        {
+            console.log("In restaurantFollow");
+            console.log(restaurantObj);
+
+            var unFollowResto = restaurantInstance;
+
+
+
+            var followerList = unFollowResto.followers;
+
+            for (var i = 0; i < followerList.length; i++)
+            {
+
+                if (followerList[i].userId == currentUserInstance._id)
+                {
+                    followerList.splice(i, 1);
+                    break;
+                }
+
+            }
+
+            unFollowResto.followers = followerList;
+
+            //console.log(unFollowResto);
+
+            RestaurantService
+                .unfollowRestaurant(unFollowResto)
+                .then(function(response)
+                {
+                    var updatedRestaurantInstance = response.data;
+
+                    //console.log(updatedRestaurantInstance);
+
+                    if(updatedRestaurantInstance)
+                    {
+
+                        var userRestoList = currentUserInstance.restaurant;
+
+                        for (var i = 0; i < userRestoList.length; i++)
+                        {
+
+                            if (userRestoList[i].hotelId == updatedRestaurantInstance.hotelId)
+                            {
+                                userRestoList.splice(i, 1);
+                                break;
+                            }
+
+                        }
+
+                        currentUserInstance.restaurant = userRestoList;
+
+                        UserService
+                            .updateUser(currentUserInstance._id,currentUserInstance)
+                            .then(function(response)
+                            {
+                                var updatedUser = response.data;
+
+                                //console.log(updatedUser);
+
+                                if(updatedUser)
+                                {
+                                    init();
+                                }
+                                else
+                                {
+                                    console.log("Cannot find the user to update");
+                                }
+                            },function(err)
+                            {
+                                console.log("Error of updating user with restaurant unfollow");
+                                console.log(err);
+                            });
+
+                    }
+                    else
+                    {
+                        console.log("Unable to unfollow restaurant!!!");
+                    }
+                },function(err)
+                {
+                    console.log("Error of updating restaurant instance");
+                    console.log(err);
+                });
+        }
+
         function showReviews()
         {
             model.isReviews = true;
@@ -456,5 +830,10 @@
             model.isReviews = false;
             model.isFollower = true;
         }
+
+        //function goToLogin()
+        //{
+        //    $location.path("/login");
+        //}
     }
 })();

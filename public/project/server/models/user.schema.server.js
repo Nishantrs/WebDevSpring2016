@@ -20,7 +20,7 @@ module.exports = function(mongoose){
         following:[{userId:String, username:String}],
         votedFor:[{reviewId:String}],
         reviewedFor:[{hotelId:String}]
-        //,restaurant:[{hotelId:String, hotelName:String, hotelImage:String}]
+        ,restaurant:[{hotelId:String, hotelName:String, hotelImage:String}]
     }, {collection: 'userModel'});
 
     return UserSchema;

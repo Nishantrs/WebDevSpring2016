@@ -61,7 +61,7 @@
                             UserService.setCurrentUser(userFound);
                             UserService.setDisplayUser(userFound);
                             //$location.path("/profile/"+userFound._id);
-                            $location.path("/profile")
+                            $location.path("/home")
 
                         }
                         else

@@ -12,64 +12,137 @@ var q = require("q");
 
 module.exports = function (db, mongoose, RestaurantSchema) {
 
-    var Review = mongoose.model("RestaurantModel", RestaurantSchema);
+    var Restaurant = mongoose.model("RestaurantModel", RestaurantSchema);
 
     var api =
     {
-        createUser: createUser,
-        getAllUsers: getAllUsers,
-        findUserById: findUserById,
-        findUserByUsername: findUserByUsername,
-        findUserByCredentials: findUserByCredentials,
-        updateUserById: updateUserById,
-        deleteUserById: deleteUserById,
-        addFollower: addFollower
+        createRestaurant:createRestaurant,
+        findRestaurantById:findRestaurantById,
+        updateRestaurantById:updateRestaurantById
+        //getAllFollowers:getAllFollowers
     };
     return api;
 
 
-    function createUser(newUser)
+    function createRestaurant(hotelObj)
     {
 
+        console.log(".....................................................");
+        console.log("In Model createRestaurant");
+
+        hotelObj.follower = [];
+
+
+        var deferred = q.defer();
+
+        console.log(".....................................................");
+        console.log("In Model createRestaurant....after adding parameters");
+        console.log(hotelObj);
+
+        Restaurant
+            .create(hotelObj, function(err, doc){
+            if (err)
+            {
+                console.log(".....................................................");
+                console.log("In Model createRestaurant....unsuccessful creation of restaurant");
+                deferred.reject (err);
+            }
+            else
+            {
+                console.log(".....................................................");
+                console.log("In Model createRestaurant....successful creation of restaurant");
+                console.log(doc);
+                deferred.resolve(doc);
+            }
+        });
+
+        return deferred.promise;
     }
 
-    function getAllUsers()
+
+    function findRestaurantById(hotelId)
     {
 
+        var deferred = q.defer();
+
+        console.log(".....................................................");
+        console.log("In Model findRestaurantById");
+
+        Restaurant
+            .findOne({hotelId: hotelId}, //findById
+                function(err, restaurant)
+                {
+                    if (err)
+                    {
+                        console.log(".....................................................");
+                        console.log("In Model findRestaurantById......unsuccessful");
+                        deferred.reject (err);
+                    }
+                    else
+                    {
+                        console.log(".....................................................");
+                        console.log("In Model findRestaurantById.......successful");
+                        console.log(restaurant);
+                        deferred.resolve (restaurant);
+                    }
+                });
+
+        return deferred.promise;
     }
 
-    function findUserById(userId)
+
+
+    function updateRestaurantById(hotelId,followerList)
     {
+        var deferred = q.defer();
 
+        console.log(".....................................................");
+        console.log("In Model updateRestaurantById");
+
+        Restaurant
+            .findByIdAndUpdate(hotelId,
+                {$set:{
+                    followers:followerList}}, //newly added
+                function(err , stats)
+                {
+                    if(stats)
+                    {
+                        console.log(".....................................................");
+                        console.log("In Model updateRestaurantById.....update successful");
+
+                        Restaurant
+                            .findById(hotelId,
+                                function(err , restaurant){
+                                    if (err)
+                                    {
+                                        console.log(".....................................................");
+                                        console.log("In Model updateRestaurantById.....cannot find restaurant after update");
+                                        deferred.reject (err);
+                                    }
+                                    else
+                                    {
+                                        console.log(".....................................................");
+                                        console.log("In Model updateRestaurantById.....restaurant after update");
+                                        console.log(restaurant);
+                                        deferred.resolve(restaurant);
+                                    }
+
+                                });
+                    }
+                    else
+                    {
+                        console.log(".....................................................");
+                        console.log("In Model updateRestaurantById.....update unsuccessful");
+                        deferred.reject(err);
+                    }
+                });
+
+        return deferred.promise;
     }
 
-    function findUserByUsername(username)
-    {
-
-    }
-
-    function findUserByCredentials(userName, userPassword)
-    {
-
-    }
-
-
-
-
-    function updateUserById(userId, user)
-    {
-
-    }
-
-
-    function deleteUserById(userId)
-    {
-
-    }
-
-    function addFollower(userId,follower)
-    {
-
-    }
+    //function getAllFollowers(hotelId)
+    //{
+    //
+    //}
 
 };

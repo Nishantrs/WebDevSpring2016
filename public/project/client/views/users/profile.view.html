@@ -4,38 +4,29 @@
             <div class="col-sm-2 col-md-2 col-lg-2"></div>
             <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 container-fluid">
                 <!--<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">-->
-                <h2>{{model.displayUser.username}}</h2>
-                <h4>{{model.displayUser.bio}}</h4>
+                <h2 class="inverted-color">{{model.displayUser.username}}</h2>
+                <h4 class="inverted-color">{{model.displayUser.bio}}</h4>
+                <h4 ng-if="model.displayUser.city" class="inverted-color">{{model.displayUser.city}}</h4>
+                <h4 ng-if="model.displayUser.followers.length" class="inverted-color">Followers: {{model.displayUser.followers.length}}</h4>
+                <h4 class="inverted-color">User Since: {{ model.displayUser.created | date : format : 'longDate'}}</h4>
                 </div>
             <!--</div>-->
         <div class="col-sm-2 col-md-2 col-lg-2"></div>
         </div>
-    <!--</div>-->
 
-    <!--<div class="col-sm-2 col-md-2 col-lg-2">-->
-    <!--</div>-->
-    <!--<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 container-fluid">-->
-    <!--<div class="col-md-6 col-lg-6">-->
-    <!--<h2>{{model.displayUser.username}}</h2>-->
-    <!--<h4>{{model.displayUser.bio}}</h4>-->
-    <!--</div>-->
-    <!--</div>-->
-    <!--<div class="col-sm-2 col-md-2 col-lg-2"></div>-->
-
-    <!--<div class="row">-->
-        <div class="profile-body">
+        <div>
             <div class="container">
                 <div class="col-sm-2 col-md-2 col-lg-2"></div>
                 <div class="col-md-8 col-lg-8 col-sm-8 col-xs-12">
 
 
         <!--<div class="row">-->
-            <div class="row col-sm-offset-5 col-md-offset-5 col-xs-offset-5 col-lg-offset-5" style="padding-top: 10px">
-                <btn ng-if="currentUser" ng-click="model.profileEdit()" class="btn btn-primary"><i class="fa fa-cog"></i> Edit </btn>
+            <div class="row col-sm-offset-5 col-md-offset-5 col-xs-offset-4 col-lg-offset-5" style="padding-top: 10px">
+                <btn ng-if="currentUser" ng-click="model.profileEdit()" class="btn sample-button-profile"><i class="glyphicon glyphicon-pencil"></i> Edit </btn>
             </div>
         <!--</div>-->
 
-        <div class="row">
+        <div class="row profile-display-text">
             <div class="container col-xs-12 col-sm-12 col-lg-12 col-md-12">
                 <br>
                 <table class="table">
@@ -47,7 +38,7 @@
                         <td style="border-top: none">
                             First Name:
                         </td>
-                        <td style="border-top: none">
+                        <td style="border-top: none" class="pull-right">
                             {{model.displayUser.firstName}}
                         </td>
                     </tr>
@@ -55,7 +46,7 @@
                         <td style="border-top: none">
                             Last Name:
                         </td>
-                        <td style="border-top: none">
+                        <td style="border-top: none" class="pull-right">
                             {{model.displayUser.lastName}}
                         </td>
                     </tr>
@@ -63,7 +54,7 @@
                         <td style="border-top: none">
                             Email:
                         </td>
-                        <td style="border-top: none">
+                        <td style="border-top: none" class="pull-right">
                             {{model.displayUser.email}}
                         </td>
                     </tr>
@@ -71,7 +62,7 @@
                         <td style="border-top: none">
                             City:
                         </td>
-                        <td style="border-top:none">
+                        <td style="border-top:none" class="pull-right">
                             {{model.displayUser.city}}
                         </td>
                     </tr>
@@ -79,7 +70,7 @@
                         <td style="border-top: none">
                             State:
                         </td>
-                        <td style="border-top: none">
+                        <td style="border-top: none"  class="pull-right">
                             {{model.displayUser.state}}
                         </td>
                     </tr>
@@ -89,11 +80,13 @@
                 </div>
             </div>
 
+                    <hr class="hr-little-spacing">
+
 
 
 
                         <div ng-show="model.userdetailsedit">
-                            <div class="row">
+                            <div class="row profile-edit-text">
                 <div class="container col-xs-12 col-sm-12 col-lg-12 col-md-12">
             <br>
             <table class="table table-bordered">
@@ -104,8 +97,8 @@
                 <tr>
                     <td style="padding-top: 18px">First Name:</td>
 
-                    <td class="text-center">
-                        <input style="border:1px " type="text"  class="form-control" ng-model="model.update.firstName">
+                    <td>
+                        <input type="text"  class="form-control" ng-model="model.update.firstName">
                     </td>
 
                 </tr>
@@ -152,13 +145,13 @@
                     <td>
 
                     </td>
-                    <td>
-                        <button ng-click="model.saveProfileEdit(model.update)" type="button" class="btn btn-default" aria-label="Left Align">
+                    <td class=" text-center">
+                        <button ng-click="model.saveProfileEdit(model.update)" type="button" class="btn sample-button-profile-edit" aria-label="center Align">
                             <!--<span class="glyphicon glyphicon-ok" aria-hidden="true"></span>-->
                             Save
                         </button>
                         &nbsp;&nbsp;
-                        <button ng-click="model.cancelEdit()" type="button" class="btn btn-default" aria-label="Left Align">
+                        <button ng-click="model.cancelEdit()" type="button" class="btn sample-button-profile-edit-cancel" aria-label="Left Align">
                             Cancel<!--<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>-->
                         </button>
                     </td>
@@ -167,21 +160,55 @@
             </table>
                  </div>
                 </div>
+
+                            <hr class="hr-little-spacing">
             </div>
 
+
+                    <div class="row">
+                        <div id="navigationTab2">
+                            <div class="col-xs-12 col-sm-12 col-lg-12 col-md-12">
+                                <ul class="nav nav-tabs nav-justified">
+                                    <li class="site-color-background-tab"><a style="color: black">
+                                        Restaurants you follow
+                                    </a></li>
+                                </ul>
+                                <div ng-if="model.restaurants">
+                                    <h3 class="dark-color">Restaurants</h3>
+                                    <div class="user-relation-template panel"
+                                         ng-repeat="restaurant in model.restaurants track by $index">
+                                        <div class="panel-heading">
+                                            <a href="#/restaurant/{{restaurant.hotelId}}">
+                                                {{restaurant.hotelName}}
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div ng-hide="model.restaurants">
+                                    <div class="user-relation-template panel elevation2 dark-color" style="margin-top: 20px">
+                                        <div class="panel-heading text-center">
+                                            You are not following any restaurant as yet!!!
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <hr class="hr-little-spacing">
 
 
                     <div class="row">
                         <div id="navigationTab">
                             <div class="col-xs-12 col-sm-12 col-lg-12 col-md-12">
                                 <ul class="nav nav-tabs nav-justified">
-                                    <li ng-class="{'active': model.isReviews}"><a ng-click="model.showReviews()">
+                                    <li ng-class="{'site-color-background-tab': model.isReviews}"><a style="color: black" ng-click="model.showReviews()">
                                         Your reviews
                                     </a></li>
-                                    <li ng-class="{'active': model.isFollowing}"><a ng-click="model.showFollowing()">
+                                    <li ng-class="{'site-color-background-tab': model.isFollowing}"><a style="color: black" ng-click="model.showFollowing()">
                                         You Follow
                                     </a></li>
-                                    <li ng-class="{'active': model.isFollower}"><a ng-click="model.showFollower()">
+                                    <li ng-class="{'site-color-background-tab': model.isFollower}"><a style="color: black" ng-click="model.showFollower()">
                                         Your Followers
                                     </a></li>
                                 </ul>
@@ -190,7 +217,7 @@
                                     <div ng-if="model.isReviews">
                                         <div ng-if="model.reviews">
                                             <h3>Reviews</h3>
-                                            <div class="panel panel-default"
+                                            <div class="panel panel-default resto-review-body-full"
                                                  ng-repeat="review in model.reviews track by $index">
                                                 <div class="panel-heading">
                                                     <div>
@@ -217,7 +244,7 @@
                                                         <!--</div>-->
                                                     </div>
                                                 </div>
-                                                <div class="panel-body">
+                                                <div class="panel-body resto-review-body">
                                                     <div>
                                                         <textarea class="form-control review-textarea ng-valid ng-dirty ng-valid-parse ng-touched msd-elastic"
                                                                   name="name"
@@ -236,12 +263,17 @@
                                             </div>
                                         </div>
                                         <div ng-hide="model.reviews">
-                                            <h3>No Reviews</h3>
+                                            <!--<h3>No Reviews</h3>-->
+                                            <div class="user-relation-template panel elevation2 dark-color" style="margin-top: 20px">
+                                                <div class="panel-heading text-center">
+                                                    No reviews posted by you yet!!!
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                     <div ng-if="model.isFollowing">
                                         <div ng-if="model.followings">
-                                            <h3>Following</h3>
+                                            <h3 class="dark-color">Following</h3>
                                             <div class="user-relation-template panel"
                                                  ng-repeat="following in model.followings track by $index">
                                             <div class="panel-heading">
@@ -252,12 +284,16 @@
                                         </div>
                                         </div>
                                         <div ng-hide="model.followings">
-                                            <h3>No Following</h3>
+                                            <div class="user-relation-template panel elevation2 dark-color" style="margin-top: 20px">
+                                                <div class="panel-heading text-center">
+                                                    You are following no one as yet!!!
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                     <div ng-if="model.isFollower">
                                         <div ng-if="model.followers">
-                                            <h3>Followers</h3>
+                                            <h3 class="dark-color">Followers</h3>
                                             <div class="user-relation-template panel"
                                                  ng-repeat="follower in model.followers track by $index">
                                                 <div class="panel-heading">
@@ -268,17 +304,39 @@
                                             </div>
                                         </div>
                                         <div ng-hide="model.followers">
-                                            <h3>No Follower</h3>
+                                            <div class="user-relation-template panel elevation2 dark-color" style="margin-top: 20px">
+                                                <div class="panel-heading text-center">
+                                                    No one is following you as yet!!!
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+
                 </div>
             </div>
             <div class="col-sm-2 col-md-2 col-lg-2">
             </div>
         </div>
+</div>
+
+<div id= "noUser" class="modal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">Modal title</h4>
+            </div>
+            <div class="modal-body">
+                <p>User Profile does not exist as it has been deleted!!! You will be directed to home page.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Okay</button>
+            </div>
+        </div>
+    </div>
 </div>
 </div>

@@ -10,7 +10,7 @@
         .module("HotelReview")
         .controller("AdminController", AdminController);
 
-    function AdminController(UserService, $filter)
+    function AdminController(UserService, $filter, ReviewService)
     {
 
         var vm = this;
@@ -104,7 +104,23 @@
                             .then(function(response){
                                 if(response.data)
                                 {
-                                    init();
+                                    ReviewService
+                                        .deleteReviewByUserId(user._id)
+                                        .then(function(response)
+                                        {
+                                            if(response.data)
+                                            {
+                                                init();
+                                            }
+                                            else
+                                            {
+                                                console.log("Unable to delete reviews posted by user!!!")
+                                            }
+                                        },function(err)
+                                        {
+                                            console.log(err);
+                                        });
+
                                 }
                                 else
                                 {

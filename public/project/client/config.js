@@ -57,11 +57,19 @@
                 templateUrl: "views/users/register.view.html",
                 controller: "RegisterController",
                 controllerAs: "model"
+                //,
+                //resolve: {
+                //    userLogged: userLogged
+                //}
             })
             .when("/login", {
                 templateUrl: "views/users/login.view.html",
                 controller: "LoginController",
                 controllerAs: "model"
+                //,
+                //resolve: {
+                //    userLogged: userLogged
+                //}
             })
             .when("/search/type/:data", {
                 templateUrl: "views/search/search.view.html",
@@ -130,6 +138,11 @@
                 {
                     $rootScope.currentUser = user;
 
+                    if(user.roles.indexOf('admin') != -1)
+                    {
+                        $rootScope.isAdminUser = true;
+                    }
+
                 }
 
                 deferred.resolve();
@@ -164,4 +177,29 @@
         return deferred.promise;
     };
 
+    //var userLogged = function($q, $timeout, $http, $location, $rootScope)
+    //{
+    //    var deferred = $q.defer();
+    //
+    //    $http.get('/api/project/loggedin').success(function(user)
+    //    {
+    //        // User is Authenticated
+    //        if (user) //user !== '0' to be used in passport js.
+    //        {
+    //            $rootScope.currentUser = user;
+    //
+    //            if(user.roles.indexOf('admin') != -1)
+    //            {
+    //                $rootScope.isAdminUser = true;
+    //            }
+    //
+    //            $location.url('/profile');
+    //
+    //        }
+    //
+    //        deferred.resolve();
+    //    });
+    //
+    //    return deferred.promise;
+    //};
 })();

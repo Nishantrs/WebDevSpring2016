@@ -1,63 +1,54 @@
-<!--<section ng-show="model.searches">-->
-    <!--<h3>Search Results</h3>-->
-    <!--<div class="table-responsive">-->
-    <!--<table class="table table-striped">-->
-        <!--<thead>-->
-        <!--<tr>-->
-            <!--<th>Poster</th>-->
-            <!--<th>Hotel</th>-->
-            <!--<th>Rating</th>-->
-        <!--</tr>-->
-        <!--</thead>-->
-        <!--<tr ng-repeat="restaurant in model.searches">-->
-            <!--<td><img height="75px" ng-src="{{restaurant.image_url}}"/></td>-->
-            <!--<td>-->
-                <!--<a href="{{restaurant.url}}" target="_blank">{{restaurant.name}}-->
-                <!--</a>-->
-            <!--</td>-->
-            <!--<td>{{restaurant.rating}}</td>-->
-        <!--</tr>-->
-    <!--</table>-->
-    <!--</div>-->
-<!--</section>-->
-
-
 <section ng-show="model.searches">
-<div class="container-fluid banner site-color-background-dark elevation3 ng-scope">
-    <div class="container search-header">
+<div class="container-fluid banner-search-page site-color-background-dark elevation2 ng-scope">
+    <div class="container-fluid search-header">
         <div class="row">
-            <div class="col-lg-8">
-                <!-- ngIf: model.place==undefined -->
+            <div ng-if="model.data" class="col-lg-8">
 
+                <h4 class="inverted-color pull-left">Search Results: <b class="site-color"> {{model.data}}</b></h4>
+            </div>
+
+            <div ng-if="!model.data" class="col-lg-8">
+
+                <h4 class="inverted-color pull-left">Search Results</h4>
             </div>
             <div class="col-lg-4">
-                <h3 class="inverted-color pull-right">Search Results</h3>
+
+
+                <h4 class="inverted-color pull-right"><a class="inverted-color" ng-click="model.goHome()">&nbsp;Back</a></h4>
             </div>
         </div>
     </div>
 </div>
 
 
-<div class="container-fluid">
+<div class="container-fluid result-offset">
     <div class="col-lg-3"></div>
     <div class="col-lg-6">
         <div class="card elevation1 search-result" ng-repeat="restaurant in model.searches">
         <a ng-click="model.viewRestaurant(restaurant.id)">    <!--href="{{restaurant.url}}-->
             <div class="row container-fluid search-content">
-                <div class="col-lg-3 col-md-3 col-sm-3">
+                <div ng-if="restaurant.image_url" class="col-lg-3 col-md-3 col-sm-3">
                     <img class="img img-responsive img-thumbnail search-image" ng-src="{{restaurant.image_url}}">
                 </div>
-                <div class="col-lg-7 col-md-7 col-sm-7">
+                <div ng-if="!restaurant.image_url" class="col-lg-3 col-md-3 col-sm-3">
+                    <img class="img img-responsive img-thumbnail search-image" src="../../images/image-not-available.jpg">
+                </div>
+                <div class="col-lg-9 col-md-9 col-sm-9">
+                    <div class="button res-rating-nf-search rating level-6 right" ng-class="{'level-1': {{restaurant.rating}} < 3.6}"><span>
+                            <span class="glyphicon glyphicon-star star-Bg" aria-hidden="true"></span>&nbsp;{{restaurant.rating}}</span></div>
                     <h3>{{restaurant.name}}</h3>
-                        <span>{{restaurant.rating}}</span>
+
+                    <p><h6><span ng-repeat="address in restaurant.location.display_address" class="resto-address">{{address}}&nbsp;</span></h6></p>
+                        <!--<div class="button res-rating-nf rating level-6 right" ng-class="{'level-1': {{restaurant.rating}} < 3.6}"><span>-->
+                            <!--<span class="glyphicon glyphicon-star star-Bg" aria-hidden="true"></span>&nbsp;{{restaurant.rating}}</span></div>-->
                     <p><i>
                         <span ng-repeat="category in restaurant.categories" class="ng-binding">{{category[0]}}&nbsp</span>  <!-- &#13 -->
                     </i>
                     </p>
 
-                    <i>
-                        <h4></h4>
-                    </i>
+                    <!--<i>-->
+                        <!--<h4></h4>-->
+                    <!--</i>-->
                     <p class="ng-binding">{{restaurant.snippet_text}}</p>
                 </div>
             </div>
@@ -72,7 +63,7 @@
                 <div class="col-lg-4 col-md-4 col-sm-4 container-fluid">
                     <div class="row">
                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 pagination-button top-button">
-                            <button class="btn btn-primary big-square-button form-control site-color-background-dark pagination-button white-color" name="button" type="button" ng-click="model.goHome()">
+                            <button class="btn sample-button-search" name="button" type="button" ng-click="model.goHome()">
                                 <h4>&lt; Back</h4>
                             </button>
                         </div>

@@ -41,6 +41,7 @@
         vm.reviews = null;
         vm.followings = null;
         vm.followers = null;
+        vm.restaurants = null;
         vm.update = {};
 
         function init()
@@ -58,7 +59,10 @@
                     .findUserById(userId)
                     .then(function(response)
                     {
+
                         var user = response.data;
+
+                        console.log(user);
 
                         if(user)
                         {
@@ -83,6 +87,15 @@
                             else
                             {
                                 vm.followings = vm.displayUser.following;
+                            }
+
+                            if(vm.displayUser.restaurant == null || vm.displayUser.restaurant.length == 0)
+                            {
+                                vm.restaurants = null;
+                            }
+                            else
+                            {
+                                vm.restaurants = vm.displayUser.restaurant;
                             }
 
                             vm.userdetailsedit = false;
@@ -151,7 +164,8 @@
                         }
                         else
                         {
-                            alert("Cannot find user");
+                            //$('noUser').modal('show');
+                            alert("User Profile does not exist as it has been deleted!!! You will be directed to home page.");
                             $location.path("/home");
                         }
                     },function (err) {
@@ -200,6 +214,15 @@
                             else
                             {
                                 vm.followings = vm.displayUser.following;
+                            }
+
+                            if(vm.displayUser.restaurant == null || vm.displayUser.restaurant.length == 0)
+                            {
+                                vm.restaurants = null;
+                            }
+                            else
+                            {
+                                vm.restaurants = vm.displayUser.restaurant;
                             }
 
 
@@ -288,6 +311,7 @@
                 updateUser.username = user.username;
                 updateUser.following = user.following;
                 updateUser.followers = user.followers;
+                updateUser.restaurant = user.restaurant;
 
 
                 UserService.updateUser(user._id,updateUser)
