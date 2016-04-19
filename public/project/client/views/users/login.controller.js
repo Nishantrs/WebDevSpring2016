@@ -48,27 +48,44 @@
             }
             else
             {
-                UserService
-                    .findUserByCredentials(cred)
-                    .then(function(response)
+                //UserService
+                //    .findUserByCredentials(cred)
+                //    .then(function(response)
+                //    {
+                //        var userFound = response.data;
+                //
+                //        //console.log(userFound);
+                //
+                //        if(userFound !== null)
+                //        {
+                //            UserService.setCurrentUser(userFound);
+                //            UserService.setDisplayUser(userFound);
+                //            //$location.path("/profile/"+userFound._id);
+                //            $location.path("/home")
+                //
+                //        }
+                //        else
+                //        {
+                //            vm.lmessage = "Invalid credentials.";
+                //        }
+                //
+                //    });
+
+                UserService.login(cred)
+                    .then(function (response)
                     {
                         var userFound = response.data;
-
-                        //console.log(userFound);
 
                         if(userFound !== null)
                         {
                             UserService.setCurrentUser(userFound);
                             UserService.setDisplayUser(userFound);
-                            //$location.path("/profile/"+userFound._id);
                             $location.path("/home")
-
                         }
                         else
                         {
-                            vm.lmessage = "Invalid credentials.";
+                            vm.lmessage = "Invalid Credential";
                         }
-
                     });
             }
 

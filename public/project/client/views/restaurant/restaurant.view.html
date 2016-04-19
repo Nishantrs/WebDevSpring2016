@@ -18,8 +18,11 @@
             <div class="col-lg-6 col-xs-12 col-sm-6 col-md-6">
                 <div class="inverted-color-new">
                     <h1 class="ng-binding">{{model.restaurant.name}}</h1>
-                    <p class="subtext inverted-color-new">Address:</p>
-                    <p class="subtext inverted-color-new"><i><span ng-repeat="address in model.restaurant.location.display_address">{{address}}<br></span></i></p>
+                    <div class="button res-rating-nf-resto rating-resto level-6 visible-xs-block" style="margin-bottom: 10px" ng-class="{'level-1': model.restaurant.rating < 3.5}">
+                        <span class="glyphicon glyphicon-star star-Bg" aria-hidden="true"></span>&nbsp;{{model.restaurant.rating}}</div>
+                    <p class="subtext inverted-color-new">Address:<br class="br-resto">
+                    <!--</p><p class="subtext inverted-color-new">-->
+                    <i><span ng-repeat="address in model.restaurant.location.display_address">{{address}}<br class="br-resto"></span></i></p>
                     <p class="subtext inverted-color-new">Contact Info:<i>&nbsp&nbsp{{model.restaurant.display_phone}}</i></p>
                     <p class="subtext inverted-color-new">Tags:
                     <!--</p><p class="subtext inverted-color"><i>-->
@@ -31,11 +34,11 @@
                 </div>
             </div>
 
-            <div class="col-lg-3 col-xs-12 col-sm-6 col-md-3">
+            <div class="col-lg-3 col-xs-12 col-sm-6 col-md-3 hidden-xs">
                 <div class="col-offset-lg-5 col-offset-md-5 col-offset-sm-5 col-offset-xs-5">
             <!--<h1 class="inverted-color big-bold ng-binding">{{model.restaurant.rating}}</h1>-->
                 <!--<div class="button res-rating-nf-resto rating-resto level-6"><span class="glyphicon glyphicon-star star-Bg" aria-hidden="true"></span>&nbsp;{{model.restaurant.rating}}</div>-->
-                <div class="button res-rating-nf-resto rating-resto level-6" ng-class="{'level-1': model.restaurant.rating < 3.6}">
+                <div class="button res-rating-nf-resto rating-resto level-6" ng-class="{'level-1': model.restaurant.rating < 3.5}">
                     <span class="glyphicon glyphicon-star star-Bg" aria-hidden="true"></span>&nbsp;{{model.restaurant.rating}}</div>
                 <!--<div class="button res-rating-nf rating level-6 right" ng-class="{'level-1': {{model.restaurant.rating}} < 3.6}">{{model.restaurant.rating}}</div>-->
             </div>
@@ -47,7 +50,7 @@
         <h3 class="inverted-color-new"><i class="ng-binding">{{model.restaurant.snippet_text}}</i></h3>
     </div>
 
-    <div class="row col-sm-offset-6 col-md-offset-5 col-xs-offset-3 col-lg-offset-5" style="padding-top: 10px">
+    <div class="row col-sm-offset-6 col-md-offset-5 col-xs-offset-4 col-lg-offset-5" style="padding-top: 10px">
         <btn ng-if="!model.alreadyFollowing" ng-click="model.restaurantFollow(model.restaurant)" class="btn sample-button-resto-display"><i class="fa fa-heart" style="color: #c0392b"></i> Follow </btn>
         <btn ng-if="model.alreadyFollowing" ng-click="model.restaurantUnFollow(model.restaurant)" class="btn sample-button-resto-display"><i class="ionicons ion-heart-broken" style="color: #c0392b"></i> Unfollow </btn>
     </div>

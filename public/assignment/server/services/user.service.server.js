@@ -26,51 +26,51 @@ module.exports = function(app, userModel)
     app.get("/api/assignment/admin/user", admin, getAllUsers);
     app.put("/api/assignment/admin/user/:id",admin, editUser);
 
-    passport.use(new LocalStrategy(localStrategy));
-    passport.serializeUser(serializeUser);
-    passport.deserializeUser(deserializeUser);
-
-
-    function localStrategy(username, password, done)
-    {
-        console.log(".........................");
-        console.log("In server services localStrategy");
-
-        userModel
-            //.findUserByCredentials({username: username, password: password}) //username, password
-            .findUserByUsername(username)
-            .then(function(user)
-            {
-                console.log(".........................");
-                console.log("In server services localStrategy.....just before returning user");
-
-                console.log(password);
-                console.log(user.password);
-                console.log(bcrypt.compareSync(password, user.password));
-
-                if(user && bcrypt.compareSync(password, user.password))
-                {
-                    console.log(".........................");
-                    console.log("In server services localStrategy.....before returning user");
-                    return done(null, user);
-                    //console.log(".........................");
-                    //console.log("In server services localStrategy.....after returning user");
-                }
-                else
-                {
-                    console.log(".........................");
-                    console.log("In server services localStrategy.....failed to return user");
-                    return done(null, false);
-                }
-            },function(err)
-                {
-                    if(err)
-                    {
-                        return done(err);
-                    }
-                });
-
-    }
+    //passport.use(new LocalStrategy(localStrategy));
+    //passport.serializeUser(serializeUser);
+    //passport.deserializeUser(deserializeUser);
+    //
+    //
+    //function localStrategy(username, password, done)
+    //{
+    //    console.log(".........................");
+    //    console.log("In server services localStrategy");
+    //
+    //    userModel
+    //        //.findUserByCredentials({username: username, password: password}) //username, password
+    //        .findUserByUsername(username)
+    //        .then(function(user)
+    //        {
+    //            console.log(".........................");
+    //            console.log("In server services localStrategy.....just before returning user");
+    //
+    //            console.log(password);
+    //            console.log(user.password);
+    //            console.log(bcrypt.compareSync(password, user.password));
+    //
+    //            if(user && bcrypt.compareSync(password, user.password))
+    //            {
+    //                console.log(".........................");
+    //                console.log("In server services localStrategy.....before returning user");
+    //                return done(null, user);
+    //                //console.log(".........................");
+    //                //console.log("In server services localStrategy.....after returning user");
+    //            }
+    //            else
+    //            {
+    //                console.log(".........................");
+    //                console.log("In server services localStrategy.....failed to return user");
+    //                return done(null, false);
+    //            }
+    //        },function(err)
+    //            {
+    //                if(err)
+    //                {
+    //                    return done(err);
+    //                }
+    //            });
+    //
+    //}
 
 
 
@@ -321,7 +321,7 @@ module.exports = function(app, userModel)
     }
 
     //New added functions
-
+    //
     function login(req,res)
     {
         console.log(".............................");
@@ -331,7 +331,7 @@ module.exports = function(app, userModel)
 
         res.json(user);
     }
-
+    //
     function register(req, res)
     {
         //console.log(".............................");
@@ -380,7 +380,7 @@ module.exports = function(app, userModel)
             );
 
     }
-
+    //
     function loggedin(req, res)
     {
         //console.log("In User Services Server....loggedin");
@@ -389,7 +389,7 @@ module.exports = function(app, userModel)
 
         res.send(req.isAuthenticated() ? req.user : '0');
     }
-
+    //
     function logout(req, res)
     {
         //console.log("In User Services Server....logout");
@@ -398,7 +398,7 @@ module.exports = function(app, userModel)
         req.logOut();
         res.send(200);
     }
-
+    //
     function isAdmin(req, res, next)
     {
         console.log(".........................");
@@ -422,27 +422,27 @@ module.exports = function(app, userModel)
             next();
         }
     }
-
-    function serializeUser(user, done)
-    {
-        //console.log("In User Services Server....serializeUser");
-        done(null, user);
-    }
-
-    function deserializeUser(user, done)
-    {
-        //console.log("In User Services Server....deserializeUser");
-
-        userModel
-            .findUserById(user._id)
-            .then(
-                function(user){
-                    done(null, user);
-                },
-                function(err){
-                    done(err, null);
-                }
-            );
-    }
+    //
+    //function serializeUser(user, done)
+    //{
+    //    //console.log("In User Services Server....serializeUser");
+    //    done(null, user);
+    //}
+    //
+    //function deserializeUser(user, done)
+    //{
+    //    //console.log("In User Services Server....deserializeUser");
+    //
+    //    userModel
+    //        .findUserById(user._id)
+    //        .then(
+    //            function(user){
+    //                done(null, user);
+    //            },
+    //            function(err){
+    //                done(err, null);
+    //            }
+    //        );
+    //}
 
 };

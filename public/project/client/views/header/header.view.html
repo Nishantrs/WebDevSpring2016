@@ -20,10 +20,10 @@
                     <a href="#/home">Home</a>
                 </li>
                 <li ng-hide="currentUser" ng-class="{'active': $location.url().indexOf('register')!=-1}">
-                    <a href="#/register"><u>Register</u></a>
+                    <a href="#/register">Register</a>
                 </li>
                 <li ng-hide="currentUser" ng-class="{'active': $location.url().indexOf('login')!=-1}">
-                    <a href="#/login"><u>Login</u></a>
+                    <a href="#/login">Login</a>
                 </li>
                 <li ng-show="currentUser" ng-class="{'active': ($location.url().indexOf('profile')!=-1) && !($location.url().indexOf('reviews')!=-1)}">
                     <a ng-href="#/profile"><span ng-bind="currentUser.username"></span></a>

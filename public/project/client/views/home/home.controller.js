@@ -17,6 +17,7 @@
         var model = this;
         model.search = search;
         model.searchData = {city:'', query:''};
+        model.cityCheck = cityCheck;
 
         var geocoder;
         geocoder = new google.maps.Geocoder();
@@ -145,7 +146,7 @@
 
             if (data.query == "" && data.city == "") //(data.query === undefined && data.city === undefined)
             {
-                alert("Enter valid value to search");
+                alert("Enter valid details to search");
                 init();
             }
             else
@@ -173,6 +174,16 @@
                 {
                     $location.path("/search/type/" + current + "/place/" + place);
                 }
+            }
+        }
+
+        function cityCheck()
+        {
+            //console.log("In cityCheck!!!!");
+
+            if(!model.searchData.city)
+            {
+                alert("Please enter the city!!!")
             }
         }
 

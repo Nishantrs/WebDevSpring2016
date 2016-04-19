@@ -126,6 +126,10 @@
                 {
                     var user = response.data;
 
+                    //console.log(user);
+                    //
+                    //console.log(user != '0');
+
                     if(user)
                     {
                         var restaurantList = user.restaurant;

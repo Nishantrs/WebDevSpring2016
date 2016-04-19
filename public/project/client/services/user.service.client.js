@@ -40,6 +40,7 @@
             isAdmin: isAdmin,
             isNotAdmin: isNotAdmin,
             editUser : editUser,
+            login:login,
 
             logout: logout
         };
@@ -166,8 +167,14 @@
 
         function logout()
         {
-            //console.log("In User Services Client....logout");
+            console.log("In User Services Client....logout");
             return $http.post("/api/project/logout");
+        }
+
+        function login(user)
+        {
+            console.log("In User Services Client....login");
+            return $http.post("/api/project/login", user);
         }
     }
 
