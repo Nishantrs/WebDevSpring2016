@@ -636,7 +636,7 @@
                     else
                     {
                         alert("You need to login to vote!!!");
-                        $location.path("/login");
+                        //$location.path("/login");
                     }
                 },function(err)
                 {
@@ -742,7 +742,7 @@
                     else
                     {
                         alert("You need to login to vote!!!");
-                        $location.path("/login");
+                        //$location.path("/login");
                     }
                 },function(err)
                 {
@@ -822,7 +822,7 @@
                     }
                     else
                     {
-                        alert("You need to login to follow!!!");
+                        //alert("You need to login to follow!!!");
                         $location.path("/login");
                     }
 

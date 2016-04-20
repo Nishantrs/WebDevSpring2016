@@ -76,7 +76,9 @@
                     {
                         var userFound = response.data;
 
-                        if(userFound !== null)
+                        console.log(userFound);
+
+                        if(userFound != null)
                         {
                             UserService.setCurrentUser(userFound);
                             UserService.setDisplayUser(userFound);
@@ -86,6 +88,12 @@
                         {
                             vm.lmessage = "Invalid Credential";
                         }
+                    },function(err)
+                    {
+                        console.log("...................................");
+                        console.log("Error in finding user with credentials");
+                        console.log(err);
+                        vm.lmessage = "Invalid Credential";
                     });
             }
 
