@@ -48,53 +48,53 @@
             }
             else
             {
-                //UserService
-                //    .findUserByCredentials(cred)
-                //    .then(function(response)
-                //    {
-                //        var userFound = response.data;
-                //
-                //        //console.log(userFound);
-                //
-                //        if(userFound !== null)
-                //        {
-                //            UserService.setCurrentUser(userFound);
-                //            UserService.setDisplayUser(userFound);
-                //            //$location.path("/profile/"+userFound._id);
-                //            $location.path("/home")
-                //
-                //        }
-                //        else
-                //        {
-                //            vm.lmessage = "Invalid credentials.";
-                //        }
-                //
-                //    });
-
-                UserService.login(cred)
-                    .then(function (response)
+                UserService
+                    .findUserByCredentials(cred)
+                    .then(function(response)
                     {
                         var userFound = response.data;
 
                         console.log(userFound);
 
-                        if(userFound != null)
+                        if(userFound !== null)
                         {
                             UserService.setCurrentUser(userFound);
                             UserService.setDisplayUser(userFound);
+                            //$location.path("/profile/"+userFound._id);
                             $location.path("/home")
+
                         }
                         else
                         {
-                            vm.lmessage = "Invalid Credential";
+                            vm.lmessage = "Invalid credentials.";
                         }
-                    },function(err)
-                    {
-                        console.log("...................................");
-                        console.log("Error in finding user with credentials");
-                        console.log(err);
-                        vm.lmessage = "Invalid Credential";
+
                     });
+
+                //UserService.login(cred)
+                //    .then(function (response)
+                //    {
+                //        var userFound = response.data;
+                //
+                //        console.log(userFound);
+                //
+                //        if(userFound != null)
+                //        {
+                //            UserService.setCurrentUser(userFound);
+                //            UserService.setDisplayUser(userFound);
+                //            $location.path("/home")
+                //        }
+                //        else
+                //        {
+                //            vm.lmessage = "Invalid Credential";
+                //        }
+                //    },function(err)
+                //    {
+                //        console.log("...................................");
+                //        console.log("Error in finding user with credentials");
+                //        console.log(err);
+                //        vm.lmessage = "Invalid Credential";
+                //    });
             }
 
         }

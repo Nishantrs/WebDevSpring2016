@@ -14,60 +14,6 @@
     function AdminController(UserService, $filter)
     {
 
-        //var vm = this;
-        //
-        //vm.remove = remove;
-        //vm.update = update;
-        //vm.add    = add;
-        //vm.select = select;
-        //
-        //function init()
-        //{
-        //    UserService
-        //        .findAllUsers()
-        //        .then(handleSuccess, handleError);
-        //}
-        //init();
-        //
-        //function remove(user)
-        //{
-        //
-        //    //code to check whether someone removes himself!!!!
-        //    UserService
-        //        .deleteUserById(user._id)
-        //        .then(handleSuccess, handleError);
-        //
-        //    //expecting users in return
-        //}
-        //
-        //function update(user)
-        //{
-        //    UserService
-        //        .editUser(user._id, user)
-        //        .then(handleSuccess, handleError);
-        //}
-        //
-        //function add(user)
-        //{
-        //    UserService
-        //        .createUser(user)
-        //        .then(handleSuccess, handleError);
-        //}
-        //
-        //function select(user)
-        //{
-        //    vm.user = angular.copy(user);
-        //}
-        //
-        //function handleSuccess(response)
-        //{
-        //    vm.users = response.data;
-        //}
-        //
-        //function handleError(error)
-        //{
-        //    vm.error = error;
-        //}
 
         var vm = this;
         var orderBy = $filter('orderBy');
@@ -82,7 +28,7 @@
                     function(response){
                         vm.users = response.data;
                         refreshSort();
-                        console.log(vm.users);
+                        //console.log(vm.users);
                     },
                     function(err){
                         console.log(err);
@@ -136,8 +82,8 @@
                         UserService
                             .deleteUserById(user._id)
                             .then(function(response){
-                                //init();
-                                vm.users = response.data;
+                                init();
+                                //vm.users = response.data;
                             },function(err)
                             {
                                 console.log(err);
@@ -167,12 +113,13 @@
                 UserService
                     .createUser(user)
                     .then(function(response){
-                        //init();
-                        vm.users = response.data;
+                        init();
+                        //vm.users = response.data;
                     }, function(err){
                             console.log(err);
                         });
-            }else{
+            }else
+            {
                 vm.message = "Please provide user credentials properly";
             }
         }
@@ -187,8 +134,8 @@
                 UserService
                     .editUser(user._id, updatedUser)
                     .then(function(response){
-                        //init();
-                        vm.users = response.data;
+                        init();
+                        //vm.users = response.data;
                     });
             }else{
                 vm.message = "Please provide user credentials properly";

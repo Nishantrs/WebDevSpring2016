@@ -18,6 +18,7 @@
 
         vm.user = null;
         vm.location = $location;
+        vm.changePassword = false;
         //var userId = $routeParams.id;
 
 
@@ -39,6 +40,7 @@
                         vm.firstName = user.firstName;
                         vm.lastName = user.lastName;
                         vm.email = user.emails;
+                        vm.phone = user.phones;
                     }
                     //else
                     //{
@@ -52,18 +54,22 @@
 
         init();
 
-        function update(username, Password, FirstName, LastName, Email)
+        function update(username, Password, FirstName, LastName, Email, Phone)
         {
+            //console.log("In here...");
+
+            //console.log(!vm.changePassword);
+
 
             //have to change logic of the code.....dependency on currentUser instead of expecting just single user after update
             //console.log("In update function");
 
             $scope.message="null";
 
-            if (username == "" || Password == "" || FirstName == "" || LastName == "" || Email == "")
+            if (username == "" || Password == "" || FirstName == "" || LastName == "" || Email == "" || Phone == "")
             {
                 $scope.pmessage = "Please enter all the details";
-                console.log($scope.pmessage);
+                //console.log($scope.pmessage);
             }
             else
             {
@@ -79,6 +85,11 @@
                             Email = Email.split(",");
                         }
 
+                        if(typeof Phone == "string")
+                        {
+                            Phone = Phone.split(",");
+                        }
+
                         var userDetails =
                         {
                             "_id":id,
@@ -88,8 +99,15 @@
                             "lastName":LastName,
                             "emails":Email,
                             "roles":currentUser.roles,
-                            "phones":currentUser.phones
+                            "phones":Phone
                         };
+
+                        if(!vm.changePassword)
+                        {
+                            //console.log("In here!!!");
+                            delete userDetails.password;
+                        }
+
                         UserService.updateUser(id,userDetails)
                             .then(function(response)
                             {
@@ -98,8 +116,9 @@
                                 if(response.data)
                                 {
                                     UserService.setCurrentUser(response.data);
-                                    $scope.pmessage = "Your Profile has been updated!!!";
-                                    //init();
+                                    //$scope.pmessage = "Your Profile has been updated!!!";
+                                    alert("Your Profile has been updated!!!");
+                                    init();
                                 }
                                 else
                                 {

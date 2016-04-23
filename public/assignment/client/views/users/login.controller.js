@@ -61,6 +61,12 @@
                         {
                             $scope.lmessage = "Invalid Credential";
                         }
+                    },function(err)
+                    {
+                        //console.log("...................................");
+                        //console.log("Error in finding currentUser");
+                        //console.log(err);
+                        $scope.lmessage = "Invalid Credential";
                     });
 
             }

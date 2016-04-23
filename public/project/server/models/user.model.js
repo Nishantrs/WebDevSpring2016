@@ -152,16 +152,16 @@ module.exports = function (db, mongoose, UserSchema) {
         return deferred.promise;
     }
 
-    //function findUserByCredentials(userName, userPassword)
-    function findUserByCredentials(user)
+    function findUserByCredentials(userName, userPassword)
+    //function findUserByCredentials(user)
     {
         var deferred = q.defer();
 
         //console.log(".....................................................");
         //console.log("In Model findUserByCredential");
         User
-            .findOne({username: user.username, password: user.password},
-            //.findOne({$and: [{username: userName},{password: userPassword}]},
+            //.findOne({username: user.username, password: user.password},
+            .findOne({$and: [{username: userName},{password: userPassword}]},
                 function(err, user)
                 {
                     if (err)

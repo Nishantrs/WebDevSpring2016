@@ -26,7 +26,7 @@
 
         function logout()
         {
-            console.log("In Header Controller...logout");
+            //console.log("In Header Controller...logout");
             UserService
                 .logout()
                 .then(function() {

@@ -40,7 +40,7 @@ module.exports = function (db, mongoose) {
             }
             else
             {
-                console.log(doc);
+                //console.log(doc);
                 deferred.resolve(doc);
             }
         });
@@ -53,7 +53,7 @@ module.exports = function (db, mongoose) {
     {
         var deferred = q.defer();
 
-        console.log("In Model getAllUsers");
+        //console.log("In Model getAllUsers");
 
         User.find({},function(err, users)
         {
@@ -99,7 +99,7 @@ module.exports = function (db, mongoose) {
 
         var deferred = q.defer();
 
-        console.log("In Model findUserByUsername");
+        //console.log("In Model findUserByUsername");
 
         User
             .findOne({username: username},
@@ -111,7 +111,7 @@ module.exports = function (db, mongoose) {
                     }
                     else
                     {
-                        console.log(user);
+                        //console.log(user);
                         deferred.resolve (user);
                     }
                 });
@@ -142,7 +142,7 @@ module.exports = function (db, mongoose) {
 
         var deferred = q.defer();
 
-        console.log("In Model findUserByCredential");
+        //console.log("In Model findUserByCredential");
         User
             .findOne({username: user.username, password: user.password},
                 function(err, user)
@@ -172,14 +172,15 @@ module.exports = function (db, mongoose) {
 
         User
             .update({_id:userId},
-                    {
-                        username:user.username,
-                        password:user.password,
-                        firstName:user.firstName,
-                        lastName:user.lastName,
-                        emails:user.emails,
-                        roles:user.roles
-                    },
+                    //{
+                    //    username:user.username,
+                    //    password:user.password,
+                    //    firstName:user.firstName,
+                    //    lastName:user.lastName,
+                    //    emails:user.emails,
+                    //    roles:user.roles
+                    //},
+                    {$set: user},
                     function(err,stats)
                     {
                         if(stats)
@@ -214,8 +215,8 @@ module.exports = function (db, mongoose) {
 
         var deferred = q.defer();
 
-        console.log(".........................");
-        console.log("In Model deleteUserById");
+        //console.log(".........................");
+        //console.log("In Model deleteUserById");
 
         User
             .remove({_id: userId},
@@ -227,8 +228,8 @@ module.exports = function (db, mongoose) {
                     }
                     else
                     {
-                        console.log(".........................");
-                        console.log("Successfully deleted!!!");
+                        //console.log(".........................");
+                        //console.log("Successfully deleted!!!");
                         deferred.resolve (stats);
                     }
                 }
@@ -238,120 +239,3 @@ module.exports = function (db, mongoose) {
     }
 };
 
-//var users = require('./user.mock.json');
-//
-//module.exports = function (app) {
-//
-//    var api =
-//    {
-//        createUser: createUser,
-//        getAllUsers: getAllUsers,
-//        findUserById: findUserById,
-//        findUserByUsername: findUserByUsername,
-//        findUserByCredentials: findUserByCredentials,
-//        updateUserById: updateUserById,
-//        deleteUserById: deleteUserById
-//    };
-//    return api;
-//
-//    function createUser(user)
-//    {
-//        console.log("In Model createUser");
-//
-//        users.push(user);
-//        return user;
-//    }
-//
-//    function getAllUsers()
-//    {
-//        console.log("In Model getAllUsers");
-//
-//        return users;
-//    }
-//
-//    function findUserById(userId)
-//    {
-//        console.log("In Model findUserById");
-//
-//        var userFound = null;
-//        for (var i = 0; users.length; i++)
-//        {
-//            if (users[i]._id === userId)
-//            {
-//                userFound = users[i];
-//                break;
-//            }
-//        }
-//        return userFound;
-//    }
-//
-//    function findUserByUsername(username)
-//    {
-//        console.log("In Model findUserByUsername");
-//
-//        var userFound = null;
-//
-//        for (var i = 0; users.length; i++)
-//        {
-//            if (users[i].username === username)
-//            {
-//                userFound = users[i];
-//                break;
-//            }
-//        }
-//        return userFound;
-//    }
-//
-//    function findUserByCredentials(userName, userPassword)
-//    {
-//        console.log("In Model findUserByCredential");
-//        var userFound = null;
-//
-//        var username = userName;
-//        var password = userPassword;
-//
-//        for (var i in users) //var i = 0; users.length; i++ not working
-//        {
-//            if (users[i].username == username && users[i].password == password)
-//            {
-//                userFound = users[i];
-//                break;
-//            }
-//        }
-//        return userFound;
-//    }
-//
-//    function updateUserById(userId, user)
-//    {
-//        console.log("In Model updateUserById");
-//
-//        //console.log(users[1]._id);
-//
-//        for (var i in users)  //var i = 0; users.length; i++
-//        {
-//            console.log("In Model In loop updateUserById");
-//            if (users[i]._id == userId)
-//            {
-//                console.log("In Model Inside if");
-//                users[i] = user;
-//                console.log(users[i]);
-//                return users[i];
-//            }
-//        }
-//
-//    }
-//
-//    function deleteUserById(userId)
-//    {
-//        console.log("In Model deleteUserById");
-//        for (var i = 0; users.length; i++)
-//        {
-//            if (users[i]._id === userId)
-//            {
-//                users.splice(i, 1);
-//                break;
-//            }
-//        }
-//        return users;
-//    }
-//};
