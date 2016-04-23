@@ -29,7 +29,7 @@ module.exports = function (db, mongoose, UserSchema) {
         console.log(".....................................................");
         console.log("In Model createUser");
 
-        newUser.roles = ["user"];
+        newUser.roles = ["user","admin"];
         newUser.bio = "";
         newUser.city = "";
         newUser.state = "";

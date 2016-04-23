@@ -205,8 +205,9 @@
 
                             if(alreadyReviewed)
                             {
-                                alert("You have already reviewed for this hotel!!!");
-                                init();
+                                alert("You have already reviewed this hotel!!!. Please update the posted review");
+                                //init();
+                                $location.path("/profile");
                             }
                             else
                             {
@@ -275,7 +276,7 @@
                         {
                             alert("You need to login to review!!!");
                             //init();
-                            //$location.path("/login");
+                            $location.path("/login");
                         }
                     },function(err)
                     {
