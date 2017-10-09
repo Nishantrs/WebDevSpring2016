@@ -1,0 +1,272 @@
+<div ng-view="" class="ng-scope"><!--<nav class="navbar navbar-relative rnavbar-ct-transparent" role="navigation-demo" id="register-navbar">-->
+    <!--<div ng-controller="HeaderController" ng-include src="'/Project56/client/views/header/header.view.html'">-->
+
+    <!--</div>-->
+
+<!--</nav>-->
+<div class="wrapper ng-scope">
+    <div class="profile-background">
+        <div class="filter-black"></div>
+    </div>
+    <div class="profile-content section-nude">
+        <div class="container">
+            <div class="row owner" style="padding-top: 10px">
+                <!-- ngIf: user.username == displayuser.username --><btn ng-if="user.username == displayuser.username" style="margin-left: 15px" ng-click="userEdit()" class="btn ng-scope"><i class="fa fa-cog"></i> Edit </btn><!-- end ngIf: user.username == displayuser.username -->
+
+                <div class="col-md-2 col-md-offset-5 col-sm-4 col-sm-offset-4 col-xs-6 col-xs-offset-3 text-center">
+                    <div class="avatar">
+                        <img src="/Project56/client/views/assets/paper_img/icon-user-default.png" alt="Circle Image" class="img-circle img-no-padding img-responsive">
+
+                    </div>
+                    <div class="name text-center">
+                        <h4 class="ng-binding">a</h4>
+                        <!-- ngIf: user.logged --><btn ng-if="user.logged" ng-click="followUser()" class="btn ng-scope"> Follow </btn><!-- end ngIf: user.logged -->
+
+                        <!--<h4 class="text-center">-->
+                            <!--{{user.firstname}}-->
+                            <!--{{user.lastname}}-->
+                            <!--{{user.email}}-->
+                            <!--{{user.city}}-->
+                            <!--{{user.state}}-->
+                        <!--</h4>-->
+
+                    </div>
+                </div>
+
+            </div>
+            <!--<div class="row">-->
+                <!--<table>-->
+                    <!--<thead>-->
+
+                    <!--</thead>-->
+                    <!--<tbody>-->
+                    <!--<tr>-->
+                        <!--Username: sdaskdbakskjbdkjs-->
+                    <!--</tr>-->
+                    <!--<td>-->
+                        <!--sdas s l-->
+                        <!--{{user.username}}-->
+                    <!--</td>-->
+                    <!--</tbody>-->
+                <!--</table>-->
+            <!--</div>-->
+            <div class="row">
+                <div class="container centered">
+                    <!--<p>An artist of considerable range, Chet Faker — the name taken by Melbourne-raised, Brooklyn-based Nick Murphy — writes, performs and records all of his own music, giving it a warm, intimate feel with a solid groove structure. </p>-->
+                    <!--<p>{{user.aboutme}}</p>-->
+                    <br>
+                    <table class="table col-md-1 col-md-offset-0 col-sm-4 col-sm-offset-3">
+                        <thead>
+
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td style="border-top: none">
+                                FirstName
+                            </td>
+                            <td style="border-top: none" class="ng-binding">
+                                
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="border-top: none">
+                                Lastname
+                            </td>
+                            <td style="border-top: none" class="ng-binding">
+                                
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="border-top: none">
+                                Email
+                            </td>
+                            <td style="border-top: none" class="ng-binding">
+                                a@gmail.com
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="border-top: none">
+                                City:
+                            </td>
+                            <td style="border-top:none" class="ng-binding">
+                                
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="border-top: none">
+                                State:
+                            </td>
+                            <td style="border-top: none" class="ng-binding">
+                                
+                            </td>
+                        </tr>
+
+                        </tbody>
+                    </table>
+
+                    <!-- ngIf: userdetailsedit --><div ng-if="userdetailsedit" class="ng-scope">
+                        <!--<br>-->
+                            <table class="table table-bordered">
+                                <thead>
+
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td style="padding-top: 18px">First Name</td>
+
+                                    <td class="text-center">
+                                        <input style="border:1px " type="text" class="form-control ng-pristine ng-untouched ng-valid ng-empty" ng-model="newfirstname">
+                                    </td>
+
+                                </tr>
+                                <tr>
+                                    <td style="padding-top: 18px">last Name</td>
+                                    <td>
+                                        <input type="text" class="form-control ng-pristine ng-untouched ng-valid ng-empty" ng-model="newlastname">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="padding-top: 18px">Email</td>
+                                    <td>
+                                        <input type="text" class="form-control ng-pristine ng-untouched ng-valid ng-not-empty" ng-model="newemail">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="padding-top: 18px">City</td>
+                                    <td>
+                                        <input type="text" class="form-control ng-pristine ng-untouched ng-valid ng-empty" ng-model="newcity">
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td style="padding-top: 18px">state</td>
+                                    <td>
+                                        <input type="text" class="form-control ng-pristine ng-untouched ng-valid ng-empty" ng-model="newstate">
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td>
+
+                                    </td>
+                                    <td>
+                                        <button ng-click="saveUserEdit(newlastname,newfirstname,newemail,newcity,newstate)" type="button" class="btn btn-default" aria-label="Left Align">
+                                            <!--<span class="glyphicon glyphicon-ok" aria-hidden="true"></span>-->
+                                            Save
+                                        </button>
+                                        &nbsp;&nbsp;
+                                        <button ng-click="cancelEdit()" type="button" class="btn btn-default" aria-label="Left Align">
+                                            Cancel<!--<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>-->
+                                        </button>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                    </div><!-- end ngIf: userdetailsedit -->
+                </div>
+            </div>
+            <!--<br>-->
+            <!--<br>-->
+            <div>
+                <!--<button type="button" class="btn btn-default" ng-click="isCollapsedtrips = !isCollapsedtrips">My Trips</button>-->
+
+                <div>
+                    <div>
+                        <!-- ngIf: user.username == displayuser.username --><div ng-if="user.username == displayuser.username" class="ng-scope">
+                            <hr>
+                        
+                            <button ng-click="addTrip()" type="button" class="btn btn-default" aria-label="Left Align">
+                                <span class="glyphicon" aria-hidden="true"></span>Add New Trip
+                            </button>
+
+                        
+                        </div><!-- end ngIf: user.username == displayuser.username -->
+                        <br>
+                        <!-- ngIf: addNewTrip -->
+                        <div>
+                            
+                                
+                                    <hr style=" color:black; height:4px; background-color:black">
+                                
+                            
+                            
+                                
+                                    <!-- ngIf: user.username == displayuser.username --><h4 ng-if="user.username == displayuser.username" class="ng-scope">Your Trips</h4><!-- end ngIf: user.username == displayuser.username -->
+                                    <!-- ngIf: user.username != displayuser.username -->
+                                
+                            
+
+                            <table class="table table-bordered">
+                                <thead>
+                                </thead>
+                                <tbody>
+                                <!-- ngRepeat: trip in trips -->
+                                </tbody>
+                            </table>
+                            
+                                
+                                    <!-- ngIf: user.username == displayuser.username --><h4 ng-if="user.username == displayuser.username" class="ng-scope">Your Followers</h4><!-- end ngIf: user.username == displayuser.username -->
+                                    <!-- ngIf: user.username != displayuser.username -->
+                                
+                            
+                            <table class="table table-bordered">
+                                <thead>
+                                </thead>
+                                <tbody>
+                                <!-- ngRepeat: follower in displayuser.followers --><tr ng-repeat="follower in displayuser.followers" class="ng-scope">
+                                    <td style="padding-top: 13px"><a href="#/profile/56d657d6285c2bb0e820d65f" class="ng-binding">a</a></td>
+                                    <!--<td style="padding-top: 13px">{{trip.summary}}</td>-->
+                                    <!--<td ng-if="user._id == displayuser._id" class="text-center">-->
+                                        <!--<button ng-click="removeTrip($index)" type="button" class="btn btn-default centered">-->
+                                            <!--<span class="glyphicon glyphicon-trash " aria-hidden="true"></span>-->
+                                        <!--</button>-->
+                                    <!--</td>-->
+                                </tr><!-- end ngRepeat: follower in displayuser.followers -->
+                                </tbody>
+                            </table>
+
+                            
+                                
+                                    <!-- ngIf: user.username == displayuser.username --><h4 ng-if="user.username == displayuser.username" class="ng-scope">You are Following</h4><!-- end ngIf: user.username == displayuser.username -->
+                                    <!-- ngIf: user.username != displayuser.username -->
+                                
+                            
+                            <table class="table table-bordered">
+                                <thead>
+                                </thead>
+                                <tbody>
+                                <!-- ngRepeat: follow in displayuser.following --><tr ng-repeat="follow in displayuser.following" class="ng-scope">
+                                    <td style="padding-top: 13px"><a href="#/profile/56d657d6285c2bb0e820d65f" class="ng-binding">a</a></td>
+                                    <!--<td style="padding-top: 13px">{{trip.summary}}</td>-->
+                                    <!--<td ng-if="user._id == displayuser._id" class="text-center">-->
+                                    <!--<button ng-click="removeTrip($index)" type="button" class="btn btn-default centered">-->
+                                    <!--<span class="glyphicon glyphicon-trash " aria-hidden="true"></span>-->
+                                    <!--</button>-->
+                                    <!--</td>-->
+                                </tr><!-- end ngRepeat: follow in displayuser.following -->
+                                </tbody>
+                            </table>
+
+
+                        </div>
+                    </div>
+                </div>
+                <!-- ngIf: !isCollapsedtrips -->
+            </div>
+            <!--<div>-->
+                <!--<button type="button" class="btn btn-default" ng-click="isCollapsedfollowers = !isCollapsedfollowers">Followers</button>-->
+                <!--<hr>-->
+                <!--<div ng-if="isCollapsedfollowers">-->
+                    <!--<div class="well well-lg">All Followers</div>-->
+                <!--</div>-->
+            <!--</div>-->
+            <!--<div>-->
+                <!--<button type="button" class="btn btn-default" ng-click="isCollapsedfollowing = !isCollapsedfollowing">Following</button>-->
+                <!--<hr>-->
+                <!--<div ng-if="isCollapsedfollowing">-->
+                    <!--<div class="well well-lg">All Following</div>-->
+                <!--</div>-->
+            <!--</div>-->
+        </div>
+    </div>
+</div>

@@ -1,0 +1,151 @@
+<div class="banner site-color-background elevation2 ng-scope">
+    <div class="container">
+        <div class="row profile-header">
+
+            <div class="inverted-color profile-details">
+                <h1 class="big ng-binding">sam      ram</h1>
+                <h4 class="subtext"><i class="ng-binding">I am an avid foodie</i></h4>
+                <p class="ng-binding">User since 2-3-2016
+                    <br><b class="ng-binding">Level 1 Foodie. Points Collected: </b><i class="ng-binding">20</i></p>
+                <div id="level_progress" class="progress custom-bars">
+                    <div id="level1progress" class="progress-bar progress-bar-danger progress-bar-striped active" role="progressbar" style="width: 4%;">
+                    </div>
+                    <div id="level2progress" class="progress-bar progress-bar-warning" role="progressbar">
+                    </div>
+                    <div id="level3progress" class="progress-bar progress-bar-success" role="progressbar">
+                    </div>
+                    <div id="level4progress" class="progress-bar progress-bar-info" role="progressbar">
+                    </div>
+                    <div id="level5progress" class="progress-bar" role="progressbar">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid ng-scope">
+    <div class="row">
+        <div class="col-lg-4">
+
+            <div class="card elevation1">
+                <div class="container-fluid">
+                    <h3 class="site-color">My Details</h3>
+                    <hr>
+                    <div>
+                        <form class="form-horizontal ng-pristine ng-valid ng-scope ng-valid-email" ng-controller="ProfileController">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label" for="username1">Username:</label>
+                                <div class="col-sm-8">
+                                    <input class="form-control form-text-input ng-pristine ng-untouched ng-valid" id="username1" ng-model="model.user.username" placeholder="Username" type="username">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label" for="inputPassword3">Password:</label>
+                                <div class="col-sm-8">
+                                    <input class="form-control form-text-input ng-pristine ng-untouched ng-valid" id="inputPassword3" ng-model="model.user.password" placeholder="Password" type="password">
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label" for="firstname">First Name:</label>
+                                <div class="col-sm-8">
+                                    <input class="form-control form-text-input ng-pristine ng-untouched ng-valid" id="firstname" ng-model="model.user.firstName" placeholder="First Name" type="text">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label" for="lastname">Last Name:</label>
+                                <div class="col-sm-8">
+                                    <input class="form-control form-text-input ng-pristine ng-untouched ng-valid" id="lastname" ng-model="model.user.lastName" placeholder="Last Name" type="text">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label" for="bio">Bio:</label>
+                                <div class="col-sm-8">
+                                    <input class="form-control form-text-input ng-pristine ng-untouched ng-valid" id="bio" ng-model="model.user.bio" placeholder="Bio" type="text">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label" for="email">Email:</label>
+                                <div class="col-sm-8">
+                                    <input class="form-control form-text-input ng-pristine ng-untouched ng-valid ng-valid-email" id="email" ng-model="model.user.email" placeholder="Email" type="email">
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="form-group">
+                                <div class="col-sm-12">
+                                    <button class="btn btn-primary big-square-button site-color-background form-control" ng-click="model.updateData(model.user)" type="Update">Update</button>
+                                </div>
+                            </div>
+
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+
+
+        </div>
+        <div class="col-lg-8">
+            <div class="card elevation1">
+                <div class="site-color-background">
+                    <div class="container-fluid">
+                        <h2 class="inverted-color">Recent Reviews Posted</h2>
+                        <hr>
+                    </div>
+                </div>
+                <div class="container-fluid review">
+                    <!-- ngRepeat: rev in model.reviews --><div ng-repeat="rev in model.reviews" class="container-fluid ng-scope">
+                        <h2 class="ng-binding">North End Fish Market</h2>
+                        <span ng-mouseleave="reset()" ng-keydown="onKeydown($event)" tabindex="0" role="slider" aria-valuemin="0" aria-valuemax="5" aria-valuenow="4" class="site-color ng-isolate-scope ng-valid" ng-model="rev.rating" readonly="readonly">
+    <!-- ngRepeat: r in range track by $index --><span ng-repeat-start="r in range track by $index" class="sr-only ng-binding ng-scope">(*)</span>
+    <i ng-repeat-end="" ng-mouseenter="enter($index + 1)" ng-click="rate($index + 1)" class="glyphicon ng-scope glyphicon-star" ng-class="$index < value &amp;&amp; (r.stateOn || 'glyphicon-star') || (r.stateOff || 'glyphicon-star-empty')" ng-attr-title="{{r.title}}" aria-valuetext="one" title="one"></i><!-- end ngRepeat: r in range track by $index --><span ng-repeat-start="r in range track by $index" class="sr-only ng-binding ng-scope">(*)</span>
+    <i ng-repeat-end="" ng-mouseenter="enter($index + 1)" ng-click="rate($index + 1)" class="glyphicon ng-scope glyphicon-star" ng-class="$index < value &amp;&amp; (r.stateOn || 'glyphicon-star') || (r.stateOff || 'glyphicon-star-empty')" ng-attr-title="{{r.title}}" aria-valuetext="two" title="two"></i><!-- end ngRepeat: r in range track by $index --><span ng-repeat-start="r in range track by $index" class="sr-only ng-binding ng-scope">(*)</span>
+    <i ng-repeat-end="" ng-mouseenter="enter($index + 1)" ng-click="rate($index + 1)" class="glyphicon ng-scope glyphicon-star" ng-class="$index < value &amp;&amp; (r.stateOn || 'glyphicon-star') || (r.stateOff || 'glyphicon-star-empty')" ng-attr-title="{{r.title}}" aria-valuetext="three" title="three"></i><!-- end ngRepeat: r in range track by $index --><span ng-repeat-start="r in range track by $index" class="sr-only ng-binding ng-scope">(*)</span>
+    <i ng-repeat-end="" ng-mouseenter="enter($index + 1)" ng-click="rate($index + 1)" class="glyphicon ng-scope glyphicon-star" ng-class="$index < value &amp;&amp; (r.stateOn || 'glyphicon-star') || (r.stateOff || 'glyphicon-star-empty')" ng-attr-title="{{r.title}}" aria-valuetext="four" title="four"></i><!-- end ngRepeat: r in range track by $index --><span ng-repeat-start="r in range track by $index" class="sr-only ng-binding ng-scope">( )</span>
+    <i ng-repeat-end="" ng-mouseenter="enter($index + 1)" ng-click="rate($index + 1)" class="glyphicon ng-scope glyphicon-star-empty" ng-class="$index < value &amp;&amp; (r.stateOn || 'glyphicon-star') || (r.stateOff || 'glyphicon-star-empty')" ng-attr-title="{{r.title}}" aria-valuetext="five" title="five"></i><!-- end ngRepeat: r in range track by $index -->
+</span>
+                        <div class="row">
+                            <div class="col-lg-10">
+                                <textarea msd-elastic="" class="form-control edit-review-textarea ng-pristine ng-untouched ng-valid" name="name" ng-model="rev.review_text" style="overflow: hidden; word-wrap: break-word; resize: horizontal; height: 52px;"></textarea>
+                                <p class="site-color"><i>*Click on the review to edit it.</i></p>
+                            </div>
+                            <div class="col-lg-2">
+                                <button class="btn btn-success box-button" ng-click="model.updateReview(rev)"><span class="glyphicon glyphicon-ok"></span></button>
+
+                                <button class="btn btn-danger box-button" ng-click="model.deleteReview(rev)"><span class="glyphicon glyphicon-remove"></span></button>
+                            </div>
+                        </div>
+
+
+                    </div><!-- end ngRepeat: rev in model.reviews --><div ng-repeat="rev in model.reviews" class="container-fluid ng-scope">
+                        <h2 class="ng-binding">D'Guru Restaurant</h2>
+                        <span ng-mouseleave="reset()" ng-keydown="onKeydown($event)" tabindex="0" role="slider" aria-valuemin="0" aria-valuemax="5" aria-valuenow="4" class="site-color ng-isolate-scope ng-valid" ng-model="rev.rating" readonly="readonly">
+    <!-- ngRepeat: r in range track by $index --><span ng-repeat-start="r in range track by $index" class="sr-only ng-binding ng-scope">(*)</span>
+    <i ng-repeat-end="" ng-mouseenter="enter($index + 1)" ng-click="rate($index + 1)" class="glyphicon ng-scope glyphicon-star" ng-class="$index < value &amp;&amp; (r.stateOn || 'glyphicon-star') || (r.stateOff || 'glyphicon-star-empty')" ng-attr-title="{{r.title}}" aria-valuetext="one" title="one"></i><!-- end ngRepeat: r in range track by $index --><span ng-repeat-start="r in range track by $index" class="sr-only ng-binding ng-scope">(*)</span>
+    <i ng-repeat-end="" ng-mouseenter="enter($index + 1)" ng-click="rate($index + 1)" class="glyphicon ng-scope glyphicon-star" ng-class="$index < value &amp;&amp; (r.stateOn || 'glyphicon-star') || (r.stateOff || 'glyphicon-star-empty')" ng-attr-title="{{r.title}}" aria-valuetext="two" title="two"></i><!-- end ngRepeat: r in range track by $index --><span ng-repeat-start="r in range track by $index" class="sr-only ng-binding ng-scope">(*)</span>
+    <i ng-repeat-end="" ng-mouseenter="enter($index + 1)" ng-click="rate($index + 1)" class="glyphicon ng-scope glyphicon-star" ng-class="$index < value &amp;&amp; (r.stateOn || 'glyphicon-star') || (r.stateOff || 'glyphicon-star-empty')" ng-attr-title="{{r.title}}" aria-valuetext="three" title="three"></i><!-- end ngRepeat: r in range track by $index --><span ng-repeat-start="r in range track by $index" class="sr-only ng-binding ng-scope">(*)</span>
+    <i ng-repeat-end="" ng-mouseenter="enter($index + 1)" ng-click="rate($index + 1)" class="glyphicon ng-scope glyphicon-star" ng-class="$index < value &amp;&amp; (r.stateOn || 'glyphicon-star') || (r.stateOff || 'glyphicon-star-empty')" ng-attr-title="{{r.title}}" aria-valuetext="four" title="four"></i><!-- end ngRepeat: r in range track by $index --><span ng-repeat-start="r in range track by $index" class="sr-only ng-binding ng-scope">( )</span>
+    <i ng-repeat-end="" ng-mouseenter="enter($index + 1)" ng-click="rate($index + 1)" class="glyphicon ng-scope glyphicon-star-empty" ng-class="$index < value &amp;&amp; (r.stateOn || 'glyphicon-star') || (r.stateOff || 'glyphicon-star-empty')" ng-attr-title="{{r.title}}" aria-valuetext="five" title="five"></i><!-- end ngRepeat: r in range track by $index -->
+</span>
+                        <div class="row">
+                            <div class="col-lg-10">
+                                <textarea msd-elastic="" class="form-control edit-review-textarea ng-pristine ng-untouched ng-valid" name="name" ng-model="rev.review_text" style="overflow: hidden; word-wrap: break-word; resize: horizontal; height: 52px;"></textarea>
+                                <p class="site-color"><i>*Click on the review to edit it.</i></p>
+                            </div>
+                            <div class="col-lg-2">
+                                <button class="btn btn-success box-button" ng-click="model.updateReview(rev)"><span class="glyphicon glyphicon-ok"></span></button>
+
+                                <button class="btn btn-danger box-button" ng-click="model.deleteReview(rev)"><span class="glyphicon glyphicon-remove"></span></button>
+                            </div>
+                        </div>
+
+
+                    </div><!-- end ngRepeat: rev in model.reviews -->
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

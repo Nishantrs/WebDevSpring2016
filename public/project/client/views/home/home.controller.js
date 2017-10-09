@@ -112,37 +112,6 @@
             //console.log("In home controller");
             console.log(data);
 
-            //if (!data) //(data.query === undefined && data.city === undefined)
-            //{
-            //    alert("Enter valid value to search");
-            //}
-            //else if(!data.query)
-            //{
-            //    alert("Enter valid cuisine");
-            //}
-            //else if(!data.city)
-            //{
-            //    alert("Enter valid city");
-            //}
-            //else
-            //{
-            //    var current = data.query;
-            //    var place = data.city;
-            //
-            //    //console.log("This is query:" + data.query);
-            //    //console.log("This is city:" + data.city);
-            //
-            //    if (typeof current !== undefined && typeof place == undefined)
-            //    {
-            //        $location.path("/search/type/" + current);
-            //    } else if (typeof current == undefined && typeof place !== undefined)
-            //    {
-            //        $location.path("/search/place/" + place);
-            //    } else
-            //    {
-            //        $location.path("/search/type/" + current + "/place/" + place);
-            //    }
-            //}
 
             if (data.query == "" && data.city == "") //(data.query === undefined && data.city === undefined)
             {
