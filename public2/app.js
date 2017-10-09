@@ -41,6 +41,6 @@
 
     }
 
-    //improper service defination which includes IIFE leads to injector error.
+    //improper service definition which includes IIFE leads to injector error.
 
 })();
